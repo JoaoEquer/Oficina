@@ -25,6 +25,10 @@ Read the harness's three rule files. Try in this order:
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/git-workflow.md
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/security-baseline.md
 
+## Step 2.5 — Check for a workspace-level harness
+
+Look for an `AGENTS.md` in the parent directories (e.g. a workspace folder like `Wibi/AGENTS.md`) that already embeds the Oficina rules. If one exists, **do not re-embed the rules in the project's AGENTS.md** — harnesses load parent context files hierarchically, and duplicating them wastes context on every turn. In that case the project file contains only: context, source of truth, locked decisions and pending items, plus one line: "Workspace-level rules inherited from the parent AGENTS.md (Oficina harness)."
+
 ## Step 3 — Generate AGENTS.md at the project root
 
 `AGENTS.md` is the canonical file (read by Gemini CLI, Codex, Cursor and others). Structure:
@@ -41,7 +45,8 @@ Source of truth for the data model: <path to the model document, or "PENDING —
 This project follows the Oficina harness (https://github.com/JoaoEquer/Oficina).
 
 ### Always-on rules
-<paste here the FULL CONTENT of the three rule files, each under a subtitle>
+<paste here the FULL CONTENT of the three rule files, each under a subtitle —
+UNLESS a workspace-level AGENTS.md already embeds them (see Step 2.5)>
 
 ### Skills
 Before executing tasks in these areas, consult the corresponding skill at
