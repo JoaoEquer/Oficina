@@ -1,0 +1,12 @@
+{
+  "name": "oficina",
+  "version": "1.1.0",
+  "description": "Harness enxuto de padrões para desenvolvimento assistido por IA — NestJS + TypeScript + Prisma + PostgreSQL, em português. Skills de CRUD, modelagem Prisma, RBAC, quebra de tarefas e documentação para cliente.",
+  "author": {
+    "name": "João Victor Equer",
+    "url": "https://github.com/JoaoEquer"
+  },
+  "repository": "https://github.com/JoaoEquer/Oficina",
+  "license": "MIT",
+  "keywords": ["nestjs", "prisma", "postgresql", "rbac", "pt-br", "harness"]
+}

@@ -28,8 +28,11 @@ oficina/
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
 │   └── security-baseline.md
-├── commands/        # Slash commands para Claude Code
-│   └── crud.md      # /crud <dominio> — gera um domínio CRUD completo no padrão da casa
+├── commands/        # Slash commands
+│   ├── init.md      # /oficina:init — configura qualquer projeto automaticamente
+│   └── crud.md      # /oficina:crud <dominio> — gera um domínio CRUD no padrão da casa
+├── .claude-plugin/  # Manifestos de plugin/marketplace do Claude Code
+├── install.sh / install.ps1  # Instalação para harnesses não-Claude
 ├── examples/        # CLAUDE.md de exemplo para apontar um projeto para este harness
 ├── docs/
 │   └── COMO-ALIMENTAR.md  # O processo de crescimento do repositório
@@ -38,28 +41,42 @@ oficina/
 
 ## Instalação
 
-Sem instalador, sem mágica. É `git clone` e cópia do que você quer — de propósito, para você saber exatamente o que está entrando no seu ambiente.
+### Claude Code (recomendado — plugin, zero cópia manual)
+
+Dentro do Claude Code, dois comandos:
+
+```
+/plugin marketplace add JoaoEquer/Oficina
+/plugin install oficina@oficina
+```
+
+Skills e commands carregam automaticamente (namespaçados: `/oficina:init`, `/oficina:crud`). Para atualizar quando o repositório evoluir: `/plugin marketplace update oficina`.
+
+### Gemini CLI, Cursor, Codex e outros
 
 ```bash
 git clone https://github.com/JoaoEquer/Oficina.git
 cd Oficina
-
-# Skills (Claude Code carrega filhos diretos de ~/.claude/skills)
-mkdir -p ~/.claude/skills
-cp -r skills/* ~/.claude/skills/
-
-# Commands
-mkdir -p ~/.claude/commands
-cp commands/*.md ~/.claude/commands/
+./install.sh --gemini     # macOS/Linux/WSL
+# ou, no Windows:
+.\install.ps1 -Gemini
 ```
 
-As **rules** não se copiam para uma pasta: elas viram texto dentro do `CLAUDE.md` do seu projeto (ou do seu `~/.claude/CLAUDE.md` se quiser em tudo). Veja `examples/project-CLAUDE.md` para o formato.
+Esses harnesses leem o `AGENTS.md` do projeto — que o passo abaixo gera sozinho.
 
-## Uso num projeto novo
+## Uso num projeto (autônomo)
 
-1. Copie `examples/project-CLAUDE.md` para a raiz do projeto como `CLAUDE.md`.
-2. Ajuste as seções marcadas com `<AJUSTAR>`.
-3. Pronto — o agente passa a seguir a filosofia, as regras de segurança e a conhecer as skills.
+Entre na pasta do projeto e rode:
+
+```
+/oficina:init
+```
+
+A IA investiga o repositório (stack, estrutura, documento de modelagem), gera `AGENTS.md` com as regras completas embutidas + `CLAUDE.md` e `GEMINI.md` apontando para ele, detecta as decisões técnicas já presentes no código e lista como PENDENTE o que precisa de confirmação humana. Um comando, três harnesses configurados.
+
+Em harness sem slash command, peça: *"configure este projeto seguindo o `commands/init.md` da Oficina"*.
+
+Prefere fazer na mão? `examples/project-CLAUDE.md` continua disponível como modelo.
 
 ## Stack coberto
 

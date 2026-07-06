@@ -1,0 +1,17 @@
+{
+  "name": "oficina",
+  "version": "1.1.0",
+  "description": "Marketplace da Oficina — harness enxuto de padrões para desenvolvimento assistido por IA em português",
+  "owner": {
+    "name": "João Victor Equer",
+    "url": "https://github.com/JoaoEquer"
+  },
+  "plugins": [
+    {
+      "name": "oficina",
+      "description": "Padrões da casa: CRUD NestJS com DIP, convenções de schema Prisma multi-tenant, desenho de RBAC, quebra de tarefas ClickUp e documentação para cliente. Inclui /oficina:init para configurar qualquer projeto automaticamente.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}
