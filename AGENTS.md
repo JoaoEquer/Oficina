@@ -16,4 +16,5 @@ When working on any project that references this harness:
    - `rbac-design` — permissions, roles, access control
    - `clickup-task-breakdown` — breaking scope into tasks
    - `client-facing-docs` — any material the client will read
+   - `token-efficiency` — session setup, token/context limits, RTK
 3. **Documentary source of truth**: data model and scope come from the project's documents. Divergence is a blocker to resolve with the tech lead, not a detail to ignore.

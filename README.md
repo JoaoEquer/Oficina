@@ -25,7 +25,8 @@ oficina/
 │   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
 │   ├── rbac-design/                # RBAC design: roles + granular permissions
 │   ├── clickup-task-breakdown/     # From scope documents to structured tasks
-│   └── client-facing-docs/         # Technical docs for clients, jargon-free
+│   ├── client-facing-docs/         # Technical docs for clients, jargon-free
+│   └── token-efficiency/           # RTK setup + habits to cut session token waste
 ├── rules/           # Always-on rules (embedded into project context files)
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
