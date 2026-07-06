@@ -1,84 +1,84 @@
 ---
 name: nestjs-crud-pattern
-description: Padrão da casa para criar domínios CRUD completos em NestJS com Prisma — controller/service/repository com inversão de dependência, DTOs validados e isolamento multi-tenant. Use sempre que for criar um novo módulo, entidade, rota CRUD ou domínio em um backend NestJS, mesmo que o pedido seja só "criar a rota de X" ou "adicionar a tabela Y".
+description: House pattern for building complete CRUD domains in NestJS with Prisma — controller/service/repository with dependency inversion, validated DTOs and multi-tenant isolation. Use whenever creating a new module, entity, CRUD route or domain in a NestJS backend, even if the request is just "create the X route" or "add the Y table".
 ---
 
-# CRUD NestJS — padrão da casa
+# NestJS CRUD — house pattern
 
-Todo domínio CRUD segue exatamente o mesmo formato. O primeiro módulo do projeto é o molde; os seguintes copiam a forma. Não invente variações.
+Every CRUD domain follows exactly the same shape. The project's first module is the mold; the rest copy its form. Do not invent variations.
 
-## Estrutura por domínio
+## Per-domain structure
 
 ```
-src/modules/<dominio>/
-├── <dominio>.controller.ts   # Só HTTP: recebe request, devolve response. Zero regra de negócio.
-├── <dominio>.service.ts      # Regra de negócio. Depende da ABSTRAÇÃO do repositório, nunca do Prisma direto.
-├── <dominio>.repository.ts   # Classe abstrata (contrato) + implementação Prisma no mesmo arquivo.
+src/modules/<domain>/
+├── <domain>.controller.ts   # HTTP only: receives request, returns response. Zero business logic.
+├── <domain>.service.ts      # Business logic. Depends on the repository ABSTRACTION, never on Prisma directly.
+├── <domain>.repository.ts   # Abstract class (contract) + Prisma implementation in the same file.
 ├── dto/
-│   ├── create-<dominio>.dto.ts
-│   └── update-<dominio>.dto.ts
-└── <dominio>.module.ts       # Fiação: amarra o contrato à implementação por provider token.
+│   ├── create-<domain>.dto.ts
+│   └── update-<domain>.dto.ts
+└── <domain>.module.ts       # Wiring: binds the contract to the implementation via provider token.
 ```
 
-Cross-cutting (PrismaService, guards, decorators de contexto) fica em `src/shared/`.
+Cross-cutting concerns (PrismaService, guards, context decorators) live in `src/shared/`.
 
-## O contrato de repositório (DIP na prática)
+## The repository contract (DIP in practice)
 
 ```typescript
-// <dominio>.repository.ts
-export abstract class TarefaRepository {
-  abstract create(workspaceId: string, data: CreateTarefaDto): Promise<Tarefa>;
-  abstract findAll(workspaceId: string): Promise<Tarefa[]>;
-  abstract findById(workspaceId: string, id: string): Promise<Tarefa | null>;
-  abstract update(workspaceId: string, id: string, data: UpdateTarefaDto): Promise<Tarefa>;
+// <domain>.repository.ts
+export abstract class TaskRepository {
+  abstract create(workspaceId: string, data: CreateTaskDto): Promise<Task>;
+  abstract findAll(workspaceId: string): Promise<Task[]>;
+  abstract findById(workspaceId: string, id: string): Promise<Task | null>;
+  abstract update(workspaceId: string, id: string, data: UpdateTaskDto): Promise<Task>;
   abstract softDelete(workspaceId: string, id: string): Promise<void>;
 }
 
 @Injectable()
-export class PrismaTarefaRepository extends TarefaRepository {
+export class PrismaTaskRepository extends TaskRepository {
   constructor(private readonly prisma: PrismaService) { super(); }
-  // ... implementação: TODA query filtra por workspaceId
+  // ... implementation: EVERY query filters by workspaceId
 }
 ```
 
 ```typescript
-// <dominio>.module.ts
+// <domain>.module.ts
 @Module({
-  controllers: [TarefaController],
+  controllers: [TaskController],
   providers: [
-    TarefaService,
-    { provide: TarefaRepository, useClass: PrismaTarefaRepository },
+    TaskService,
+    { provide: TaskRepository, useClass: PrismaTaskRepository },
   ],
 })
-export class TarefaModule {}
+export class TaskModule {}
 ```
 
-O service injeta `TarefaRepository` (o contrato). Trocar a implementação ou mockar em teste vira trivial.
+The service injects `TaskRepository` (the contract). Swapping the implementation or mocking in tests becomes trivial.
 
-## Regras invioláveis
+## Non-negotiable rules
 
-1. **`workspaceId` sempre vem do contexto autenticado (JWT), nunca do corpo da requisição.** Se o Auth ainda não existe, use uma constante marcadora (`FAKE_WORKSPACE_ID`) com comentário `// TODO: extrair do JWT` — e registre isso como pendência visível.
-2. **Isolamento de tenant garantido na camada de dados**: toda query do repositório filtra por `workspaceId`. Sem exceção, nem em query "interna".
-3. **Permissões validadas no servidor** (guard/decorator), nunca confiadas ao front.
-4. **Datas sempre em UTC.**
-5. **DTOs com `class-validator`** e `ValidationPipe` global ligado no `main.ts` (`whitelist: true`).
-6. **Delete é soft delete** por padrão (`deletedAt`), salvo decisão explícita em contrário.
+1. **`workspaceId` always comes from the authenticated context (JWT), never from the request body.** If Auth doesn't exist yet, use a marker constant (`FAKE_WORKSPACE_ID`) with a `// TODO: extract from JWT` comment — and register it as a visible pending item.
+2. **Tenant isolation enforced at the data layer**: every repository query filters by `workspaceId`. No exceptions, not even for "internal" queries.
+3. **Permissions validated on the server** (guard/decorator), never trusted to the frontend.
+4. **Dates always in UTC.**
+5. **DTOs with `class-validator`** and a global `ValidationPipe` enabled in `main.ts` (`whitelist: true`).
+6. **Delete is soft delete** by default (`deletedAt`), unless an explicit decision says otherwise.
 
-## SOLID com pé no chão
+## SOLID, feet on the ground
 
-- **SRP**: uma responsabilidade por camada. Controller não valida negócio; service não monta SQL; repository não decide regra.
-- **DIP**: service ↔ contrato de repositório, como acima.
-- **OCP/ISP sem exagero**: NÃO crie repositório genérico `BaseRepository<T>`, NÃO monte ports/adapters hexagonais, NÃO abstraia o que ainda não precisa. Abstração só onde o custo se paga.
+- **SRP**: one responsibility per layer. The controller doesn't validate business rules; the service doesn't build SQL; the repository doesn't decide policy.
+- **DIP**: service ↔ repository contract, as above.
+- **OCP/ISP without excess**: do NOT create a generic `BaseRepository<T>`, do NOT build hexagonal ports/adapters, do NOT abstract what isn't needed yet. Abstraction only where the cost pays off.
 
-## Fonte da verdade do modelo
+## Source of truth for the model
 
-Os campos exatos de cada entidade vêm do documento de modelagem do projeto (UML/diagrama em `docs/`). Se o documento não existir ou a entidade não estiver nele, **pare e pergunte** antes de inventar campos. Nunca rode migration de produção sem bater o schema contra a fonte da verdade.
+The exact fields of each entity come from the project's data model document (UML/diagram in `docs/`). If the document doesn't exist or the entity isn't in it, **stop and ask** before inventing fields. Never run a production migration without checking the schema against the source of truth.
 
-## Definição de pronto (por domínio)
+## Definition of done (per domain)
 
-- [ ] Modelo no Prisma + migration aplicada (tabela criada de verdade)
-- [ ] Módulo completo: POST, GET lista, GET por id, PATCH, DELETE respondendo
-- [ ] `workspaceId` do contexto, queries filtradas, DTOs validando
-- [ ] Lint e build limpos, projeto sobe local
-- [ ] Registrado no `AppModule`
-- [ ] Documentado: o que foi feito entra no registro de entrega do dia (ver rule `git-workflow`)
+- [ ] Model in Prisma + migration applied (table actually created)
+- [ ] Complete module: POST, GET list, GET by id, PATCH, DELETE responding
+- [ ] `workspaceId` from context, filtered queries, DTOs validating
+- [ ] Lint and build clean, project boots locally
+- [ ] Registered in `AppModule`
+- [ ] Documented: the work goes into the day's delivery log (see `git-workflow` rule)

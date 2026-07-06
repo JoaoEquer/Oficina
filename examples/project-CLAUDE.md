@@ -1,33 +1,33 @@
-# CLAUDE.md — <AJUSTAR: nome do projeto>
+# CLAUDE.md — <ADJUST: project name>
 
-## Contexto
+## Context
 
-<AJUSTAR: uma frase sobre o que o sistema faz e para quem.>
+<ADJUST: one sentence on what the system does and for whom.>
 
-Stack: NestJS + TypeScript + Prisma + PostgreSQL · Docker + GitHub Actions · <AJUSTAR: extras (GCS, SSE, JWT...)>
+Stack: NestJS + TypeScript + Prisma + PostgreSQL · Docker + GitHub Actions · <ADJUST: extras (GCS, SSE, JWT...)>
 
-Papéis: <AJUSTAR: tech lead, dev(s)>. Fonte da verdade do modelo de dados: `docs/<AJUSTAR: nome do documento de modelagem>`.
+Roles: <ADJUST: tech lead, dev(s)>. Source of truth for the data model: `docs/<ADJUST: model document name>`.
 
 ## Harness
 
-Este projeto segue o harness **Oficina** (https://github.com/JoaoEquer/Oficina).
+This project follows the **Oficina** harness (https://github.com/JoaoEquer/Oficina).
 
-Regras sempre-ativas (resumo — texto completo no harness):
+Always-on rules (summary — full text in the harness):
 
-- Pragmatismo: tecnologia comprovada, complexidade só quando o problema exige, decisões reversíveis, sem buzzword, sem over-engineering.
-- Git: branch por entrega, commits convencionais, PR pequeno, tudo documentado desde o dia 0 em `docs/registro/`.
-- Segurança: identidade/tenant do token (nunca do corpo), autorização no servidor, toda query filtra por workspace, segredos fora do repo, datas em UTC, validação em toda borda.
+- Pragmatism: proven technology, complexity only when the problem demands it, reversible decisions, no buzzwords, no over-engineering.
+- Git: branch per deliverable, conventional commits, small PRs, everything documented from day 0 in `docs/log/`.
+- Security: identity/tenant from the token (never from the body), authorization on the server, every query filters by workspace, secrets out of the repo, dates in UTC, validation at every edge.
 
-Skills instaladas relevantes: `nestjs-crud-pattern`, `prisma-schema-conventions`, `rbac-design`, `clickup-task-breakdown`, `client-facing-docs`.
+Relevant installed skills: `nestjs-crud-pattern`, `prisma-schema-conventions`, `rbac-design`, `clickup-task-breakdown`, `client-facing-docs`.
 
-## Decisões travadas deste projeto
+## Locked decisions for this project
 
-<AJUSTAR: liste aqui as decisões específicas, ex.:>
-- Multi-tenant por workspaceId em toda entidade
-- Criticidade em escala numérica 1–5
-- Recorrência idempotente (templateId + dataAlvo únicos)
-- Auditoria via fila no Postgres, consumida por worker
+<ADJUST: list the project-specific decisions, e.g.:>
+- Multi-tenant via workspaceId on every entity
+- Criticality as a numeric 1–5 scale
+- Idempotent recurrence (templateId + targetDate unique)
+- Audit via Postgres queue, consumed by a worker
 
-## Pendências conhecidas
+## Known pending items
 
-<AJUSTAR: ex.: workspaceId provisório até módulo de Auth; decisões aguardando revisão do tech lead.>
+<ADJUST: e.g.: provisional workspaceId until the Auth module lands; decisions awaiting tech lead review.>

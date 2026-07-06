@@ -1,19 +1,19 @@
 # AGENTS.md — Oficina
 
-Ponto de entrada para harnesses que leem `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI e afins).
+Entry point for harnesses that read `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI and similar).
 
-Este repositório é um harness enxuto de padrões de trabalho para o stack **NestJS + TypeScript + Prisma + PostgreSQL**, em português.
+This repository is a lean harness of working patterns for the **NestJS + TypeScript + Prisma + PostgreSQL** stack.
 
-Ao trabalhar em qualquer projeto que referencie este harness:
+When working on any project that references this harness:
 
-1. **Siga as regras sempre-ativas** em `rules/`:
-   - `rules/engineering-philosophy.md` — como o time decide (pragmatismo, sem over-engineering)
-   - `rules/git-workflow.md` — branches, commits, documentação desde o dia 0
-   - `rules/security-baseline.md` — inegociáveis de segurança e multi-tenancy
-2. **Consulte as skills** em `skills/` antes de executar tarefas dos temas cobertos:
-   - `nestjs-crud-pattern` — criar qualquer módulo/domínio/rota CRUD
-   - `prisma-schema-conventions` — criar/alterar schema, planejar migrations
-   - `rbac-design` — permissões, papéis, controle de acesso
-   - `clickup-task-breakdown` — quebrar escopo em tarefas
-   - `client-facing-docs` — qualquer material que o cliente vá ler
-3. **Fonte da verdade documental**: modelo de dados e escopo vêm dos documentos do projeto. Divergência é bloqueio a resolver com o tech lead, não detalhe a ignorar.
+1. **Follow the always-on rules** in `rules/`:
+   - `rules/engineering-philosophy.md` — how the team decides (pragmatism, no over-engineering)
+   - `rules/git-workflow.md` — branches, commits, documentation from day 0
+   - `rules/security-baseline.md` — security and multi-tenancy non-negotiables
+2. **Consult the skills** in `skills/` before executing tasks in the covered areas:
+   - `nestjs-crud-pattern` — creating any CRUD module/domain/route
+   - `prisma-schema-conventions` — creating/changing schema, planning migrations
+   - `rbac-design` — permissions, roles, access control
+   - `clickup-task-breakdown` — breaking scope into tasks
+   - `client-facing-docs` — any material the client will read
+3. **Documentary source of truth**: data model and scope come from the project's documents. Divergence is a blocker to resolve with the tech lead, not a detail to ignore.

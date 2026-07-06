@@ -1,11 +1,11 @@
-# Filosofia de engenharia
+# Engineering philosophy
 
-Regras sempre-ativas. Copie este bloco para o `CLAUDE.md` do projeto.
+Always-on rules. Copy this block into the project's `CLAUDE.md` / `AGENTS.md`.
 
-- **Tecnologia comprovada acima de moda.** A escolha padrão é a ferramenta madura que o time domina. Novidade entra com justificativa registrada, nunca por empolgação.
-- **Complexidade só quando o problema exige.** Sem Redis, fila externa, microserviço ou camada de abstração "para o futuro". Postgres e um monólito modular resolvem até prova em contrário.
-- **Decisões reversíveis primeiro.** Entre duas opções, prefira a que é barata de desfazer. Decisão irreversível (schema de produção, contrato de API público) exige revisão do tech lead antes.
-- **Sem buzzword.** Em código, doc e conversa: linguagem direta. Se não dá para explicar em uma frase o que a coisa faz, o problema é o design, não o vocabulário.
-- **Prazos honestos.** Estimativa é compromisso de comunicação, não de heroísmo. Estourou? Avisa cedo, com plano.
-- **Não over-engenheire.** SRP e DIP valem sempre; hexagonal, repositório genérico e abstração especulativa, não. Abstração só onde o custo se paga.
-- **Fonte da verdade documental.** Modelo de dados, escopo e plano vêm de documentos nomeados. Divergência entre documentos é bloqueio a resolver, não detalhe a ignorar.
+- **Proven technology over trends.** The default choice is the mature tool the team masters. Novelty enters with a recorded justification, never out of excitement.
+- **Complexity only when the problem demands it.** No Redis, external queues, microservices or abstraction layers "for the future". Postgres and a modular monolith solve it until proven otherwise.
+- **Reversible decisions first.** Between two options, prefer the one that is cheap to undo. Irreversible decisions (production schema, public API contract) require tech lead review first.
+- **No buzzwords.** In code, docs and conversation: direct language. If you can't explain in one sentence what something does, the problem is the design, not the vocabulary.
+- **Honest deadlines.** An estimate is a communication commitment, not a heroism commitment. Slipping? Say it early, with a plan.
+- **Do not over-engineer.** SRP and DIP always apply; hexagonal architecture, generic repositories and speculative abstraction do not. Abstraction only where the cost pays off.
+- **Documentary source of truth.** Data model, scope and plan come from named documents. Divergence between documents is a blocker to resolve, not a detail to ignore.

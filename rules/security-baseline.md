@@ -1,12 +1,12 @@
-# Linha de base de segurança
+# Security baseline
 
-Inegociáveis em qualquer projeto do stack:
+Non-negotiable in any project on this stack:
 
-- **Identidade e tenant vêm do token, nunca do input.** `workspaceId`, `userId` e afins são extraídos do JWT/contexto autenticado. Qualquer endpoint que aceite esses campos no corpo é bug de segurança.
-- **Autorização no servidor.** Guard/decorator de permissão em toda rota que não seja explicitamente pública. Front esconde botão; servidor nega ação.
-- **Isolamento de tenant na camada de dados.** Toda query filtra por workspace. Revisão de PR verifica isso em cada método novo de repositório.
-- **Segredos fora do repositório.** `.env` no `.gitignore`, `.env.example` com placeholders. Segredo commitado = rotacionar na hora, não só apagar do histórico.
-- **Validação de entrada em toda borda** (`class-validator` + `ValidationPipe` global com `whitelist: true`).
-- **Datas em UTC no banco e na API**; fuso só na apresentação.
-- **Dados pessoais com LGPD em mente**: colete o mínimo, registre a finalidade, e trate exclusão de dado pessoal como requisito (única exceção aceita ao soft delete).
-- **Dependências**: sem pacote obscuro por conveniência; `npm audit`/Dependabot ativos no repo.
+- **Identity and tenant come from the token, never from input.** `workspaceId`, `userId` and the like are extracted from the JWT/authenticated context. Any endpoint accepting these fields in the body is a security bug.
+- **Authorization on the server.** Permission guard/decorator on every route that isn't explicitly public. The frontend hides buttons; the server denies actions.
+- **Tenant isolation at the data layer.** Every query filters by workspace. PR review checks this on every new repository method.
+- **Secrets out of the repository.** `.env` in `.gitignore`, `.env.example` with placeholders. A committed secret = rotate immediately, not just delete from history.
+- **Input validation at every edge** (`class-validator` + global `ValidationPipe` with `whitelist: true`).
+- **Dates in UTC in the database and the API**; timezone only at presentation.
+- **Personal data with privacy law in mind** (LGPD/GDPR): collect the minimum, record the purpose, and treat personal-data deletion as a requirement (the only accepted exception to soft delete).
+- **Dependencies**: no obscure packages for convenience; `npm audit`/Dependabot active on the repo.

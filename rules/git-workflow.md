@@ -1,8 +1,8 @@
-# Fluxo de Git e documentação desde o dia 0
+# Git workflow and day-0 documentation
 
-- **Branch por entrega**: `feat/<dominio>`, `fix/<assunto>`, `chore/<assunto>`. Nada direto na `main` depois do setup inicial.
-- **Commits convencionais** (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`), mensagem no imperativo, descrevendo o *porquê* quando não for óbvio.
-- **Documentado desde o dia 0**: todo dia/entrega gera um registro curto do que foi feito (o que, por quê, pendências), armazenado na pasta de documentação do projeto (`docs/registro/` no repo e/ou o Drive combinado com o cliente). O registro alimenta o e-mail de fechamento — nunca escreva o fechamento de memória.
-- **PR pequeno**: um domínio/assunto por PR. PR que mistura schema + três domínios + refactor não recebe revisão de verdade.
-- **Migration com nome descritivo** e revisada antes de merge; migration de produção só depois do checklist da skill `prisma-schema-conventions`.
-- **README do repo sempre atualizado** com: como subir local, variáveis de ambiente (`.env.example` obrigatório) e estrutura de pastas.
+- **Branch per deliverable**: `feat/<domain>`, `fix/<topic>`, `chore/<topic>`. Nothing straight to `main` after initial setup.
+- **Conventional commits** (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`), imperative mood, explaining the *why* when it isn't obvious.
+- **Documented from day 0**: every day/delivery produces a short log of what was done (what, why, pending items), stored in the project's documentation folder (`docs/log/` in the repo and/or the drive agreed with the client). The log feeds the closing email — never write the closing from memory.
+- **Small PRs**: one domain/topic per PR. A PR mixing schema + three domains + a refactor gets no real review.
+- **Migrations with descriptive names**, reviewed before merge; production migrations only after the checklist in the `prisma-schema-conventions` skill.
+- **Repo README always up to date** with: how to run locally, environment variables (`.env.example` mandatory) and folder structure.

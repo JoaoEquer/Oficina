@@ -1,41 +1,41 @@
 ---
 name: client-facing-docs
-description: Escrever documentação técnica voltada a cliente — documento de arquitetura, proposta, apresentação de projeto — em português claro, sem jargão, com números honestos e princípios de engenharia pragmática explícitos. Use sempre que o material for lido por cliente ou stakeholder não-técnico: doc de arquitetura, apresentação de kickoff, proposta, relatório de entrega ou e-mail de fechamento.
+description: Writing client-facing technical documentation — architecture documents, proposals, project presentations — in plain language, jargon-free, with honest numbers and explicit pragmatic engineering principles. Use whenever the material will be read by a client or non-technical stakeholder - architecture doc, kickoff presentation, proposal, delivery report or closing email.
 ---
 
-# Documentação para cliente
+# Client-facing documentation
 
-Documento para cliente não é documento técnico com capa bonita. É outra escrita.
+A document for a client is not a technical document with a nice cover. It is a different kind of writing.
 
-## Princípios
+## Principles
 
-1. **Zero jargão sem tradução.** "Monorepo" vira "repositório único". "Multi-tenant" vira "cada empresa com seus dados isolados". "CI/CD" vira "toda alteração passa por verificação automática antes de entrar no ar". Se o termo técnico precisar aparecer, a explicação em uma frase vem junto.
-2. **Números honestos.** Horas, prazos e escopo refletem o contrato real — nunca uma versão parcial que "apresenta melhor". Erro de número em material apresentado é o tipo de coisa que corrói confiança e é caríssimo de corrigir depois.
-3. **Escopo do documento = escopo contratado.** Fase futura, visão de produto e possibilidade comercial ficam de fora do documento do MVP (no máximo, uma nota de uma linha: "evoluções futuras dependem de novo ciclo comercial").
-4. **Time real, papéis reais.** Só quem está de fato alocado, com o papel correto de cada um. Conferir antes de enviar.
-5. **Princípios de engenharia explícitos.** Uma seção curta dizendo como o time decide: tecnologia comprovada acima de moda, complexidade só quando o problema exige, decisões reversíveis, prazos honestos. Cliente entende e valoriza — e o documento vira âncora quando alguém sugerir a moda da semana.
+1. **Zero untranslated jargon.** "Monorepo" becomes "a single repository". "Multi-tenant" becomes "each company with its data isolated". "CI/CD" becomes "every change passes automated checks before going live". If a technical term must appear, a one-sentence explanation comes with it.
+2. **Honest numbers.** Hours, deadlines and scope reflect the real contract — never a partial version that "presents better". A wrong number in presented material is the kind of thing that erodes trust and is very expensive to fix later.
+3. **Document scope = contracted scope.** Future phases, product vision and commercial possibilities stay out of the MVP document (at most, a one-line note: "future evolutions depend on a new commercial cycle").
+4. **Real team, real roles.** Only people actually allocated, each with their correct role. Double-check before sending.
+5. **Explicit engineering principles.** A short section stating how the team decides: proven technology over trends, complexity only when the problem demands it, reversible decisions, honest deadlines. Clients understand and value it — and the document becomes an anchor when someone suggests the trend of the week.
 
-## Formatos da casa
+## House formats
 
-**Documento de arquitetura/estrutura (HTML responsivo):**
-- Seções: visão geral → o que o sistema faz → como está organizado (repos, módulos) → time e papéis → princípios de engenharia → cronograma/frentes de trabalho
-- Linguagem corrida, tabelas só onde comparação exige
-- Sem bordas decorativas Unicode e sem excesso de emoji (quebram renderização e envelhecem mal)
+**Architecture/structure document (responsive HTML):**
+- Sections: overview → what the system does → how it is organized (repos, modules) → team and roles → engineering principles → timeline/workstreams
+- Flowing prose, tables only where comparison demands them
+- No decorative Unicode borders and no emoji overload (they break rendering and age badly)
 
-**Apresentação (deck HTML fullscreen):**
-- Navegação por teclado (←/→) e clique, barra de progresso, contador de slide
-- Um assunto por slide, frases curtas
-- Exportação para PDF para distribuição por WhatsApp/e-mail (o PDF é o que circula; o HTML é o que apresenta)
-- **Conferência final obrigatória**: números do deck × números do contrato, antes de apresentar
+**Presentation (fullscreen HTML deck):**
+- Keyboard (←/→) and click navigation, progress bar, slide counter
+- One topic per slide, short sentences
+- Export to PDF for distribution via WhatsApp/email (the PDF is what circulates; the HTML is what presents)
+- **Mandatory final check**: deck numbers × contract numbers, before presenting
 
-**E-mail de fechamento (semanal/entrega):**
-- O que foi feito (fatos verificáveis), o que vem a seguir, pendências que dependem do cliente
-- Curto: se passou de uma tela, virou relatório e ninguém lê
+**Closing email (weekly/delivery):**
+- What was done (verifiable facts), what comes next, items pending on the client
+- Short: if it's longer than one screen, it became a report and nobody reads it
 
-## Checklist antes de enviar qualquer material
+## Checklist before sending any material
 
-- [ ] Números batem com o contrato/plano de execução
-- [ ] Time e papéis conferidos
-- [ ] Jargão traduzido ou eliminado
-- [ ] Escopo limitado ao contratado
-- [ ] Revisão de renderização no dispositivo em que o cliente vai abrir (celular, geralmente)
+- [ ] Numbers match the contract/execution plan
+- [ ] Team and roles verified
+- [ ] Jargon translated or eliminated
+- [ ] Scope limited to what was contracted
+- [ ] Rendering checked on the device the client will open it on (usually a phone)

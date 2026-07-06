@@ -1,60 +1,60 @@
 ---
 name: rbac-design
-description: Desenho de controle de acesso baseado em papéis (RBAC) com papéis + permissões granulares — matriz papel × domínio, modelagem N:N no banco e processo de aprovação antes da implementação. Use sempre que o projeto envolver permissões, papéis de usuário, controle de acesso, painel administrativo ou perguntas do tipo "quem pode fazer o quê" no sistema.
+description: Role-based access control design with roles + granular permissions — role × domain matrix, N:N database modeling and an approval process before implementation. Use whenever the project involves permissions, user roles, access control, admin panels or "who can do what" questions in the system.
 ---
 
-# Desenho de RBAC
+# RBAC design
 
-RBAC mal desenhado é retrabalho garantido. Este é o processo e o modelo que funcionam.
+Badly designed RBAC is guaranteed rework. This is the process and the model that work.
 
-## O modelo: papéis + permissões granulares (não papéis puros)
+## The model: roles + granular permissions (not pure roles)
 
-Papel puro ("admin pode tudo, editor pode editar") quebra na primeira exceção real. O modelo da casa:
+Pure roles ("admin can do everything, editor can edit") break at the first real exception. The house model:
 
-- **Permissão** = ação atômica sobre um domínio (ex.: `tarefa:criar`, `documento:aprovar`, `relatorio:exportar`).
-- **Papel** = conjunto nomeado de permissões (N:N papel ↔ permissão).
-- **Usuário** recebe papéis (N:N usuário ↔ papel), e o sistema resolve o conjunto efetivo de permissões.
+- **Permission** = atomic action on a domain (e.g. `task:create`, `document:approve`, `report:export`).
+- **Role** = named set of permissions (N:N role ↔ permission).
+- **User** receives roles (N:N user ↔ role), and the system resolves the effective permission set.
 
 ```prisma
-model Papel {
+model Role {
   id          String  @id @default(uuid())
   workspaceId String
-  nome        String
-  permissoes  PapelPermissao[]
+  name        String
+  permissions RolePermission[]
 }
 
-model Permissao {
-  id      String @id @default(uuid())
-  dominio String   // ex.: "tarefa", "documento", "relatorio"
-  acao    String   // ex.: "criar", "ler", "editar", "aprovar", "excluir"
-  papeis  PapelPermissao[]
-  @@unique([dominio, acao])
+model Permission {
+  id     String @id @default(uuid())
+  domain String   // e.g. "task", "document", "report"
+  action String   // e.g. "create", "read", "update", "approve", "delete"
+  roles  RolePermission[]
+  @@unique([domain, action])
 }
 
-model PapelPermissao {
-  papelId     String
-  permissaoId String
-  papel       Papel     @relation(fields: [papelId], references: [id])
-  permissao   Permissao @relation(fields: [permissaoId], references: [id])
-  @@id([papelId, permissaoId])
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  @@id([roleId, permissionId])
 }
 ```
 
-Checagem no servidor via guard/decorator (`@RequirePermission('documento:aprovar')`). O front só usa permissões para esconder botão — nunca como controle real.
+Server-side check via guard/decorator (`@RequirePermission('document:approve')`). The frontend uses permissions only to hide buttons — never as real control.
 
-## O processo: matriz antes de código
+## The process: matrix before code
 
-**Não implemente RBAC direto no código.** O fluxo correto:
+**Do not implement RBAC straight into code.** The correct flow:
 
-1. **Levante os domínios** do sistema (as "áreas": tarefas, documentos, usuários, relatórios, configurações...). Sistemas médios têm entre 8 e 15 domínios.
-2. **Levante os papéis** reais da operação do cliente (não os que você imagina). Normalmente 5 a 8 papéis bastam; mais que isso é cheiro de papéis que deviam ser permissões avulsas.
-3. **Monte a matriz papel × domínio** num documento legível (tabela: linhas = papéis, colunas = domínios, células = ações permitidas).
-4. **Submeta à aprovação** do arquiteto/tech lead e, se fizer sentido, do cliente. A matriz é barata de mudar; código e migration não são.
-5. **Só depois da aprovação**, implemente — e verifique o codebase real antes, se a implementação for em sistema existente (não implemente contra um codebase imaginado).
+1. **Map the domains** of the system (the "areas": tasks, documents, users, reports, settings...). Medium systems have 8–15 domains.
+2. **Map the real roles** of the client's operation (not the ones you imagine). Usually 5–8 roles are enough; more than that smells like roles that should be standalone permissions.
+3. **Build the role × domain matrix** in a readable document (table: rows = roles, columns = domains, cells = allowed actions).
+4. **Submit it for approval** by the architect/tech lead and, when it makes sense, the client. The matrix is cheap to change; code and migrations are not.
+5. **Only after approval**, implement — and if implementing into an existing system, verify the real codebase first (do not implement against an imagined codebase).
 
-## Armadilhas conhecidas
+## Known traps
 
-- **Permissão implícita**: "todo mundo pode ler" não documentado vira furo de segurança quando o requisito muda. Toda permissão é explícita na matriz.
-- **Papel-Deus crescente**: o papel "admin" que acumula tudo. Aceitável, mas registre que ele é super-usuário por design.
-- **RBAC sem tenant**: em sistema multi-tenant, papel e atribuição pertencem ao workspace (`workspaceId` no `Papel`). Papéis globais só se a decisão for registrada.
-- **Granularidade prematura**: comece com ações padrão (criar/ler/editar/excluir + as 2–3 ações de negócio específicas do domínio, como "aprovar"). Não invente 40 ações por domínio no dia 1.
+- **Implicit permission**: an undocumented "everyone can read" becomes a security hole when requirements change. Every permission is explicit in the matrix.
+- **The ever-growing God role**: the "admin" role that accumulates everything. Acceptable, but record that it is a super-user by design.
+- **RBAC without tenant**: in a multi-tenant system, roles and assignments belong to the workspace (`workspaceId` on `Role`). Global roles only with a recorded decision.
+- **Premature granularity**: start with standard actions (create/read/update/delete + the 2–3 domain-specific business actions, like "approve"). Do not invent 40 actions per domain on day 1.

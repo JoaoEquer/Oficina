@@ -1,58 +1,58 @@
 ---
 name: clickup-task-breakdown
-description: Transformar documentos de escopo (modelagem/UML, proposta funcional, plano de execução) em tarefas estruturadas no ClickUp — módulos como tarefas-pai, subtarefas com "como fazer", dependências e importação por CSV. Use sempre que precisar criar tarefas, quebrar escopo em atividades, organizar backlog, planejar sprint ou estruturar um plano de execução em ferramenta de gestão.
+description: Turn scope documents (data model/UML, functional proposal, execution plan) into structured ClickUp tasks — modules as parent tasks, subtasks with "how to" descriptions, dependencies and CSV import. Use whenever you need to create tasks, break scope into activities, organize a backlog, plan a sprint or structure an execution plan in a project management tool.
 ---
 
-# De documento de escopo a tarefas ClickUp
+# From scope documents to ClickUp tasks
 
-Processo para converter os documentos de planejamento de um projeto em um backlog executável, sem inventar escopo.
+Process for converting a project's planning documents into an executable backlog, without inventing scope.
 
-## Regra número 1: fonte da verdade
+## Rule number one: source of truth
 
-As tarefas nascem **exclusivamente** dos documentos-fonte do projeto — tipicamente três:
+Tasks are born **exclusively** from the project's source documents — typically three:
 
-1. **Modelagem de dados** (UML/diagrama de entidades)
-2. **Proposta funcional** (o que o sistema faz, na visão de produto)
-3. **Plano de execução** (módulos, horas, sequência)
+1. **Data model** (UML/entity diagram)
+2. **Functional proposal** (what the system does, from the product view)
+3. **Execution plan** (modules, hours, sequence)
 
-Se algo não está em nenhum documento, não vira tarefa — vira **pergunta** para o tech lead. Gerar tarefa de escopo imaginado é o erro mais caro desse processo.
+If something isn't in any document, it doesn't become a task — it becomes a **question** for the tech lead. Generating tasks from imagined scope is the most expensive mistake in this process.
 
-## Estrutura
+## Structure
 
-- **Tarefa-pai = módulo do plano de execução.** Um para um. Se o plano tem 7 módulos, são 7 tarefas-pai.
-- **Subtarefa = entrega verificável dentro do módulo** (3 a 6 por módulo é o normal). "Verificável" = dá para olhar e dizer se está pronto.
-- Cada subtarefa carrega:
-  - **Título**: verbo no infinitivo + objeto ("Implementar CRUD de tarefas", "Configurar pipeline de CI")
-  - **Descrição "como fazer"**: 3–8 linhas aterradas nas decisões técnicas travadas do projeto — não um tutorial genérico
-  - **Estimativa** herdada/rateada das horas do módulo no plano
-  - **Responsável** quando a alocação do time já é conhecida
+- **Parent task = module from the execution plan.** One to one. If the plan has 7 modules, there are 7 parent tasks.
+- **Subtask = verifiable deliverable within the module** (3–6 per module is normal). "Verifiable" = you can look at it and say whether it's done.
+- Each subtask carries:
+  - **Title**: infinitive verb + object ("Implement task CRUD", "Set up CI pipeline")
+  - **"How to" description**: 3–8 lines grounded in the project's locked technical decisions — not a generic tutorial
+  - **Estimate** inherited/apportioned from the module's hours in the plan
+  - **Assignee** when team allocation is already known
 
-## Sequenciamento e dependências
+## Sequencing and dependencies
 
-Monte o grafo de dependências entre módulos ANTES de distribuir trabalho (ex.: `Setup → Auth → domínios em paralelo → dashboards → QA`). No ClickUp, use relações *waiting on* entre tarefas-pai; dentro do módulo, a ordem das subtarefas já expressa a sequência.
+Build the dependency graph between modules BEFORE distributing work (e.g. `Setup → Auth → domains in parallel → dashboards → QA`). In ClickUp, use *waiting on* relations between parent tasks; within a module, the subtask order already expresses the sequence.
 
-Entregue junto um **guia de sequenciamento** de meia página: a ordem, o porquê, e onde o time pode paralelizar.
+Deliver alongside it a half-page **sequencing guide**: the order, the why, and where the team can parallelize.
 
-## Importação
+## Import
 
-Para volume (20+ tarefas), gere CSV no formato do Spreadsheet Importer do ClickUp:
+For volume (20+ tasks), generate a CSV in ClickUp's Spreadsheet Importer format:
 
 ```csv
 Task Name,Parent Task,Description,Time Estimate,Assignee
-"Módulo A — Autenticação e estrutura organizacional",,"...",30h,
-"Implementar login com JWT","Módulo A — Autenticação e estrutura organizacional","Como fazer: ...",8h,João
+"Module A — Authentication and org structure",,"...",30h,
+"Implement JWT login","Module A — Authentication and org structure","How to: ...",8h,John
 ```
 
-Cuidados que já causaram retrabalho:
-- `Parent Task` referencia o **nome exato** da tarefa-pai (case-sensitive)
-- Descrições com vírgula/quebra de linha entre aspas duplas
-- Estimativas no formato que o importador aceita (`8h`, não `8 horas`)
-- Sem caracteres decorativos Unicode (bordas, emojis em excesso) — quebram renderização em vários lugares
+Gotchas that have already caused rework:
+- `Parent Task` references the **exact name** of the parent task (case-sensitive)
+- Descriptions containing commas/line breaks go inside double quotes
+- Estimates in the format the importer accepts (`8h`, not `8 hours`)
+- No decorative Unicode characters (borders, emoji overload) — they break rendering in several places
 
-## Checklist de qualidade antes de entregar
+## Quality checklist before delivering
 
-- [ ] Toda tarefa rastreia para um trecho de documento-fonte
-- [ ] Nenhum módulo do plano ficou sem tarefa-pai
-- [ ] Toda subtarefa tem "como fazer" aterrado nas decisões do projeto
-- [ ] Soma das estimativas bate com as horas do plano de execução (divergência = sinalizar, não esconder)
-- [ ] Guia de sequenciamento entregue junto
+- [ ] Every task traces back to a passage in a source document
+- [ ] No module from the plan is missing a parent task
+- [ ] Every subtask has a "how to" grounded in the project's decisions
+- [ ] The sum of estimates matches the execution plan's hours (divergence = flag it, don't hide it)
+- [ ] Sequencing guide delivered alongside

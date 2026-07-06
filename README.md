@@ -1,95 +1,97 @@
 # Oficina
 
-**Harness de trabalho para desenvolvimento assistido por IA — pragmático, enxuto e em português.**
+**A lean agent harness for AI-assisted development — pragmatic, focused, battle-tested.**
 
-Padrões reais extraídos de projetos reais (SaaS multi-tenant, painéis administrativos com RBAC, gestão de tarefas operacionais), construídos com NestJS + TypeScript + Prisma + PostgreSQL. Nada aqui é teórico: toda skill, regra e comando nasceu de um problema que apareceu em produção ou em entrega de cliente.
+Real patterns extracted from real projects (multi-tenant SaaS, admin panels with RBAC, operational task management), built with NestJS + TypeScript + Prisma + PostgreSQL. Nothing here is theoretical: every skill, rule and command was born from a problem that showed up in production or in a client delivery.
 
-Funciona com **Claude Code** e qualquer harness que leia `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI).
+Works with **Claude Code** and any harness that reads `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI).
 
-## Filosofia
+*"Oficina" is Portuguese for "workshop" — the place where working patterns are forged.*
 
-Inspirado no método do [ECC](https://github.com/affaan-m/ECC) — usar, extrair o padrão, transformar em skill, reutilizar — mas deliberadamente **pequeno**. Aqui não tem 270 skills para 12 linguagens. Tem o que eu uso de verdade, para o stack que eu uso de verdade. A regra de crescimento é uma só:
+## Philosophy
 
-> **Só entra no repositório o que já se repetiu pelo menos duas vezes em projeto real.**
+Inspired by the method behind [ECC](https://github.com/affaan-m/ECC) — use, extract the pattern, turn it into a skill, reuse — but deliberately **small**. There are no 270 skills for 12 languages here. There is what I actually use, for the stack I actually use. The single growth rule:
 
-A linha editorial segue a escola pragmática brasileira (Fabio Akita, Augusto Galego): tecnologia comprovada acima de moda, complexidade só quando o problema exige, decisões reversíveis, sem buzzword.
+> **Nothing enters this repository until it has repeated at least twice in a real project.**
 
-## Estrutura
+The editorial line follows the pragmatic school (Fabio Akita, Augusto Galego): proven technology over trends, complexity only when the problem demands it, reversible decisions, no buzzwords.
+
+## Structure
 
 ```
 oficina/
-├── skills/          # Padrões de trabalho reutilizáveis (superfície principal)
-│   ├── nestjs-crud-pattern/        # CRUD NestJS: controller/service/repository com DIP
-│   ├── prisma-schema-conventions/  # Convenções de modelagem multi-tenant no Prisma
-│   ├── rbac-design/                # Desenho de RBAC: papéis + permissões granulares
-│   ├── clickup-task-breakdown/     # De documento de escopo a tarefas estruturadas
-│   └── client-facing-docs/         # Documentação técnica para cliente, sem jargão
-├── rules/           # Regras sempre-ativas (copiar para o CLAUDE.md ou rules do harness)
+├── skills/          # Reusable working patterns (the primary surface)
+│   ├── nestjs-crud-pattern/        # NestJS CRUD: controller/service/repository with DIP
+│   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
+│   ├── rbac-design/                # RBAC design: roles + granular permissions
+│   ├── clickup-task-breakdown/     # From scope documents to structured tasks
+│   └── client-facing-docs/         # Technical docs for clients, jargon-free
+├── rules/           # Always-on rules (embedded into project context files)
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
 │   └── security-baseline.md
 ├── commands/        # Slash commands
-│   ├── init.md      # /oficina:init — configura qualquer projeto automaticamente
-│   └── crud.md      # /oficina:crud <dominio> — gera um domínio CRUD no padrão da casa
-├── .claude-plugin/  # Manifestos de plugin/marketplace do Claude Code
-├── install.sh / install.ps1  # Instalação para harnesses não-Claude
-├── examples/        # CLAUDE.md de exemplo para apontar um projeto para este harness
+│   ├── init.md      # /oficina:init — configures any project automatically
+│   └── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
+├── .claude-plugin/  # Claude Code plugin/marketplace manifests
+├── install.sh / install.ps1  # Installers for non-Claude harnesses
+├── examples/        # Example CLAUDE.md to point a project at this harness
 ├── docs/
-│   └── COMO-ALIMENTAR.md  # O processo de crescimento do repositório
-└── AGENTS.md        # Ponto de entrada para harnesses não-Claude
+│   └── HOW-TO-GROW.md   # The growth process of this repository
+└── AGENTS.md        # Entry point for non-Claude harnesses
 ```
 
-## Instalação
+## Installation
 
-### Claude Code (recomendado — plugin, zero cópia manual)
+### Claude Code (recommended — plugin, zero manual copying)
 
-Dentro do Claude Code, dois comandos:
+Inside Claude Code, two commands:
 
 ```
 /plugin marketplace add JoaoEquer/Oficina
 /plugin install oficina@oficina
 ```
 
-Skills e commands carregam automaticamente (namespaçados: `/oficina:init`, `/oficina:crud`). Para atualizar quando o repositório evoluir: `/plugin marketplace update oficina`.
+Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`). To update when the repository evolves: `/plugin marketplace update oficina`.
 
-### Gemini CLI, Cursor, Codex e outros
+### Gemini CLI, Cursor, Codex and others
 
 ```bash
 git clone https://github.com/JoaoEquer/Oficina.git
 cd Oficina
 ./install.sh --gemini     # macOS/Linux/WSL
-# ou, no Windows:
+# or, on Windows:
 .\install.ps1 -Gemini
 ```
 
-Esses harnesses leem o `AGENTS.md` do projeto — que o passo abaixo gera sozinho.
+These harnesses read the project's `AGENTS.md` — which the step below generates for you.
 
-## Uso num projeto (autônomo)
+## Using it in a project (autonomous)
 
-Entre na pasta do projeto e rode:
+Enter the project folder and run:
 
 ```
 /oficina:init
 ```
 
-A IA investiga o repositório (stack, estrutura, documento de modelagem), gera `AGENTS.md` com as regras completas embutidas + `CLAUDE.md` e `GEMINI.md` apontando para ele, detecta as decisões técnicas já presentes no código e lista como PENDENTE o que precisa de confirmação humana. Um comando, três harnesses configurados.
+The AI investigates the repository (stack, structure, data model document), generates an `AGENTS.md` with the full rules embedded plus `CLAUDE.md` and `GEMINI.md` pointing to it, detects technical decisions already present in the code, and lists anything that needs human confirmation as PENDING. One command, three harnesses configured.
 
-Em harness sem slash command, peça: *"configure este projeto seguindo o `commands/init.md` da Oficina"*.
+On a harness without slash commands, just ask: *"configure this project following `commands/init.md` from Oficina"*.
 
-Prefere fazer na mão? `examples/project-CLAUDE.md` continua disponível como modelo.
+Prefer doing it by hand? `examples/project-CLAUDE.md` remains available as a template.
 
-## Stack coberto
+## Covered stack
 
 TypeScript · NestJS · Prisma · PostgreSQL · Docker · GitHub Actions · ClickUp
 
-Se você usa outro stack, este repositório provavelmente não é para você — e está tudo bem. Faça o seu.
+If you use a different stack, this repository is probably not for you — and that's fine. Build your own; `docs/HOW-TO-GROW.md` explains the method.
 
-## Créditos
+## Credits
 
-- Método e inspiração estrutural: [affaan-m/ECC](https://github.com/affaan-m/ECC)
-- Filosofia de engenharia: Fabio Akita e Augusto Galego
-- Padrões extraídos de projetos reais construídos na [Wibi](https://wibi.com.br)
+- Method and structural inspiration: [affaan-m/ECC](https://github.com/affaan-m/ECC)
+- Engineering philosophy: Fabio Akita and Augusto Galego
+- Patterns extracted from real projects built at [Wibi](https://wibi.com.br)
 
-## Licença
+## License
 
-MIT — use, copie, adapte.
+MIT — use, copy, adapt.

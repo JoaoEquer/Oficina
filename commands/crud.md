@@ -1,16 +1,17 @@
 ---
-description: Gera um domínio CRUD completo no padrão da casa (NestJS + Prisma, multi-tenant)
+description: Generates a complete CRUD domain in the house pattern (NestJS + Prisma, multi-tenant)
+argument-hint: "<domain>"
 ---
 
-Crie o domínio CRUD **$ARGUMENTS** seguindo estritamente a skill `nestjs-crud-pattern` e as convenções da skill `prisma-schema-conventions`.
+Create the CRUD domain **$ARGUMENTS** strictly following the `nestjs-crud-pattern` skill and the conventions in the `prisma-schema-conventions` skill.
 
-Passos obrigatórios, nesta ordem:
+Mandatory steps, in this order:
 
-1. Localize o documento de modelagem do projeto (UML/diagrama em `docs/`). Se não encontrar ou a entidade não estiver nele, PARE e pergunte os campos — não invente.
-2. Se já existir um módulo CRUD no repo, use-o como molde e mantenha o formato idêntico.
-3. Modele a entidade no `schema.prisma` seguindo as convenções (workspaceId, soft delete, UTC, e as demais que se aplicarem) e gere a migration com nome descritivo.
-4. Crie `src/modules/$ARGUMENTS/` completo: controller, service, repository (contrato abstrato + implementação Prisma), DTOs com class-validator, module com provider token. Registre no AppModule.
-5. Valide: projeto sobe, migration aplicada, as 5 rotas respondem, lint e build limpos.
-6. Escreva o registro da entrega em `docs/registro/` (o que foi feito, decisões, pendências), conforme a rule de git-workflow.
+1. Locate the project's data model document (UML/diagram in `docs/`). If you can't find it or the entity isn't in it, STOP and ask for the fields — do not invent them.
+2. If a CRUD module already exists in the repo, use it as the mold and keep the format identical.
+3. Model the entity in `schema.prisma` following the conventions (workspaceId, soft delete, UTC, and whichever others apply) and generate the migration with a descriptive name.
+4. Create the complete `src/modules/$ARGUMENTS/`: controller, service, repository (abstract contract + Prisma implementation), DTOs with class-validator, module with provider token. Register it in AppModule.
+5. Validate: project boots, migration applied, all 5 routes respond, lint and build clean.
+6. Write the delivery log in `docs/log/` (what was done, decisions, pending items), per the git-workflow rule.
 
-Regras invioláveis: workspaceId do contexto autenticado (nunca do corpo), toda query filtra por tenant, permissão validada no servidor, datas em UTC.
+Non-negotiable rules: workspaceId from the authenticated context (never from the body), every query filters by tenant, permissions validated on the server, dates in UTC.

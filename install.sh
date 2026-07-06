@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
-# Oficina — instalador para macOS/Linux/WSL
-# Uso:
-#   ./install.sh            -> instala global para Claude Code (skills + commands em ~/.claude)
-#   ./install.sh --gemini   -> também instala para Gemini CLI (~/.gemini)
+# Oficina — macOS/Linux/WSL installer
+# Usage:
+#   ./install.sh            -> global install for Claude Code (skills + commands into ~/.claude)
+#   ./install.sh --gemini   -> also install for Gemini CLI (~/.gemini)
 set -euo pipefail
 repo="$(cd "$(dirname "$0")" && pwd)"
 
-echo "Oficina — instalando a partir de $repo"
+echo "Oficina — installing from $repo"
 
 mkdir -p ~/.claude/skills ~/.claude/commands
 cp -r "$repo"/skills/* ~/.claude/skills/
 cp "$repo"/commands/*.md ~/.claude/commands/
-echo "[ok] Claude Code: skills e commands instalados em ~/.claude"
+echo "[ok] Claude Code: skills and commands installed into ~/.claude"
 
 if [[ "${1:-}" == "--gemini" ]]; then
   mkdir -p ~/.gemini
   cp "$repo/AGENTS.md" ~/.gemini/OFICINA.md
-  echo "[ok] Gemini CLI: harness copiado para ~/.gemini/OFICINA.md"
-  echo "     Adicione '@OFICINA.md' ao seu ~/.gemini/GEMINI.md para ativar globalmente."
+  echo "[ok] Gemini CLI: harness copied to ~/.gemini/OFICINA.md"
+  echo "     Add '@OFICINA.md' to your ~/.gemini/GEMINI.md to enable it globally."
 fi
 
 echo
-echo "Pronto. Para configurar um projeto: entre na pasta e rode /oficina:init (Claude Code)"
-echo "ou peça à IA: 'configure este projeto seguindo commands/init.md da Oficina'."
+echo "Done. To configure a project: enter the folder and run /oficina:init (Claude Code)"
+echo "or ask the AI: 'configure this project following commands/init.md from Oficina'."

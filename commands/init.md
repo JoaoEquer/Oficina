@@ -1,70 +1,70 @@
 ---
-description: Configura o projeto atual com o harness Oficina — gera CLAUDE.md, AGENTS.md e GEMINI.md automaticamente, aterrados no que o projeto realmente é
-argument-hint: "[descrição opcional do projeto]"
+description: Configures the current project with the Oficina harness — generates CLAUDE.md, AGENTS.md and GEMINI.md automatically, grounded in what the project actually is
+argument-hint: "[optional project description]"
 ---
 
-Configure o projeto atual com o harness **Oficina** (https://github.com/JoaoEquer/Oficina). Seu objetivo é que, ao final, qualquer IA (Claude Code, Gemini, Cursor, Codex) aberta neste projeto trabalhe automaticamente no padrão da casa.
+Configure the current project with the **Oficina** harness (https://github.com/JoaoEquer/Oficina). Your goal: by the end, any AI (Claude Code, Gemini, Cursor, Codex) opened in this project works in the house pattern automatically.
 
-## Passo 1 — Entenda o projeto ANTES de gerar qualquer coisa
+## Step 1 — Understand the project BEFORE generating anything
 
-Investigue o repositório atual:
+Investigate the current repository:
 
-- Leia `package.json`, `README.md` e a estrutura de pastas
-- Identifique: nome do projeto, stack real (NestJS? Prisma? qual banco?), se já existe módulo CRUD que sirva de molde, e onde está o documento de modelagem (procure em `docs/`)
-- Se o usuário passou descrição em `$ARGUMENTS`, use como contexto principal
+- Read `package.json`, `README.md` and the folder structure
+- Identify: project name, real stack (NestJS? Prisma? which database?), whether a CRUD module already exists to serve as the mold, and where the data model document lives (look in `docs/`)
+- If the user passed a description in `$ARGUMENTS`, use it as primary context
 
-Se não conseguir identificar o essencial (nome, propósito, se é multi-tenant), **pergunte ao usuário** — no máximo 3 perguntas objetivas. Não invente contexto.
+If you cannot identify the essentials (name, purpose, whether it is multi-tenant), **ask the user** — at most 3 objective questions. Do not invent context.
 
-## Passo 2 — Obtenha o conteúdo das regras
+## Step 2 — Obtain the rules content
 
-Leia os três arquivos de regras do harness. Tente nesta ordem:
+Read the harness's three rule files. Try in this order:
 
-1. Do diretório do plugin instalado (você está rodando de dentro dele): `rules/engineering-philosophy.md`, `rules/git-workflow.md`, `rules/security-baseline.md`
-2. Se não encontrar, busque do repositório público:
+1. From the installed plugin directory (you are running from inside it): `rules/engineering-philosophy.md`, `rules/git-workflow.md`, `rules/security-baseline.md`
+2. If not found, fetch from the public repository:
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/engineering-philosophy.md
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/git-workflow.md
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/security-baseline.md
 
-## Passo 3 — Gere o AGENTS.md na raiz do projeto
+## Step 3 — Generate AGENTS.md at the project root
 
-O `AGENTS.md` é o arquivo canônico (lido por Gemini CLI, Codex, Cursor e outros). Estrutura:
+`AGENTS.md` is the canonical file (read by Gemini CLI, Codex, Cursor and others). Structure:
 
 ```markdown
-# AGENTS.md — <nome do projeto>
+# AGENTS.md — <project name>
 
-## Contexto
-<1-2 frases: o que o sistema faz, para quem, stack real detectada>
+## Context
+<1-2 sentences: what the system does, for whom, detected stack>
 
-Fonte da verdade do modelo de dados: <caminho do documento de modelagem, ou "PENDENTE — perguntar ao tech lead">
+Source of truth for the data model: <path to the model document, or "PENDING — ask the tech lead">
 
 ## Harness
-Este projeto segue o harness Oficina (https://github.com/JoaoEquer/Oficina).
+This project follows the Oficina harness (https://github.com/JoaoEquer/Oficina).
 
-### Regras sempre-ativas
-<cole aqui o CONTEÚDO COMPLETO dos três arquivos de regras, cada um sob um subtítulo>
+### Always-on rules
+<paste here the FULL CONTENT of the three rule files, each under a subtitle>
 
 ### Skills
-Antes de executar tarefas destes temas, consulte a skill correspondente em
-https://github.com/JoaoEquer/Oficina/tree/main/skills (ou na instalação local):
-- nestjs-crud-pattern — criar qualquer módulo/domínio/rota CRUD
-- prisma-schema-conventions — criar/alterar schema, planejar migrations
-- rbac-design — permissões, papéis, controle de acesso
-- clickup-task-breakdown — quebrar escopo em tarefas
-- client-facing-docs — qualquer material que o cliente vá ler
+Before executing tasks in these areas, consult the corresponding skill at
+https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installation):
+- nestjs-crud-pattern — creating any CRUD module/domain/route
+- prisma-schema-conventions — creating/changing schema, planning migrations
+- rbac-design — permissions, roles, access control
+- clickup-task-breakdown — breaking scope into tasks
+- client-facing-docs — any material the client will read
 
-## Decisões travadas deste projeto
-<liste as que você detectou no código/docs; marque as não-confirmadas como PENDENTE>
+## Locked decisions for this project
+<list what you detected in code/docs; mark unconfirmed ones as PENDING>
 
-## Pendências conhecidas
-<o que precisa de confirmação humana antes de virar produção>
+## Known pending items
+<what needs human confirmation before going to production>
 ```
 
-## Passo 4 — Gere os apontadores
+## Step 4 — Generate the pointers
 
-- `CLAUDE.md` na raiz, com o conteúdo exatamente: `@AGENTS.md` (Claude Code importa o arquivo)
-- `GEMINI.md` na raiz, com o conteúdo exatamente: `@AGENTS.md` (Gemini CLI importa o arquivo)
-- Se já existir `CLAUDE.md`, `GEMINI.md` ou `AGENTS.md` no projeto, **não sobrescreva sem mostrar o diff e pedir confirmação**.
+- `CLAUDE.md` at the root, containing exactly: `@AGENTS.md` (Claude Code imports the file)
+- `GEMINI.md` at the root, containing exactly: `@AGENTS.md` (Gemini CLI imports the file)
+- If `CLAUDE.md`, `GEMINI.md` or `AGENTS.md` already exist in the project, **do not overwrite without showing the diff and asking for confirmation**.
 
-## Passo 5 — Relate
+## Step 5 — Report
 
-Mostre ao usuário: os arquivos criados, as decisões detectadas automaticamente, e a lista de PENDENTEs que precisam de resposta humana. Não faça commit — deixe o usuário revisar primeiro.
+Show the user: the files created, the decisions detected automatically, and the list of PENDING items that need human answers. Do not commit — let the user review first.

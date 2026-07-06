@@ -1,18 +1,18 @@
 ---
 name: prisma-schema-conventions
-description: Convenções de modelagem de dados em Prisma + PostgreSQL para sistemas multi-tenant — isolamento por workspace, criticidade numérica, recorrência idempotente, versionamento de documentos por linhagem e auditoria desacoplada via fila no próprio Postgres. Use sempre que for criar ou alterar schema.prisma, desenhar entidades novas, planejar migrations ou discutir modelagem de dados em qualquer projeto do stack.
+description: Data modeling conventions for Prisma + PostgreSQL in multi-tenant systems — workspace isolation, numeric criticality, idempotent recurrence, document versioning by lineage and decoupled audit via a queue in Postgres itself. Use whenever creating or changing schema.prisma, designing new entities, planning migrations or discussing data modeling in any project on this stack.
 ---
 
-# Convenções de schema Prisma
+# Prisma schema conventions
 
-Decisões de modelagem travadas por experiência em produção. Elas valem para qualquer entidade nova, salvo decisão explícita e registrada em contrário.
+Modeling decisions locked in by production experience. They apply to every new entity unless an explicit, recorded decision says otherwise.
 
-## 1. Multi-tenancy: `workspaceId` em toda entidade
+## 1. Multi-tenancy: `workspaceId` on every entity
 
-Toda entidade de negócio carrega `workspaceId` (isolamento no nível de linha, single database). O isolamento é garantido na camada de dados — toda query filtra por workspace — e o id vem sempre do contexto autenticado, nunca de input do cliente.
+Every business entity carries a `workspaceId` (row-level isolation, single database). Isolation is enforced at the data layer — every query filters by workspace — and the id always comes from the authenticated context, never from client input.
 
 ```prisma
-model Tarefa {
+model Task {
   id          String   @id @default(uuid())
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
@@ -21,60 +21,60 @@ model Tarefa {
 }
 ```
 
-**Ponto de atenção**: confirme cedo com o arquiteto se o projeto é de fato multi-tenant. Divergência entre documento de modelagem (single-tenant) e documento comercial (multi-tenant) é um erro clássico — resolva ANTES da primeira migration de produção, não depois.
+**Watch out**: confirm early with the architect whether the project is actually multi-tenant. A mismatch between the data model document (single-tenant) and the commercial document (multi-tenant) is a classic error — resolve it BEFORE the first production migration, not after.
 
-## 2. Criticidade / prioridade: escala numérica, nunca boolean
+## 2. Criticality / priority: numeric scale, never boolean
 
-`criticidade Int` (ex.: 1–5). Boolean ("crítico sim/não") não sobrevive à primeira reunião em que o cliente pede "média prioridade". Se o documento de modelagem mostrar boolean em uma entidade e inteiro em outra, trate como inconsistência a resolver — modele como `Int` e sinalize.
+`criticality Int` (e.g. 1–5). A boolean ("critical yes/no") doesn't survive the first meeting where the client asks for "medium priority". If the model document shows boolean on one entity and integer on another, treat it as an inconsistency to resolve — model as `Int` and flag it.
 
-## 3. Recorrência idempotente
+## 3. Idempotent recurrence
 
-Tarefa/evento recorrente é gerado a partir de um template, com **chave única composta (templateId + data alvo)**:
+Recurring tasks/events are generated from a template, with a **composite unique key (templateId + target date)**:
 
 ```prisma
-model Tarefa {
+model Task {
   // ...
   templateId String?
-  dataAlvo   DateTime?
-  @@unique([templateId, dataAlvo])
+  targetDate DateTime?
+  @@unique([templateId, targetDate])
 }
 ```
 
-O gerador de recorrência pode rodar quantas vezes for (cron duplicado, retry, reprocessamento) sem criar duplicata. Idempotência por design, não por lógica de aplicação.
+The recurrence generator can run any number of times (duplicated cron, retry, reprocessing) without creating duplicates. Idempotency by design, not by application logic.
 
-## 4. Documento versionado por linhagem
+## 4. Documents versioned by lineage
 
-Nada de sobrescrever arquivo. Cada versão é uma linha nova, agrupada por id de linhagem:
+Never overwrite a file. Each version is a new row, grouped by a lineage id:
 
 ```prisma
-model Documento {
-  id         String  @id @default(uuid())
-  linhagemId String              // agrupa todas as versões do "mesmo" documento
-  versao     Int
-  ativo      Boolean @default(true) // só uma versão ativa por linhagem
+model Document {
+  id        String  @id @default(uuid())
+  lineageId String              // groups all versions of the "same" document
+  version   Int
+  active    Boolean @default(true) // only one active version per lineage
   // ...
-  @@unique([linhagemId, versao])
+  @@unique([lineageId, version])
 }
 ```
 
-## 5. Auditoria desacoplada (fila no próprio Postgres)
+## 5. Decoupled audit (queue in Postgres itself)
 
-Auditoria não pode deixar a operação principal lenta nem derrubá-la se falhar. O padrão: a transação de negócio grava um evento numa tabela-fila (`AuditoriaFila`); um worker separado consome a fila e materializa o registro de auditoria. **Sem Redis, sem fila externa** — Postgres dá conta até prova em contrário (regra da complexidade justificada).
+Auditing must not slow down the main operation nor take it down if it fails. The pattern: the business transaction writes an event to a queue table (`AuditQueue`); a separate worker consumes the queue and materializes the audit record. **No Redis, no external queue** — Postgres handles it until proven otherwise (the justified-complexity rule).
 
-## 6. Datas em UTC, sempre
+## 6. Dates in UTC, always
 
-Banco em UTC, conversão de fuso só na borda (apresentação). `DateTime` do Prisma já é UTC-friendly; o pecado é o código de aplicação criar datas em fuso local.
+Database in UTC, timezone conversion only at the edge (presentation). Prisma's `DateTime` is UTC-friendly; the sin is application code creating dates in local time.
 
-## 7. Soft delete por padrão
+## 7. Soft delete by default
 
-`deletedAt DateTime?` nas entidades de negócio. Hard delete só com decisão registrada (ex.: exigência de LGPD para dados pessoais).
+`deletedAt DateTime?` on business entities. Hard delete only with a recorded decision (e.g. data-protection requirements such as LGPD/GDPR for personal data).
 
-## Antes de qualquer migration de produção
+## Before any production migration
 
-Checklist obrigatório:
+Mandatory checklist:
 
-- [ ] Schema batido contra o documento de modelagem (fonte da verdade)
-- [ ] Divergências entre documentos resolvidas com o arquiteto e registradas
-- [ ] Multi-tenancy confirmada (item 1)
-- [ ] Tipos de campos ambíguos confirmados (item 2)
-- [ ] Migration revisada (nome descritivo, sem `migrate dev` acumulado virando lixo)
+- [ ] Schema checked against the data model document (source of truth)
+- [ ] Divergences between documents resolved with the architect and recorded
+- [ ] Multi-tenancy confirmed (item 1)
+- [ ] Ambiguous field types confirmed (item 2)
+- [ ] Migration reviewed (descriptive name, no accumulated `migrate dev` garbage)
