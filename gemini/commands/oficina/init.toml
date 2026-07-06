@@ -1,0 +1,21 @@
+description = "Configures the current project with the Oficina harness — generates AGENTS.md, CLAUDE.md and GEMINI.md automatically"
+prompt = """
+Configure the current project with the Oficina harness (https://github.com/JoaoEquer/Oficina). Goal: any AI opened in this project works in the house pattern automatically.
+
+Step 1 — Understand the project BEFORE generating anything: read package.json, README.md and the folder structure. Identify: project name, real stack, whether a CRUD module exists to serve as the mold, and where the data model document lives (look in docs/). If the user passed a description in the arguments, use it as primary context. If you cannot identify the essentials, ask the user — at most 3 objective questions. Do not invent context.
+
+Step 2 — Check for a workspace-level harness: look for an AGENTS.md in the parent directories that already embeds the Oficina rules. If one exists, do NOT re-embed the rules in the project's AGENTS.md (harnesses load parent context hierarchically; duplication wastes context every turn). In that case the project file contains only: context, source of truth, locked decisions and pending items, plus one line: "Workspace-level rules inherited from the parent AGENTS.md (Oficina harness)."
+
+Step 3 — Obtain the rules content (only if NO workspace-level AGENTS.md exists), fetching from:
+https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/engineering-philosophy.md
+https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/git-workflow.md
+https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/security-baseline.md
+
+Step 4 — Generate AGENTS.md at the project root with sections: Context (1-2 sentences + detected stack) / Source of truth for the data model / Harness (rules full text OR inheritance note per Step 2) / Skills list (nestjs-crud-pattern, prisma-schema-conventions, rbac-design, clickup-task-breakdown, client-facing-docs, token-efficiency, at https://github.com/JoaoEquer/Oficina/tree/main/skills) / Locked decisions detected in code-docs (mark unconfirmed ones as PENDING) / Known pending items.
+
+Step 5 — Generate pointers: CLAUDE.md containing exactly "@AGENTS.md" and GEMINI.md containing exactly "@AGENTS.md". If any of the three files already exists, do not overwrite without showing the diff and asking.
+
+Step 6 — Report: files created, decisions detected, PENDING items needing human answers. Do not commit — let the user review first.
+
+User-provided description (may be empty): {{args}}
+"""

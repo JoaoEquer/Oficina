@@ -1,0 +1,30 @@
+description = "Generates a complete CRUD domain in the house pattern (NestJS + Prisma, multi-tenant) — Oficina harness"
+prompt = """
+Create the CRUD domain named in the user's command arguments, strictly following the Oficina harness (https://github.com/JoaoEquer/Oficina) — the nestjs-crud-pattern and prisma-schema-conventions skills. The project's AGENTS.md (context, locked decisions, PENDING items) is already in your context; obey it.
+
+Mandatory steps, in this order:
+
+1. Locate the project's data model document (UML/diagram in docs/). If you can't find it or the entity isn't in it, STOP and ask for the fields — do not invent them.
+2. If a CRUD module already exists in the repo (e.g. tasks), use it as the mold and keep the format identical:
+   - src/modules/<domain>/ with controller (HTTP only, zero business logic), service (business logic, depends on the repository ABSTRACTION, never on Prisma directly), repository file (abstract class contract + Prisma implementation, bound via provider token in the module), dto/ with class-validator, module.
+   - No generic BaseRepository, no hexagonal ports/adapters, no speculative abstraction.
+3. Model the entity in schema.prisma following the conventions (workspaceId on every entity, soft delete via deletedAt, UTC dates, idempotent recurrence / lineage versioning / audit queue where they apply) and generate the migration with a descriptive name.
+4. Register the module in AppModule.
+5. Validate: project boots, migration applied, all 5 routes respond (POST, GET list, GET by id, PATCH, DELETE), lint and build clean.
+6. Write the delivery log in docs/log/ (what was done, decisions, pending items).
+7. Self-verification (mandatory — do not skip): before declaring the domain done, print this checklist with an explicit pass/fail per item. If any item fails, fix it before finishing; if it cannot be fixed, report it as pending — never declare done with a silent failure.
+   - Entity fields match the project's data model document (no invented fields)
+   - Migration applied with a descriptive name (table exists)
+   - Repository is an abstract contract + Prisma implementation bound via provider token
+   - workspaceId comes from the authenticated context; zero endpoints accept it in the body
+   - Every repository query filters by workspaceId
+   - DTOs validate via class-validator; global ValidationPipe active
+   - All 5 routes respond
+   - Module registered in AppModule; lint and build clean
+   - Delivery log written in docs/log/
+   - Any decision marked PENDING in AGENTS.md was flagged, not silently decided
+
+Non-negotiable: workspaceId from the authenticated context (never from the body), every query filters by tenant, permissions validated on the server, dates in UTC.
+
+Domain to build: {{args}}
+"""

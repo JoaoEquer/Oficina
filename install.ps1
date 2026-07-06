@@ -19,10 +19,14 @@ Write-Host "[ok] Claude Code: skills and commands installed into ~/.claude"
 
 if ($Gemini) {
     $geminiDir = Join-Path $HOME ".gemini"
-    New-Item -ItemType Directory -Force -Path $geminiDir | Out-Null
+    $geminiCmds = Join-Path $geminiDir "commands"
+    New-Item -ItemType Directory -Force -Path $geminiDir, $geminiCmds | Out-Null
+    Copy-Item -Recurse -Force (Join-Path $repo "gemini\commands\*") $geminiCmds
     Copy-Item -Force (Join-Path $repo "AGENTS.md") (Join-Path $geminiDir "OFICINA.md")
+    Write-Host "[ok] Gemini CLI: /oficina:init and /oficina:crud installed into ~/.gemini/commands"
     Write-Host "[ok] Gemini CLI: harness copied to ~/.gemini/OFICINA.md"
     Write-Host "     Add '@OFICINA.md' to your ~/.gemini/GEMINI.md to enable it globally."
+    Write-Host "     Run /commands reload inside Gemini to pick up the new commands."
 }
 
 Write-Host ""

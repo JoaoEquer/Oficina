@@ -65,7 +65,7 @@ cd Oficina
 .\install.ps1 -Gemini
 ```
 
-These harnesses read the project's `AGENTS.md` — which the step below generates for you.
+This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
 
 ## Using it in a project (autonomous)
 
