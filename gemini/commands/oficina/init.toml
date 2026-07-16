@@ -10,6 +10,7 @@ Step 3 — Obtain the rules content (only if NO workspace-level AGENTS.md exists
 https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/engineering-philosophy.md
 https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/git-workflow.md
 https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/security-baseline.md
+https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/agent-workflow.md
 
 Step 4 — Generate AGENTS.md at the project root with sections: Context (1-2 sentences + detected stack) / Source of truth for the data model / Harness (rules full text OR inheritance note per Step 2) / Skills list (nestjs-crud-pattern, prisma-schema-conventions, rbac-design, clickup-task-breakdown, client-facing-docs, token-efficiency, at https://github.com/JoaoEquer/Oficina/tree/main/skills) / Locked decisions detected in code-docs (mark unconfirmed ones as PENDING) / Known pending items.
 

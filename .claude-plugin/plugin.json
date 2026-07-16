@@ -1,6 +1,6 @@
 {
   "name": "oficina",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A lean agent harness for AI-assisted development — NestJS + TypeScript + Prisma + PostgreSQL. Skills for CRUD, Prisma modeling, RBAC, task breakdown and client-facing docs.",
   "author": {
     "name": "João Victor Equer",

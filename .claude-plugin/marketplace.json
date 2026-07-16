@@ -1,6 +1,6 @@
 {
   "name": "oficina",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Oficina marketplace — a lean agent harness of working patterns for AI-assisted development",
   "owner": {
     "name": "João Victor Equer",
@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "oficina",
-      "description": "House patterns: NestJS CRUD with DIP, multi-tenant Prisma schema conventions, RBAC design, ClickUp task breakdown and client-facing documentation. Includes /oficina:init to configure any project automatically.",
+      "description": "House patterns: NestJS CRUD with DIP, multi-tenant Prisma schema conventions, RBAC design, ClickUp task breakdown and client-facing documentation. Includes /oficina:init to configure any project automatically and /oficina:review for house-checklist diff review.",
       "source": "./",
       "category": "development"
     }

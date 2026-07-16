@@ -6,3 +6,4 @@
 - **Small PRs**: one domain/topic per PR. A PR mixing schema + three domains + a refactor gets no real review.
 - **Migrations with descriptive names**, reviewed before merge; production migrations only after the checklist in the `prisma-schema-conventions` skill.
 - **Repo README always up to date** with: how to run locally, environment variables (`.env.example` mandatory) and folder structure.
+- **Commit `.claude/settings.json`**, not just `.gitignore` it. Tiered permissions (`allow`/`ask`/`deny` — example at https://github.com/JoaoEquer/Oficina/blob/main/examples/project-settings.json) keep every agent working under the same guardrails; production-affecting commands (`git push`, migrations, PR creation) go under `ask`, never `allow`. Personal overrides belong in `.claude/settings.local.json`, which stays gitignored.

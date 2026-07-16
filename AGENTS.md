@@ -10,6 +10,7 @@ When working on any project that references this harness:
    - `rules/engineering-philosophy.md` — how the team decides (pragmatism, no over-engineering)
    - `rules/git-workflow.md` — branches, commits, documentation from day 0
    - `rules/security-baseline.md` — security and multi-tenancy non-negotiables
+   - `rules/agent-workflow.md` — how to direct the agent itself (plan before code, scoped sessions, early correction)
 2. **Consult the skills** in `skills/` before executing tasks in the covered areas:
    - `nestjs-crud-pattern` — creating any CRUD module/domain/route
    - `prisma-schema-conventions` — creating/changing schema, planning migrations

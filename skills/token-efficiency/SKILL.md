@@ -1,6 +1,6 @@
 ---
 name: token-efficiency
-description: Reducing LLM token consumption in AI-assisted development sessions — RTK setup (CLI output compression via hook), when it pays off and complementary habits. Use when setting up a new machine or project for agent work, when sessions are hitting context limits or rate limits too fast, when API costs are a concern, or whenever the user mentions tokens, context window, RTK or session cost.
+description: Reducing LLM token consumption in AI-assisted development sessions — RTK setup (CLI output compression via hook), session management (/clear, /compact, /rewind, named resumes), model tiering, and complementary habits. Use when setting up a new machine or project for agent work, when sessions are hitting context limits or rate limits too fast, when API costs are a concern, or whenever the user mentions tokens, context window, RTK, session cost, checkpoints, or resuming a session.
 ---
 
 # Token efficiency
@@ -38,3 +38,17 @@ Restart the agent afterwards. The hook rewrites Bash calls transparently (`git s
 - **Don't paste what the agent can read**: reference file paths instead of pasting file contents into the prompt.
 - **One domain per session**: long mixed sessions accumulate stale context; a fresh session with a good CLAUDE.md/AGENTS.md beats a bloated one.
 - **Keep context files lean**: the project's AGENTS.md is re-read constantly — it pays rent on every turn. If a section isn't changing behavior, cut it.
+
+## Session management
+
+- **`/clear` between unrelated tasks.** A session accumulates every file read and every dead end along the way; `/clear` starts the next task without dragging that weight. Prefer it over continuing one thread across unrelated work.
+- **`/compact` for a long session you still need.** Summarizes history to free up context without losing the thread — use when one task genuinely has to keep going past the point where tool output dominates the window.
+- **`/rewind` to back out of a wrong turn.** Rolls the conversation and/or code back to a checkpoint — cheaper than manually undoing several turns of accumulated edits.
+- **`/rename <name>` + `claude --resume <name>`** to give a long-running task a memorable session instead of hunting through the `claude --resume` picker.
+- **`/context`** shows what is actually filling the window — check it before assuming a slowdown is the model's fault rather than a bloated AGENTS.md or an unnecessarily wide file read.
+- Session transcripts live in `~/.claude/projects/<path>/` and are pruned after 30 days by default (`cleanupPeriodDays` in `settings.json`). Don't treat them as permanent history — the delivery log in `docs/log/` is the permanent record (`git-workflow`).
+
+## Model tiering by leverage
+
+- **Strong model plans, mid-tier model executes.** Spend the highest-capability model on exploring the codebase and producing the plan; a faster/cheaper model carries out an already-approved, well-specified plan just as well, for a fraction of the tokens.
+- **Never the inverse.** A weak model producing the plan compounds mistakes silently through every step that follows; a weak model executing a plan a strong model already approved just executes — review the diff either way.

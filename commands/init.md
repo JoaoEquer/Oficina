@@ -17,13 +17,14 @@ If you cannot identify the essentials (name, purpose, whether it is multi-tenant
 
 ## Step 2 — Obtain the rules content
 
-Read the harness's three rule files. Try in this order:
+Read the harness's four rule files. Try in this order:
 
-1. From the installed plugin directory (you are running from inside it): `rules/engineering-philosophy.md`, `rules/git-workflow.md`, `rules/security-baseline.md`
+1. From the installed plugin directory (you are running from inside it): `rules/engineering-philosophy.md`, `rules/git-workflow.md`, `rules/security-baseline.md`, `rules/agent-workflow.md`
 2. If not found, fetch from the public repository:
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/engineering-philosophy.md
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/git-workflow.md
    - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/security-baseline.md
+   - https://raw.githubusercontent.com/JoaoEquer/Oficina/main/rules/agent-workflow.md
 
 ## Step 2.5 — Check for a workspace-level harness
 
@@ -45,7 +46,7 @@ Source of truth for the data model: <path to the model document, or "PENDING —
 This project follows the Oficina harness (https://github.com/JoaoEquer/Oficina).
 
 ### Always-on rules
-<paste here the FULL CONTENT of the three rule files, each under a subtitle —
+<paste here the FULL CONTENT of the four rule files, each under a subtitle —
 UNLESS a workspace-level AGENTS.md already embeds them (see Step 2.5)>
 
 ### Skills

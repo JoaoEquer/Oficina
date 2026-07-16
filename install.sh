@@ -17,7 +17,7 @@ if [[ "${1:-}" == "--gemini" ]]; then
   mkdir -p ~/.gemini/commands
   cp -r "$repo"/gemini/commands/* ~/.gemini/commands/
   cp "$repo/AGENTS.md" ~/.gemini/OFICINA.md
-  echo "[ok] Gemini CLI: /oficina:init and /oficina:crud installed into ~/.gemini/commands"
+  echo "[ok] Gemini CLI: /oficina:init, /oficina:crud and /oficina:review installed into ~/.gemini/commands"
   echo "[ok] Gemini CLI: harness copied to ~/.gemini/OFICINA.md"
   echo "     Add '@OFICINA.md' to your ~/.gemini/GEMINI.md to enable it globally."
   echo "     Run /commands reload inside Gemini to pick up the new commands."

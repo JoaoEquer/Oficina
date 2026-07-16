@@ -30,13 +30,15 @@ oficina/
 ├── rules/           # Always-on rules (embedded into project context files)
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
-│   └── security-baseline.md
+│   ├── security-baseline.md
+│   └── agent-workflow.md          # how to direct the agent itself: plan before code, scoped sessions, early correction
 ├── commands/        # Slash commands
 │   ├── init.md      # /oficina:init — configures any project automatically
-│   └── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
+│   ├── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
+│   └── review.md    # /oficina:review [PR] — reviews a diff against the house checklist, read-only
 ├── .claude-plugin/  # Claude Code plugin/marketplace manifests
 ├── install.sh / install.ps1  # Installers for non-Claude harnesses
-├── examples/        # Example CLAUDE.md to point a project at this harness
+├── examples/        # Example CLAUDE.md and committed .claude/settings.json for a project on this harness
 ├── docs/
 │   └── HOW-TO-GROW.md   # The growth process of this repository
 └── AGENTS.md        # Entry point for non-Claude harnesses
@@ -53,7 +55,7 @@ Inside Claude Code, two commands:
 /plugin install oficina@oficina
 ```
 
-Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`). To update when the repository evolves: `/plugin marketplace update oficina`.
+Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`, `/oficina:review`). To update when the repository evolves: `/plugin marketplace update oficina`.
 
 ### Gemini CLI, Cursor, Codex and others
 
@@ -65,7 +67,7 @@ cd Oficina
 .\install.ps1 -Gemini
 ```
 
-This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
+This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
 
 ## Using it in a project (autonomous)
 
