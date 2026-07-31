@@ -1,0 +1,6 @@
+description = "Closes the current work session - updates Estado Atual in AGENTS.md and appends a dated entry to .oficina/memory/log.md"
+prompt = """
+Close the current session on this project. Confirm AGENTS.md exists at the root; if not, stop and say /oficina:init needs to run first. Summarize this session in 3-5 factual bullets: what changed, decisions made, what's in progress, the next concrete step - no hype, no invented progress. Rewrite the Estado Atual section of AGENTS.md with that summary - it reflects current state, not history. If the section already exists, replace its content; if this project's AGENTS.md predates this convention and has no such section, insert one right after the "Source of truth for the data model" line, before ## Harness. Create .oficina/memory/ if it doesn't exist and append a new dated entry (## YYYY-MM-DD heading) to .oficina/memory/log.md with the same summary - append-only, never rewrite past entries. Never touch OPEN_DECISIONS.md - it is hand-edited only when a decision is actually confirmed. Never write credentials, tokens, connection strings or client contract terms into .oficina/memory/ - redact and flag instead of writing them. Do not commit; show the diff of AGENTS.md and the new log entry and let the user review.
+
+Optional note steering the summary (may be empty): {{args}}
+"""

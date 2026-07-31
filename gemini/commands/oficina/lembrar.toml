@@ -1,0 +1,6 @@
+description = "Searches .oficina/memory/ and OPEN_DECISIONS.md for a keyword - cross-session recall"
+prompt = """
+Search past session memory for the given term. If .oficina/memory/ doesn't exist in this project, say so and stop - probably /oficina:fechar-sessao was never run here. Otherwise search .oficina/memory/*.md and OPEN_DECISIONS.md (if present) for the term, case-insensitive, and show each match quoting the file, the dated entry it belongs to, and the matching line in context - never paraphrase. If nothing matches, say so plainly rather than guessing or answering from general knowledge. Group results by date, most recent first.
+
+Search term: {{args}}
+"""

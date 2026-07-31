@@ -42,6 +42,9 @@ Look for an `AGENTS.md` in the parent directories (e.g. a workspace folder like 
 
 Source of truth for the data model: <path to the model document, or "PENDING — ask the tech lead">
 
+## Estado Atual
+_(no session recorded yet — filled in by `/oficina:fechar-sessao` after each work session)_
+
 ## Harness
 This project follows the Oficina harness (https://github.com/JoaoEquer/Oficina).
 
@@ -57,6 +60,7 @@ https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installat
 - rbac-design — permissions, roles, access control
 - clickup-task-breakdown — breaking scope into tasks
 - client-facing-docs — any material the client will read
+- token-efficiency — session setup, token/context limits, RTK
 
 ## Locked decisions for this project
 <list what you detected in code/docs; mark unconfirmed ones as PENDING>
@@ -64,6 +68,18 @@ https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installat
 ## Known pending items
 <what needs human confirmation before going to production>
 ```
+
+## Step 3.5 — Scaffold OPEN_DECISIONS.md
+
+If `OPEN_DECISIONS.md` doesn't already exist at the project root, create it with just this header:
+
+```markdown
+# Open decisions
+
+Hand-edited only, never AI-summarized. Add an entry here only when a decision is actually confirmed.
+```
+
+Do not populate it with content — it starts empty and is filled in by the human as real decisions get confirmed. Don't create `.oficina/memory/` here — that's lazily created by `/oficina:fechar-sessao` on first use.
 
 ## Step 4 — Generate the pointers
 

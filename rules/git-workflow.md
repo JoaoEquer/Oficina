@@ -2,7 +2,7 @@
 
 - **Branch per deliverable**: `feat/<domain>`, `fix/<topic>`, `chore/<topic>`. Nothing straight to `main` after initial setup.
 - **Conventional commits** (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`), imperative mood, explaining the *why* when it isn't obvious.
-- **Documented from day 0**: every day/delivery produces a short log of what was done (what, why, pending items), stored in the project's documentation folder (`docs/log/` in the repo and/or the drive agreed with the client). The log feeds the closing email — never write the closing from memory.
+- **Documented from day 0**: every day/delivery produces a short log of what was done (what, why, pending items), stored in the project's documentation folder (`docs/log/` in the repo and/or the drive agreed with the client). The log feeds the closing email — never write the closing from memory. On a project using the Oficina memory convention, run `/oficina:fechar-sessao` at the same time — one habit to remember, not two. A confirmed decision goes into `OPEN_DECISIONS.md` the moment it's confirmed, not saved up for session close: it's the one thing a forgotten `/oficina:fechar-sessao` can't recover.
 - **Small PRs**: one domain/topic per PR. A PR mixing schema + three domains + a refactor gets no real review.
 - **Migrations with descriptive names**, reviewed before merge; production migrations only after the checklist in the `prisma-schema-conventions` skill.
 - **Repo README always up to date** with: how to run locally, environment variables (`.env.example` mandatory) and folder structure.

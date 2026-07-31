@@ -1,6 +1,8 @@
 # Oficina
 
-**A lean agent harness for AI-assisted development — pragmatic, focused, battle-tested.**
+**A portable context pack for AI coding assistants — pragmatic, focused, battle-tested.**
+
+Not an agent itself: a shared, versioned set of rules, skills and commands that any AI coding assistant reads, so it behaves the same way — house style, security baseline, memory across sessions — on every project you point it at.
 
 Real patterns extracted from real projects (multi-tenant SaaS, admin panels with RBAC, operational task management), built with NestJS + TypeScript + Prisma + PostgreSQL. Nothing here is theoretical: every skill, rule and command was born from a problem that showed up in production or in a client delivery.
 
@@ -35,9 +37,12 @@ oficina/
 ├── commands/        # Slash commands
 │   ├── init.md      # /oficina:init — configures any project automatically
 │   ├── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
-│   └── review.md    # /oficina:review [PR] — reviews a diff against the house checklist, read-only
+│   ├── review.md    # /oficina:review [PR] — reviews a diff against the house checklist, read-only
+│   ├── fechar-sessao.md  # /oficina:fechar-sessao — closes the session, updates Estado Atual + memory log
+│   └── lembrar.md        # /oficina:lembrar <termo> — searches past session memory
 ├── .claude-plugin/  # Claude Code plugin/marketplace manifests
-├── install.sh / install.ps1  # Installers for non-Claude harnesses
+├── hooks/           # SessionStart hook — nudges /oficina:fechar-sessao when it looks behind
+├── install.sh / install.ps1  # Installers for non-Claude harnesses (also wire up the hook above)
 ├── examples/        # Example CLAUDE.md and committed .claude/settings.json for a project on this harness
 ├── docs/
 │   └── HOW-TO-GROW.md   # The growth process of this repository
@@ -55,7 +60,7 @@ Inside Claude Code, two commands:
 /plugin install oficina@oficina
 ```
 
-Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`, `/oficina:review`). To update when the repository evolves: `/plugin marketplace update oficina`.
+Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:lembrar`). To update when the repository evolves: `/plugin marketplace update oficina`.
 
 ### Gemini CLI, Cursor, Codex and others
 
@@ -67,7 +72,9 @@ cd Oficina
 .\install.ps1 -Gemini
 ```
 
-This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
+This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:lembrar` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
+
+Both installers also register a `SessionStart` hook for Claude Code (`hooks/session-start.sh`, requires Node to merge `settings.json` safely): on `startup`/`resume` in a project with `AGENTS.md`, it silently checks whether there are commits after the last `/oficina:fechar-sessao` entry and, only then, nudges the agent to propose running it. Read-only, no network, prints nothing when there's nothing to say. Note: this only gets registered by the manual installers above — installing via the plugin marketplace (previous section) currently gives you the skills and commands but not this hook.
 
 ## Using it in a project (autonomous)
 
