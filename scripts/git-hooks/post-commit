@@ -1,0 +1,13 @@
+#!/bin/sh
+# Oficina — auto-sync hook. Installed into .git/hooks/post-commit by install.ps1/install.sh.
+# Runs scripts/sync.{ps1,sh} after every commit in this repo, so a new/edited
+# command or skill is live in ~/.claude and ~/.gemini without a manual re-install.
+repo_root="$(git rev-parse --show-toplevel)"
+
+if command -v powershell.exe >/dev/null 2>&1; then
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$repo_root/scripts/sync.ps1"
+elif command -v pwsh >/dev/null 2>&1; then
+  pwsh -NoProfile -File "$repo_root/scripts/sync.ps1"
+else
+  sh "$repo_root/scripts/sync.sh"
+fi

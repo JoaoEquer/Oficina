@@ -9,4 +9,4 @@ Non-negotiable in any project on this stack:
 - **Input validation at every edge** (`class-validator` + global `ValidationPipe` with `whitelist: true`).
 - **Dates in UTC in the database and the API**; timezone only at presentation.
 - **Personal data with privacy law in mind** (LGPD/GDPR): collect the minimum, record the purpose, and treat personal-data deletion as a requirement (the only accepted exception to soft delete).
-- **Dependencies**: no obscure packages for convenience; `npm audit`/Dependabot active on the repo.
+- **Dependencies**: no obscure packages for convenience; `npm audit`/Dependabot active on the repo. **Audit frequency**: run `/oficina:audit` (see `commands/audit.md`) mandatorily before any release, recommended right after adding a dependency flagged as critical (auth, payments, crypto, data storage), and at minimum quarterly otherwise.

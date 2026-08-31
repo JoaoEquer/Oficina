@@ -64,6 +64,16 @@ try {
     Write-Host "[warn] could not set up SessionStart hook - skipping: $_"
 }
 
+# Git hook: keep ~/.claude and ~/.gemini in sync automatically after every commit
+# in this repo, so a new/edited command doesn't need a manual re-install to go live.
+$gitHooks = Join-Path $repo ".git\hooks"
+if (Test-Path $gitHooks) {
+    Copy-Item -Force (Join-Path $repo "scripts\git-hooks\post-commit") (Join-Path $gitHooks "post-commit")
+    Write-Host "[ok] git hook installed: commits to this repo now auto-sync ~/.claude and ~/.gemini"
+} else {
+    Write-Host "[warn] $repo is not a git checkout - skipping auto-sync hook"
+}
+
 if ($Gemini) {
     $geminiDir = Join-Path $HOME ".gemini"
     $geminiCmds = Join-Path $geminiDir "commands"

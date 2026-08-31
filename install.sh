@@ -41,6 +41,16 @@ else
   echo "[warn] node not found - hook script copied but not registered in settings.json (needs Node to merge JSON safely)"
 fi
 
+# Git hook: keep ~/.claude and ~/.gemini in sync automatically after every commit
+# in this repo, so a new/edited command doesn't need a manual re-install to go live.
+if [ -d "$repo/.git/hooks" ]; then
+  cp "$repo/scripts/git-hooks/post-commit" "$repo/.git/hooks/post-commit"
+  chmod +x "$repo/.git/hooks/post-commit"
+  echo "[ok] git hook installed: commits to this repo now auto-sync ~/.claude and ~/.gemini"
+else
+  echo "[warn] $repo is not a git checkout - skipping auto-sync hook"
+fi
+
 if [[ "${1:-}" == "--gemini" ]]; then
   mkdir -p ~/.gemini/commands
   cp -r "$repo"/gemini/commands/* ~/.gemini/commands/

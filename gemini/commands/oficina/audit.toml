@@ -1,0 +1,17 @@
+description = "Runs a read-only supply-chain risk audit (Trail of Bits skill) against a target project's dependencies - never installs, builds, or executes the audited project - Oficina harness"
+prompt = """
+Audit {{args}} (path to another project on disk; current directory if omitted). Requires the supply-chain-risk-auditor plugin (trailofbits/skills) installed - claude plugin marketplace add trailofbits/skills, then claude plugin install supply-chain-risk-auditor@trailofbits (the README's /plugin install trailofbits/skills/plugins/supply-chain-risk-auditor shorthand did not resolve on CLI 2.1.148 - verified 2026-08-31) - and uv on PATH. Authenticated gh strongly recommended: unauthenticated GitHub calls cap at 60/hour and the collector makes several per dependency.
+
+Confirm the plugin is installed; if not, stop and say so - this command orchestrates the existing skill, it never reimplements the scan. Run it against the target: uv run collect.py <path> --json findings.json, then uv run render.py findings.json --out report.md - or trigger it conversationally with "audit this project's dependencies" if the target is the current project. Read the coverage table in report.md before trusting any verdict - the tool marks what it couldn't measure as unassessable, never as clean.
+
+Known coverage gaps - check before treating a "clean" result as complete:
+- Lockfile: only package-lock.json/npm-shrinkwrap.json, uv.lock, and Go 1.17+ go.mod feed the full transitive advisory sweep. yarn.lock, pnpm-lock.yaml, poetry.lock are not read. Wibi's frontend stack runs on yarn - on dream-book-admin/dream-book-app/dream-book-site expect direct-dependency coverage only; the transitive tree reports unassessable, not clean.
+- Native/Expo surface is entirely out of scope: the tool reads npm manifests (registry metadata, publisher ACL, install scripts, upstream repo status). It has no visibility into native iOS/Android permissions pulled in by Expo config plugins, nor into anything resolved outside the public registry (workspace, git, vendored deps) - those come back unassessable.
+- Never runs the project: whether pinned versions actually build/import cleanly is out of scope - this complements CI, it doesn't replace it.
+
+Example - Dreambook (dream-book-app): uv run collect.py ../dream-book-app --json findings.json && uv run render.py findings.json --out report.md. Expect direct-dependency coverage with the transitive tree marked unassessable - that's the yarn.lock gap above, not a bug.
+
+After the audit: review report.md, then run /oficina:fechar-sessao inside the audited project (needs that project's own AGENTS.md from /oficina:init) to log a factual summary - counts by severity, what was flagged - into its .oficina/memory/log.md. Never paste the raw findings.json/report.md into memory.
+
+Target project path, if given: {{args}}
+"""
