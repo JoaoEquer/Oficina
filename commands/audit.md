@@ -14,11 +14,12 @@ Requires the `supply-chain-risk-auditor` plugin (`trailofbits/skills`) installed
    uv run render.py findings.json --out report.md
    ```
    or, if $ARGUMENTS is the current project, trigger it conversationally with "audit this project's dependencies".
-3. Read the coverage table in `report.md` before trusting any verdict — the tool marks what it couldn't measure as unassessable, never as clean.
+3. If $ARGUMENTS has a `yarn.lock`, also run `osv-scanner scan source --lockfile=<path-to-$ARGUMENTS>/yarn.lock --format markdown` — step 2 never reads it (see gap below), so this is not optional on any Wibi frontend. Verified twice in production (2026-08-31, `dream-book-app` and `dream-book-admin`): both runs surfaced real, severity ≥7 advisories against the *actual resolved* version of a direct, production dependency (`axios`) that step 2 had reported clean because it could only check `axios`'s latest release, not what `yarn.lock` actually pins. Install once: download `osv-scanner_windows_amd64.exe` (or the matching platform asset) from `google/osv-scanner` releases.
+4. Read the coverage table in `report.md` before trusting any verdict — the tool marks what it couldn't measure as unassessable, never as clean. Cross-check any direct dependency the osv-scanner pass flagged against step 2's table — a "none known" there can mean "checked against the wrong version", not "safe".
 
 **Known coverage gaps — check these before treating a "clean" result as complete:**
 
-- **Lockfile**: only `package-lock.json`/`npm-shrinkwrap.json`, `uv.lock`, and Go 1.17+ `go.mod` feed the full transitive advisory sweep. `yarn.lock`, `pnpm-lock.yaml`, `poetry.lock` are not read. Wibi's frontend stack runs on yarn — on `dream-book-admin`/`dream-book-app`/`dream-book-site` expect direct-dependency coverage only; the transitive tree reports unassessable, not clean.
+- **Lockfile**: only `package-lock.json`/`npm-shrinkwrap.json`, `uv.lock`, and Go 1.17+ `go.mod` feed the full transitive advisory sweep. `yarn.lock`, `pnpm-lock.yaml`, `poetry.lock` are not read. Wibi's frontend stack runs on yarn — on `dream-book-admin`/`dream-book-app`/`dream-book-site` expect direct-dependency coverage only; the transitive tree reports unassessable, not clean. **Closed by step 3 above**, not just noted: don't skip it.
 - **Native/Expo surface is entirely out of scope**: the tool reads npm manifests (registry metadata, publisher ACL, install scripts, upstream repo status). It has no visibility into native iOS/Android permissions pulled in by Expo config plugins, nor into anything resolved outside the public registry (workspace, git, vendored deps) — those come back unassessable.
 - **Never runs the project**: whether pinned versions actually build/import cleanly is out of scope — this complements CI, it doesn't replace it.
 
