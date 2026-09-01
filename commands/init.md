@@ -55,7 +55,8 @@ UNLESS a workspace-level AGENTS.md already embeds them (see Step 2.5)>
 ### Skills
 Before executing tasks in these areas, consult the corresponding skill at
 https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installation):
-- nestjs-crud-pattern — creating any CRUD module/domain/route
+- nestjs-crud-pattern — creating any CRUD module/domain/route, NestJS projects only (deprecated — check express-prisma-pattern first)
+- express-prisma-pattern — creating any CRUD route/domain in an Express + Prisma backend (the real Wibi stack)
 - prisma-schema-conventions — creating/changing schema, planning migrations
 - rbac-design — permissions, roles, access control
 - clickup-task-breakdown — breaking scope into tasks

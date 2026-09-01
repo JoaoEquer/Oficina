@@ -1,7 +1,9 @@
 ---
 name: nestjs-crud-pattern
-description: House pattern for building complete CRUD domains in NestJS with Prisma — controller/service/repository with dependency inversion, validated DTOs and multi-tenant isolation. Use whenever creating a new module, entity, CRUD route or domain in a NestJS backend, even if the request is just "create the X route" or "add the Y table".
+description: House pattern for building complete CRUD domains in NestJS with Prisma — controller/service/repository with dependency inversion, validated DTOs and multi-tenant isolation. DEPRECATED — no active Wibi backend uses NestJS today; use only if a project explicitly picks NestJS. For the real production stack (Express), use express-prisma-pattern instead.
 ---
+
+> ⚠️ **Deprecated**: no active Wibi backend uses NestJS — the 3 real backends (`dream-book-api`, `dream-book-api-agent`, `simple-management-api`) are Express + Prisma in a manual Clean Architecture shape. Kept for historical reference, or in case a future project explicitly picks NestJS. For the real production stack, use [`express-prisma-pattern`](../express-prisma-pattern/SKILL.md).
 
 # NestJS CRUD — house pattern
 

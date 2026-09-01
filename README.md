@@ -23,7 +23,8 @@ The editorial line follows the pragmatic school (Fabio Akita, Augusto Galego): p
 ```
 oficina/
 ├── skills/          # Reusable working patterns (the primary surface)
-│   ├── nestjs-crud-pattern/        # NestJS CRUD: controller/service/repository with DIP
+│   ├── express-prisma-pattern/     # Express + Prisma CRUD: manual Clean Architecture (the real Wibi stack)
+│   ├── nestjs-crud-pattern/        # NestJS CRUD: controller/service/repository with DIP (deprecated)
 │   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
 │   ├── rbac-design/                # RBAC design: roles + granular permissions
 │   ├── clickup-task-breakdown/     # From scope documents to structured tasks

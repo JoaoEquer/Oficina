@@ -2,7 +2,7 @@
 
 Entry point for harnesses that read `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI and similar).
 
-This repository is a lean harness of working patterns for the **NestJS + TypeScript + Prisma + PostgreSQL** stack.
+This repository is a lean harness of working patterns for the **Node.js + TypeScript + Prisma** stack — Express (manual Clean Architecture) in the real Wibi backends today, NestJS kept for projects that explicitly pick it.
 
 When working on any project that references this harness:
 
@@ -12,7 +12,8 @@ When working on any project that references this harness:
    - `rules/security-baseline.md` — security and multi-tenancy non-negotiables
    - `rules/agent-workflow.md` — how to direct the agent itself (plan before code, scoped sessions, early correction)
 2. **Consult the skills** in `skills/` before executing tasks in the covered areas:
-   - `nestjs-crud-pattern` — creating any CRUD module/domain/route
+   - `express-prisma-pattern` — creating any CRUD route/domain in an Express + Prisma backend (the real Wibi stack)
+   - `nestjs-crud-pattern` — same, but NestJS projects only (deprecated — check express-prisma-pattern first)
    - `prisma-schema-conventions` — creating/changing schema, planning migrations
    - `rbac-design` — permissions, roles, access control
    - `clickup-task-breakdown` — breaking scope into tasks

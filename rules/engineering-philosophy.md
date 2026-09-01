@@ -9,3 +9,4 @@ Always-on rules. Copy this block into the project's `CLAUDE.md` / `AGENTS.md`.
 - **Honest deadlines.** An estimate is a communication commitment, not a heroism commitment. Slipping? Say it early, with a plan.
 - **Do not over-engineer.** SRP and DIP always apply; hexagonal architecture, generic repositories and speculative abstraction do not. Abstraction only where the cost pays off.
 - **Documentary source of truth.** Data model, scope and plan come from named documents. Divergence between documents is a blocker to resolve, not a detail to ignore.
+- **Tests without CI are technical debt.** If a project has `jest.config.js`, `vitest.config.ts` or `playwright.config.ts` but no `.github/workflows/` running them, wiring that workflow comes before the next feature, not after. A test suite that only runs on someone's machine isn't a safety net — it's a false sense of one.
