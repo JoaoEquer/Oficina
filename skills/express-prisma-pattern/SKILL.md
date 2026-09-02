@@ -5,7 +5,7 @@ description: House pattern for Express + Prisma backends structured as manual Cl
 
 # Express + Prisma — house pattern
 
-Manual Clean Architecture, not a framework's DI container: every layer is a plain TS interface, wired by hand in a factory function. Confirmed by reading real code in `dream-book-api` and `simple-management-api` (independent codebases, different Prisma majors, same shape) — the shell below is non-negotiable, do not invent a NestJS-style module system on top of it.
+Manual Clean Architecture, not a framework's DI container: every layer is a plain TS interface, wired by hand in a factory function. Confirmed by reading real code in `dream-book-api` and `simple-management-api` (independent codebases, different Prisma majors, same controller/usecase/repository/factory shape) — the shell below is non-negotiable, do not invent a NestJS-style module system on top of it. The two repos diverge on *where* zod validation runs (see rule 4) — that's the one confirmed exception to "same shape", not an oversight.
 
 ## Per-feature structure
 
@@ -59,7 +59,7 @@ Response shaping always goes through the shared helpers (`ok`, `badRequest`, `un
 1. **Controller never imports Prisma.** Not even the db client — if you're tempted, the logic belongs in the usecase or repository.
 2. **Repository is always interface + implementation, in separate files** (`interfaces/repositories/<x>.ts` contract, `repository/<x>/<x>-repository.ts` with `Prisma<X>Repository implements <X>Repository`). No controller or usecase imports `PrismaClient`/the db client directly.
 3. **Wiring happens in `main/factories/`, by hand.** No DI container, no decorators — a plain `make<X>Controller()` function that `new`s the chain.
-4. **Validation at the edge, with `zod`** (already a dependency in every repo on this stack) parsing `request.body` before it reaches the usecase. Manual `if (!field) return badRequest(...)` chains are legacy, not the model to copy into new code.
+4. **Validate with `zod`** (already a dependency in every repo on this stack) as the *first* thing that runs on `request.body`, before any business logic — confirmed in two different spots depending on the repo: in the controller before calling the usecase (`simple-management-api`'s `tarefa-controllers.ts`), or as the first step inside `usecase.execute()` (`dream-book-api`'s `CreateDreamUsecase`). Match whichever placement the project already uses — check an existing feature before picking one — never split validation across both layers for the same feature. Manual `if (!field) return badRequest(...)` chains are legacy, not the model to copy into new code.
 5. **Tenant/workspace isolation at the repository query** — same bar as `security-baseline.md`. Being Express instead of NestJS is not an exception.
 
 ## Source of truth for the model
@@ -71,6 +71,6 @@ Same rule as `nestjs-crud-pattern`: exact fields come from the project's data mo
 - [ ] Model in Prisma + migration applied
 - [ ] Controller/usecase/repository/factory files created, wired through the factory
 - [ ] Response goes through the shared http helpers, try/catch → serverError
-- [ ] Validation at the edge via zod (not manual ad-hoc checks) for new code
+- [ ] Validation via zod (not manual ad-hoc checks) as the first thing that runs, in whichever layer this project already validates at (controller or usecase — see rule 4)
 - [ ] Lint and build clean
 - [ ] Route registered in `main/routes/`

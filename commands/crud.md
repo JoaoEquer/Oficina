@@ -21,7 +21,7 @@ Mandatory steps, in this order:
    - [ ] Repository is an interface/abstract contract + Prisma implementation, never called directly by controller or business logic
    - [ ] `workspaceId` comes from the authenticated context; zero endpoints accept it in the body
    - [ ] Every repository query filters by `workspaceId`
-   - [ ] Input validated at the edge (class-validator + ValidationPipe for NestJS; zod for Express) — every non-negotiable rule of the applicable skill (step 1) followed
+   - [ ] Input validated as the first thing that runs (class-validator + ValidationPipe for NestJS; zod for Express, in whichever layer — controller or usecase — the project already validates at) — every non-negotiable rule of the applicable skill (step 1) followed
    - [ ] All 5 routes respond (POST, GET list, GET by id, PATCH, DELETE)
    - [ ] Feature wired into the app (AppModule for NestJS; factory + route registration for Express); lint and build clean
    - [ ] Delivery log written in `docs/log/`
