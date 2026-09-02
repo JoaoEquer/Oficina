@@ -41,14 +41,16 @@ else
   echo "[warn] node not found - hook script copied but not registered in settings.json (needs Node to merge JSON safely)"
 fi
 
-# Git hook: keep ~/.claude and ~/.gemini in sync automatically after every commit
-# in this repo, so a new/edited command doesn't need a manual re-install to go live.
+# Git hooks: keep ~/.claude and ~/.gemini in sync automatically after every commit
+# in this repo, and block any commit that stages .oficina/ (local-only, this repo is public).
 if [ -d "$repo/.git/hooks" ]; then
   cp "$repo/scripts/git-hooks/post-commit" "$repo/.git/hooks/post-commit"
   chmod +x "$repo/.git/hooks/post-commit"
-  echo "[ok] git hook installed: commits to this repo now auto-sync ~/.claude and ~/.gemini"
+  cp "$repo/scripts/git-hooks/pre-commit" "$repo/.git/hooks/pre-commit"
+  chmod +x "$repo/.git/hooks/pre-commit"
+  echo "[ok] git hooks installed: commits to this repo now auto-sync ~/.claude and ~/.gemini, and are blocked if they stage .oficina/"
 else
-  echo "[warn] $repo is not a git checkout - skipping auto-sync hook"
+  echo "[warn] $repo is not a git checkout - skipping git hooks"
 fi
 
 if [[ "${1:-}" == "--gemini" ]]; then

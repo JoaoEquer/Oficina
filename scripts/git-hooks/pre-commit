@@ -1,0 +1,14 @@
+#!/bin/sh
+# Oficina — safety guard. Installed into .git/hooks/pre-commit by install.ps1/install.sh.
+# This repo is public. .oficina/ is local-only dogfood memory (gitignored) that can end up
+# holding analysis of private client/production code (it did, once, on 2026-09-01, caught
+# before it was ever staged). .gitignore alone doesn't stop `git add -f` or a future
+# .gitignore edit — this blocks the commit outright if anything under .oficina/ is staged.
+staged_oficina="$(git diff --cached --name-only | grep '^\.oficina/' || true)"
+
+if [ -n "$staged_oficina" ]; then
+  echo "BLOCKED: staged file(s) under .oficina/ — this repo is public, .oficina/ is local-only:" >&2
+  printf '%s\n' "$staged_oficina" >&2
+  echo "Unstage with: git restore --staged <file>" >&2
+  exit 1
+fi
