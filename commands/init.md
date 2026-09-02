@@ -62,6 +62,16 @@ https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installat
 - clickup-task-breakdown — breaking scope into tasks
 - client-facing-docs — any material the client will read
 - token-efficiency — session setup, token/context limits, RTK
+- domain-modeling — building/sharpening a CONTEXT.md glossary and ADRs
+- codebase-design — deep-module vocabulary when designing or reviewing an interface
+- improve-codebase-architecture — scanning a codebase for deepening opportunities
+- grilling — structured requirements interview to stress-test a plan or decision
+- diagnosing-bugs — hard bugs and performance regressions
+- tdd — test-first feature/bugfix work, red-green-refactor discipline
+- secrets-gitleaks — secret scanning, pre-commit and CI
+- ci-cd-and-automation — standing up CI/CD quality gates from scratch
+- rag-architect — designing/evaluating a RAG pipeline (if the project has one)
+- sentry-setup-ai-monitoring — instrumenting LLM call cost/latency/tokens (if the project talks to an LLM)
 
 ## Locked decisions for this project
 <list what you detected in code/docs; mark unconfirmed ones as PENDING>

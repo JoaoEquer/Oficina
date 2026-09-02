@@ -4,7 +4,7 @@
 
 Not an agent itself: a shared, versioned set of rules, skills and commands that any AI coding assistant reads, so it behaves the same way — house style, security baseline, memory across sessions — on every project you point it at.
 
-Real patterns extracted from real projects (multi-tenant SaaS, admin panels with RBAC, operational task management), built with NestJS + TypeScript + Prisma + PostgreSQL. Nothing here is theoretical: every skill, rule and command was born from a problem that showed up in production or in a client delivery.
+Real patterns extracted from real projects (multi-tenant SaaS, admin panels with RBAC, operational task management), built with Node.js + TypeScript + Prisma — Express in a manual Clean Architecture shape today (NestJS kept for projects that explicitly pick it). Nothing here is theoretical: every house-pattern skill, rule and command was born from a problem that showed up in production or in a client delivery; the curated skills (see `docs/HOW-TO-GROW.md`) close a confirmed, current gap the same way.
 
 Works with **Claude Code** and any harness that reads `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI).
 
@@ -23,13 +23,25 @@ The editorial line follows the pragmatic school (Fabio Akita, Augusto Galego): p
 ```
 oficina/
 ├── skills/          # Reusable working patterns (the primary surface)
+│   │                # -- House patterns (Path 1: extracted by repetition, see docs/HOW-TO-GROW.md) --
 │   ├── express-prisma-pattern/     # Express + Prisma CRUD: manual Clean Architecture (the real Wibi stack)
 │   ├── nestjs-crud-pattern/        # NestJS CRUD: controller/service/repository with DIP (deprecated)
 │   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
 │   ├── rbac-design/                # RBAC design: roles + granular permissions
 │   ├── clickup-task-breakdown/     # From scope documents to structured tasks
 │   ├── client-facing-docs/         # Technical docs for clients, jargon-free
-│   └── token-efficiency/           # RTK setup + habits to cut session token waste
+│   ├── token-efficiency/           # RTK setup + habits to cut session token waste
+│   │                # -- Curated (Path 2: audited external adoption, see docs/HOW-TO-GROW.md) --
+│   ├── domain-modeling/            # Sharpen CONTEXT.md glossary + ADRs as you design
+│   ├── codebase-design/            # Deep-module vocabulary: module, interface, depth, seam, adapter
+│   ├── improve-codebase-architecture/ # Scan for deepening opportunities, visual HTML report
+│   ├── grilling/                   # Structured requirements interview (design-tree, round by round)
+│   ├── diagnosing-bugs/            # 6-phase discipline for hard bugs and perf regressions
+│   ├── tdd/                        # Red-green-refactor: seams, anti-patterns, the rules of the loop
+│   ├── secrets-gitleaks/           # Gitleaks: pre-commit + CI secret scanning (security-baseline.md)
+│   ├── ci-cd-and-automation/       # Quality-gate CI/CD from scratch: gates, rollback, feature flags
+│   ├── rag-architect/              # RAG pipeline design + retrieval evaluation (dream-book-api-agent)
+│   └── sentry-setup-ai-monitoring/ # LLM call cost/latency/token instrumentation (dream-book-api-agent)
 ├── rules/           # Always-on rules (embedded into project context files)
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
@@ -93,9 +105,9 @@ Prefer doing it by hand? `examples/project-CLAUDE.md` remains available as a tem
 
 ## Covered stack
 
-TypeScript · NestJS · Prisma · PostgreSQL · Docker · GitHub Actions · ClickUp
+TypeScript · Express · NestJS (legacy) · Prisma · MySQL/PostgreSQL · Docker · GitHub Actions · ClickUp
 
-If you use a different stack, this repository is probably not for you — and that's fine. Build your own; `docs/HOW-TO-GROW.md` explains the method.
+If you use a different stack, this repository is probably not for you — and that's fine. Build your own; `docs/HOW-TO-GROW.md` explains the method (including the curated-adoption path for stack-agnostic engineering practice: testing, debugging, CI/CD, secret scanning).
 
 ## Credits
 
