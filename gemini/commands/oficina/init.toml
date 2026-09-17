@@ -16,6 +16,8 @@ Step 4 — Generate AGENTS.md at the project root with sections: Context (1-2 se
 
 Step 4.5 — If OPEN_DECISIONS.md doesn't already exist at the project root, create it with just a header: "# Open decisions" plus one line saying it's hand-edited only, never AI-summarized, and only gets an entry when a decision is actually confirmed. Leave it empty otherwise.
 
+Step 4.6 — Check the project's .gitignore (create one if missing) for an ".oficina/" entry. If missing, add it with a short comment. Defense-in-depth: no current Oficina command writes there, but this closes the door on any future skill or manual note that assumes it's already ignored.
+
 Step 5 — Generate pointers: CLAUDE.md containing exactly "@AGENTS.md" and GEMINI.md containing exactly "@AGENTS.md". If any of the three files already exists, do not overwrite without showing the diff and asking.
 
 Step 6 — Report: files created, decisions detected, PENDING items needing human answers. Do not commit — let the user review first.

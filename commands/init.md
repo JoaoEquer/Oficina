@@ -91,6 +91,10 @@ Hand-edited only, never AI-summarized. Add an entry here only when a decision is
 
 Do not populate it with content — it starts empty and is filled in by the human as real decisions get confirmed.
 
+## Step 3.6 — Guard against local-only files leaking
+
+Check the project's `.gitignore` (create one if it doesn't exist) for an `.oficina/` entry. If missing, add it with a short comment (`# Oficina harness local-only files, never shared`). This is defense-in-depth — no current Oficina command writes there anymore, but the entry costs nothing and closes the door on any future skill, habit, or manual note that assumes the directory is already ignored.
+
 ## Step 4 — Generate the pointers
 
 - `CLAUDE.md` at the root, containing exactly: `@AGENTS.md` (Claude Code imports the file)
