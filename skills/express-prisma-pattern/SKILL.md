@@ -64,7 +64,7 @@ Response shaping always goes through the shared helpers (`ok`, `badRequest`, `un
 
 ## Source of truth for the model
 
-Same rule as `nestjs-crud-pattern`: exact fields come from the project's data model document. If it's not there, stop and ask before inventing fields.
+Exact fields come from the project's data model document. If it's not there, stop and ask before inventing fields.
 
 ## Definition of done (per feature)
 

@@ -10,10 +10,11 @@ New-Item -ItemType Directory -Force -Path $claudeSkills, $claudeCommands | Out-N
 Copy-Item -Recurse -Force (Join-Path $repo "skills\*")      $claudeSkills
 Copy-Item -Force          (Join-Path $repo "commands\*.md") $claudeCommands
 
-$geminiRoot = Join-Path $HOME ".gemini"
-if (Test-Path $geminiRoot) {
-    $geminiCmds = Join-Path $geminiRoot "commands\oficina"
-    New-Item -ItemType Directory -Force -Path $geminiCmds | Out-Null
+# Only refreshes an install that was explicitly opted into via install.ps1 -Gemini
+# (checks for the oficina subfolder itself, not just ~/.gemini — that directory can
+# exist for unrelated reasons, e.g. other tools that happen to use the same name).
+$geminiCmds = Join-Path $HOME ".gemini\commands\oficina"
+if (Test-Path $geminiCmds) {
     Copy-Item -Force (Join-Path $repo "gemini\commands\oficina\*") $geminiCmds
 }
 

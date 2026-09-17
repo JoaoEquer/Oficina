@@ -49,21 +49,6 @@ try {
     Write-Host "[warn] rtk setup failed - skipping RTK setup (see https://github.com/rtk-ai/rtk): $_"
 }
 
-# SessionStart hook - nudges /oficina:fechar-sessao when a project's memory log
-# looks behind its commits. Read-only, prints nothing when there's nothing to say.
-try {
-    $claudeHooks = Join-Path $HOME ".claude\hooks"
-    New-Item -ItemType Directory -Force -Path $claudeHooks | Out-Null
-    Copy-Item -Force (Join-Path $repo "hooks\session-start.sh") (Join-Path $claudeHooks "oficina-session-start.sh")
-    if (Get-Command node -ErrorAction SilentlyContinue) {
-        node (Join-Path $repo "hooks\register-session-start.js")
-    } else {
-        Write-Host "[warn] node not found - hook script copied but not registered in settings.json (needs Node to merge JSON safely)"
-    }
-} catch {
-    Write-Host "[warn] could not set up SessionStart hook - skipping: $_"
-}
-
 # Git hooks: keep ~/.claude and ~/.gemini in sync automatically after every commit
 # in this repo, and block any commit that stages .oficina/ (local-only, this repo is public).
 $gitHooks = Join-Path $repo ".git\hooks"

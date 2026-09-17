@@ -43,7 +43,7 @@ Look for an `AGENTS.md` in the parent directories (e.g. a workspace folder like 
 Source of truth for the data model: <path to the model document, or "PENDING — ask the tech lead">
 
 ## Estado Atual
-_(no session recorded yet — filled in by `/oficina:fechar-sessao` after each work session)_
+_(no session recorded yet — optionally updated by `/oficina:fechar-sessao` when a session ends cleanly; not required, fine to go stale)_
 
 ## Harness
 This project follows the Oficina harness (https://github.com/JoaoEquer/Oficina).
@@ -55,7 +55,6 @@ UNLESS a workspace-level AGENTS.md already embeds them (see Step 2.5)>
 ### Skills
 Before executing tasks in these areas, consult the corresponding skill at
 https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installation):
-- nestjs-crud-pattern — creating any CRUD module/domain/route, NestJS projects only (deprecated — check express-prisma-pattern first)
 - express-prisma-pattern — creating any CRUD route/domain in an Express + Prisma backend (the real Wibi stack)
 - prisma-schema-conventions — creating/changing schema, planning migrations
 - rbac-design — permissions, roles, access control
@@ -90,7 +89,7 @@ If `OPEN_DECISIONS.md` doesn't already exist at the project root, create it with
 Hand-edited only, never AI-summarized. Add an entry here only when a decision is actually confirmed.
 ```
 
-Do not populate it with content — it starts empty and is filled in by the human as real decisions get confirmed. Don't create `.oficina/memory/` here — that's lazily created by `/oficina:fechar-sessao` on first use.
+Do not populate it with content — it starts empty and is filled in by the human as real decisions get confirmed.
 
 ## Step 4 — Generate the pointers
 

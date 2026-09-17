@@ -10,8 +10,10 @@ mkdir -p ~/.claude/skills ~/.claude/commands
 cp -r "$repo"/skills/* ~/.claude/skills/
 cp "$repo"/commands/*.md ~/.claude/commands/
 
-if [ -d ~/.gemini ]; then
-  mkdir -p ~/.gemini/commands/oficina
+# Only refreshes an install that was explicitly opted into via install.sh --gemini
+# (checks for the oficina subfolder itself, not just ~/.gemini — that directory can
+# exist for unrelated reasons, e.g. other tools that happen to use the same name).
+if [ -d ~/.gemini/commands/oficina ]; then
   cp "$repo"/gemini/commands/oficina/* ~/.gemini/commands/oficina/
 fi
 

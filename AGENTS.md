@@ -13,7 +13,6 @@ When working on any project that references this harness:
    - `rules/agent-workflow.md` — how to direct the agent itself (plan before code, scoped sessions, early correction)
 2. **Consult the skills** in `skills/` before executing tasks in the covered areas. House patterns (extracted from repeated real usage — Path 1 in `docs/HOW-TO-GROW.md`):
    - `express-prisma-pattern` — creating any CRUD route/domain in an Express + Prisma backend (the real Wibi stack)
-   - `nestjs-crud-pattern` — same, but NestJS projects only (deprecated — check express-prisma-pattern first)
    - `prisma-schema-conventions` — creating/changing schema, planning migrations
    - `rbac-design` — permissions, roles, access control
    - `clickup-task-breakdown` — breaking scope into tasks

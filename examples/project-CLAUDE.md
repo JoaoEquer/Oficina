@@ -4,7 +4,7 @@
 
 <ADJUST: one sentence on what the system does and for whom.>
 
-Stack: NestJS + TypeScript + Prisma + PostgreSQL · Docker + GitHub Actions · <ADJUST: extras (GCS, SSE, JWT...)>
+Stack: Express + TypeScript + Prisma + PostgreSQL · Docker + GitHub Actions · <ADJUST: extras (GCS, SSE, JWT...)>
 
 Roles: <ADJUST: tech lead, dev(s)>. Source of truth for the data model: `docs/<ADJUST: model document name>`.
 
@@ -18,7 +18,7 @@ Always-on rules (summary — full text in the harness):
 - Git: branch per deliverable, conventional commits, small PRs, everything documented from day 0 in `docs/log/`.
 - Security: identity/tenant from the token (never from the body), authorization on the server, every query filters by workspace, secrets out of the repo, dates in UTC, validation at every edge.
 
-Relevant installed skills: `nestjs-crud-pattern`, `prisma-schema-conventions`, `rbac-design`, `clickup-task-breakdown`, `client-facing-docs`.
+Relevant installed skills: `express-prisma-pattern`, `prisma-schema-conventions`, `rbac-design`, `clickup-task-breakdown`, `client-facing-docs`.
 
 ## Locked decisions for this project
 

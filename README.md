@@ -25,7 +25,6 @@ oficina/
 ├── skills/          # Reusable working patterns (the primary surface)
 │   │                # -- House patterns (Path 1: extracted by repetition, see docs/HOW-TO-GROW.md) --
 │   ├── express-prisma-pattern/     # Express + Prisma CRUD: manual Clean Architecture (the real Wibi stack)
-│   ├── nestjs-crud-pattern/        # NestJS CRUD: controller/service/repository with DIP (deprecated)
 │   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
 │   ├── rbac-design/                # RBAC design: roles + granular permissions
 │   ├── clickup-task-breakdown/     # From scope documents to structured tasks
@@ -51,11 +50,9 @@ oficina/
 │   ├── init.md      # /oficina:init — configures any project automatically
 │   ├── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
 │   ├── review.md    # /oficina:review [PR] — reviews a diff against the house checklist, read-only
-│   ├── fechar-sessao.md  # /oficina:fechar-sessao — closes the session, updates Estado Atual + memory log
-│   └── lembrar.md        # /oficina:lembrar <termo> — searches past session memory
+│   └── fechar-sessao.md  # /oficina:fechar-sessao — closes the session, rewrites Estado Atual
 ├── .claude-plugin/  # Claude Code plugin/marketplace manifests
-├── hooks/           # SessionStart hook — nudges /oficina:fechar-sessao when it looks behind
-├── install.sh / install.ps1  # Installers for non-Claude harnesses (also wire up the hook above)
+├── install.sh / install.ps1  # Installers for non-Claude harnesses
 ├── examples/        # Example CLAUDE.md and committed .claude/settings.json for a project on this harness
 ├── docs/
 │   └── HOW-TO-GROW.md   # The growth process of this repository
@@ -73,7 +70,7 @@ Inside Claude Code, two commands:
 /plugin install oficina@oficina
 ```
 
-Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:lembrar`). To update when the repository evolves: `/plugin marketplace update oficina`.
+Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`). To update when the repository evolves: `/plugin marketplace update oficina`.
 
 ### Gemini CLI, Cursor, Codex and others
 
@@ -85,9 +82,9 @@ cd Oficina
 .\install.ps1 -Gemini
 ```
 
-This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:lembrar` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
+This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
 
-Both installers also register a `SessionStart` hook for Claude Code (`hooks/session-start.sh`, requires Node to merge `settings.json` safely): on `startup`/`resume` in a project with `AGENTS.md`, it silently checks whether there are commits after the last `/oficina:fechar-sessao` entry and, only then, nudges the agent to propose running it. Read-only, no network, prints nothing when there's nothing to say. Note: this only gets registered by the manual installers above — installing via the plugin marketplace (previous section) currently gives you the skills and commands but not this hook.
+There is deliberately no `SessionStart` hook nudging you to run `/oficina:fechar-sessao`. An earlier version had one; it assumed every session ends cleanly enough to close it out, which doesn't hold if you work until the session/quota just cuts off — so it fired on sessions you had no intention of closing and, worse, primed the agent to spend a turn catching up a stale `AGENTS.md` before starting the actual next task. `/oficina:fechar-sessao` is opt-in bookkeeping: run it when you land on a natural stopping point and want to, never a prerequisite for anything.
 
 ## Using it in a project (autonomous)
 

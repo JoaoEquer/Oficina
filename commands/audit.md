@@ -32,4 +32,4 @@ uv run render.py findings.json --out report.md
 
 Expect direct-dependency coverage (React Native, Expo SDK packages, Firebase, Sentry, etc. as pinned in `package.json`) with the transitive tree marked unassessable — that's the yarn.lock gap above, not a bug.
 
-**After the audit:** review `report.md`, then run `/oficina:fechar-sessao` **inside the audited project** (needs that project's own `AGENTS.md` from `/oficina:init`) to log a factual summary — counts by severity, what was flagged — into its `.oficina/memory/log.md`. Never paste the raw `findings.json`/`report.md` into memory.
+**After the audit:** review `report.md`, then run `/oficina:fechar-sessao` **inside the audited project** (needs that project's own `AGENTS.md` from `/oficina:init`) to refresh Estado Atual with a factual summary — counts by severity, what was flagged. Never paste the raw `findings.json`/`report.md` into `AGENTS.md` or memory.

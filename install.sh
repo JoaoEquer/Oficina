@@ -30,17 +30,6 @@ else
   echo "[warn] rtk not on PATH — skipping rtk init"
 fi
 
-# SessionStart hook - nudges /oficina:fechar-sessao when a project's memory log
-# looks behind its commits. Read-only, prints nothing when there's nothing to say.
-mkdir -p ~/.claude/hooks
-cp "$repo/hooks/session-start.sh" ~/.claude/hooks/oficina-session-start.sh
-chmod +x ~/.claude/hooks/oficina-session-start.sh
-if command -v node >/dev/null 2>&1; then
-  node "$repo/hooks/register-session-start.js" || echo "[warn] could not register SessionStart hook in settings.json"
-else
-  echo "[warn] node not found - hook script copied but not registered in settings.json (needs Node to merge JSON safely)"
-fi
-
 # Git hooks: keep ~/.claude and ~/.gemini in sync automatically after every commit
 # in this repo, and block any commit that stages .oficina/ (local-only, this repo is public).
 if [ -d "$repo/.git/hooks" ]; then
