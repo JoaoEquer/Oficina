@@ -25,7 +25,7 @@ references:
      (autor atribuído: SirAppSec; repo agregador sem LICENSE próprio detectado no GitHub — conteúdo é
      documentação de uso de uma ferramenta open-source real, gitleaks/gitleaks, sem claim de autoria
      original sobre o gitleaks em si). Copiado verbatim 2026-09-01 após leitura completa (duas vezes,
-     mesmo veredito). Ver Wibi/backlogs/skills-radar.md (seção H).
+     mesmo veredito). Ver skills-radar.md (seção H).
 
      CAVEAT confirmado na cópia: a seção "Bundled Resources" abaixo lista scripts/references/assets
      que NÃO EXISTEM no repo de origem (só SKILL.md + metadata.json de fato existem) — são aspiracionais,

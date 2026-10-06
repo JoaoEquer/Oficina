@@ -6,7 +6,7 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 <!-- Fonte: github.com/mattpocock/skills, skills/engineering/diagnosing-bugs/SKILL.md (Matt Pocock).
      Copiado verbatim 2026-09-01 após leitura completa (incluindo scripts/hitl-loop.template.sh, que é
      um template inofensivo de roteiro interativo de terminal, sem rede/exfiltração). Ver
-     Wibi/backlogs/skills-radar.md (seção C). -->
+     skills-radar.md (seção C). -->
 
 # Diagnosing Bugs
 

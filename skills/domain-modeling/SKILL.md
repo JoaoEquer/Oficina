@@ -4,7 +4,7 @@ description: Build and sharpen a project's domain model. Use when discussing cod
 ---
 
 <!-- Fonte: github.com/mattpocock/skills, skills/engineering/domain-modeling/SKILL.md (Matt Pocock).
-     Copiado verbatim 2026-09-01 após leitura completa. Ver Wibi/backlogs/skills-radar.md (seção C). -->
+     Copiado verbatim 2026-09-01 após leitura completa. Ver skills-radar.md (seção C). -->
 
 # Domain Modeling
 

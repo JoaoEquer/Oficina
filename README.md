@@ -24,7 +24,7 @@ The editorial line follows the pragmatic school (Fabio Akita, Augusto Galego): p
 oficina/
 ├── skills/          # Reusable working patterns (the primary surface)
 │   │                # -- House patterns (Path 1: extracted by repetition, see docs/HOW-TO-GROW.md) --
-│   ├── express-prisma-pattern/     # Express + Prisma CRUD: manual Clean Architecture (the real Wibi stack)
+│   ├── express-prisma-pattern/     # Express + Prisma CRUD: manual Clean Architecture (the house stack)
 │   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
 │   ├── rbac-design/                # RBAC design: roles + granular permissions
 │   ├── clickup-task-breakdown/     # From scope documents to structured tasks
@@ -110,7 +110,7 @@ If you use a different stack, this repository is probably not for you — and th
 
 - Method and structural inspiration: [affaan-m/ECC](https://github.com/affaan-m/ECC)
 - Engineering philosophy: Fabio Akita and Augusto Galego
-- Patterns extracted from real projects built at [Wibi](https://wibi.dev)
+- Patterns extracted from real production projects
 
 ## License
 

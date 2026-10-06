@@ -5,7 +5,7 @@ description: Grill the user relentlessly about a plan, decision, or idea. Use wh
 
 <!-- Fonte: github.com/mattpocock/skills, skills/productivity/grilling/SKILL.md (Matt Pocock). Copiado
      verbatim 2026-09-01 após leitura completa. Instalada como dependência direta de
-     improve-codebase-architecture. Ver Wibi/backlogs/skills-radar.md (seção C). -->
+     improve-codebase-architecture. Ver skills-radar.md (seção C). -->
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 

@@ -4,7 +4,7 @@ description: Automates CI/CD pipeline setup. Use when setting up or modifying bu
 ---
 
 <!-- Fonte: github.com/addyosmani/agent-skills, skills/ci-cd-and-automation/SKILL.md (MIT License, Addy Osmani).
-     Copiado verbatim 2026-09-01 após leitura completa do conteúdo real. Ver Wibi/backlogs/skills-radar.md
+     Copiado verbatim 2026-09-01 após leitura completa do conteúdo real. Ver skills-radar.md
      (seção H) para o veredito e o motivo de ter sido escolhida sobre cicd-pipeline-skill (LambdaTest) e
      github-actions-efficiency (GitHub oficial, adiada — otimiza CI já existente, não monta CI do zero). -->
 

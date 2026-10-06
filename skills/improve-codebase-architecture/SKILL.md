@@ -5,7 +5,7 @@ disable-model-invocation: true
 ---
 
 <!-- Fonte: github.com/mattpocock/skills, skills/engineering/improve-codebase-architecture/SKILL.md
-     (Matt Pocock). Copiado verbatim 2026-09-01 após leitura completa. Ver Wibi/backlogs/skills-radar.md
+     (Matt Pocock). Copiado verbatim 2026-09-01 após leitura completa. Ver skills-radar.md
      (seção C). Depende de codebase-design e grilling (instalados junto) — sem elas, os passos que
      chamam "Skill tool com codebase-design/grilling" ficam sem o que invocar. -->
 

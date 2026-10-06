@@ -6,7 +6,7 @@ description: Shared vocabulary for designing deep modules. Use when the user wan
 <!-- Fonte: github.com/mattpocock/skills, skills/engineering/codebase-design/SKILL.md (Matt Pocock).
      Copiado verbatim 2026-09-01 após leitura completa. Instalada como dependência direta de
      improve-codebase-architecture e tdd (ambas chamam esta skill pelo nome). Ver
-     Wibi/backlogs/skills-radar.md (seção C). -->
+     skills-radar.md (seção C). -->
 
 # Codebase Design
 

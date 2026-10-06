@@ -7,7 +7,7 @@ Create the CRUD domain **$ARGUMENTS** following the house pattern (`express-pris
 
 Mandatory steps, in this order:
 
-1. Detect the stack: check the project's `package.json`. `express` present → use the `express-prisma-pattern` skill. `@nestjs/core` present instead → stop and tell the user Oficina doesn't maintain a NestJS pattern today (no active Wibi backend runs NestJS); they can adapt `express-prisma-pattern`'s principles by hand, or pull the retired `nestjs-crud-pattern` skill from an older commit if they want the literal Nest structure back. Neither present → STOP and ask which pattern to follow; do not guess.
+1. Detect the stack: check the project's `package.json`. `express` present → use the `express-prisma-pattern` skill. `@nestjs/core` present instead → stop and tell the user Oficina doesn't maintain a NestJS pattern today (no active backend in the house stack runs NestJS); they can adapt `express-prisma-pattern`'s principles by hand, or pull the retired `nestjs-crud-pattern` skill from an older commit if they want the literal Nest structure back. Neither present → STOP and ask which pattern to follow; do not guess.
 2. Locate the project's data model document (UML/diagram in `docs/`). If you can't find it or the entity isn't in it, STOP and ask for the fields — do not invent them.
 3. If a CRUD module/feature already exists in the repo, use it as the mold and keep the format identical.
 4. Model the entity in `schema.prisma` following the conventions (workspaceId, soft delete, UTC, and whichever others apply) and generate the migration with a descriptive name.

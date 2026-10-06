@@ -4,9 +4,9 @@ The value of this repository is not in what it holds today — it is in the proc
 
 ## Two paths in, one repository
 
-**Path 1 — House patterns, by repetition.** The original path, and still the default for anything specific to *how Wibi builds* (a CRUD shape, a schema convention, an RBAC process). Goal: stay between 5 and 15 of these, always. See "The cycle" below.
+**Path 1 — House patterns, by repetition.** The original path, and still the default for anything specific to *how the house stack is built* (a CRUD shape, a schema convention, an RBAC process). Goal: stay between 5 and 15 of these, always. See "The cycle" below.
 
-**Path 2 — Curated adoption, by audited fit.** For general engineering-practice content (testing discipline, debugging, CI/CD, secret scanning, architecture review) that didn't originate inside a Wibi project but closes a **confirmed, current** gap in one. Sourced from `Wibi/backlogs/skills-radar.md` (the standing research log of external skills, refreshed periodically). See "The curated-adoption bar" below. No count ceiling here — the bar is fit, not scarcity — but every entry is dated and re-justified at the next skill-radar pass, not installed once and forgotten.
+**Path 2 — Curated adoption, by audited fit.** For general engineering-practice content (testing discipline, debugging, CI/CD, secret scanning, architecture review) that didn't originate inside a house project but closes a **confirmed, current** gap in one. Sourced from `skills-radar.md` (the standing research log of external skills, refreshed periodically). See "The curated-adoption bar" below. No count ceiling here — the bar is fit, not scarcity — but every entry is dated and re-justified at the next skill-radar pass, not installed once and forgotten.
 
 Both paths produce the same shape (`skills/<name>/SKILL.md`, same naming rules) and are indistinguishable to whoever consumes Oficina. The difference is only in *how a candidate earns its place* — keep the provenance note (source repo, date, one-line why) inside each curated skill's `SKILL.md` so a future audit can tell which path it came from without asking.
 
@@ -68,7 +68,7 @@ A skill nobody triggers in 2–3 months is a candidate for removal or for a rewr
 A candidate from `skills-radar.md` earns a place in Oficina only when **both** are true:
 
 1. **Content audit passed.** The real `SKILL.md` was read in full (not the one-line description from a catalog), and any bundled script it runs was read too — no vendor lock-in pushed into "neutral" examples, no unrequested tool-calling instructions, no network/exec/eval in a bundled script that shouldn't need one. A large, popular source repo (thousands of stars) earns *zero* extra trust by association — audit the individual skill anyway.
-2. **Confirmed, current fit.** It closes a gap that's real *today* in a tracked Wibi repo or in how Oficina itself is used — not "would be nice if we ever needed X." Point at the specific confirmed gap (a missing CI workflow, a documented past secret leak, a real RAG pipeline already in production) when recording the decision. A generically well-written skill with no confirmed current target stays in `skills-radar.md`, unchecked, until one appears.
+2. **Confirmed, current fit.** It closes a gap that's real *today* in a tracked house repo or in how Oficina itself is used — not "would be nice if we ever needed X." Point at the specific confirmed gap (a missing CI workflow, a documented past secret leak, a real RAG pipeline already in production) when recording the decision. A generically well-written skill with no confirmed current target stays in `skills-radar.md`, unchecked, until one appears.
 
 Re-run this bar at every skill-radar pass, not just on first install: a skill that passed a year ago might no longer fit the project's current stage (stack changed, gap closed, a better-maintained alternative surfaced) — that's a removal, the same as an unused Path-1 skill.
 

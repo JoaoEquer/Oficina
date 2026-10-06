@@ -28,7 +28,7 @@ Read the harness's four rule files. Try in this order:
 
 ## Step 2.5 — Check for a workspace-level harness
 
-Look for an `AGENTS.md` in the parent directories (e.g. a workspace folder like `Wibi/AGENTS.md`) that already embeds the Oficina rules. If one exists, **do not re-embed the rules in the project's AGENTS.md** — harnesses load parent context files hierarchically, and duplicating them wastes context on every turn. In that case the project file contains only: context, source of truth, locked decisions and pending items, plus one line: "Workspace-level rules inherited from the parent AGENTS.md (Oficina harness)."
+Look for an `AGENTS.md` in the parent directories (e.g. a workspace folder like `<workspace>/AGENTS.md`) that already embeds the Oficina rules. If one exists, **do not re-embed the rules in the project's AGENTS.md** — harnesses load parent context files hierarchically, and duplicating them wastes context on every turn. In that case the project file contains only: context, source of truth, locked decisions and pending items, plus one line: "Workspace-level rules inherited from the parent AGENTS.md (Oficina harness)."
 
 ## Step 3 — Generate AGENTS.md at the project root
 
@@ -55,7 +55,7 @@ UNLESS a workspace-level AGENTS.md already embeds them (see Step 2.5)>
 ### Skills
 Before executing tasks in these areas, consult the corresponding skill at
 https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installation):
-- express-prisma-pattern — creating any CRUD route/domain in an Express + Prisma backend (the real Wibi stack)
+- express-prisma-pattern — creating any CRUD route/domain in an Express + Prisma backend (the house stack)
 - prisma-schema-conventions — creating/changing schema, planning migrations
 - rbac-design — permissions, roles, access control
 - clickup-task-breakdown — breaking scope into tasks

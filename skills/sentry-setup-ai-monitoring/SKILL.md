@@ -6,7 +6,7 @@ license: Apache-2.0
 
 <!-- Fonte: github.com/getsentry/sentry-agent-skills, skills/sentry-setup-ai-monitoring/SKILL.md
      (Apache-2.0, org oficial Sentry). Copiado verbatim 2026-09-01 após leitura completa. Ver
-     Wibi/backlogs/skills-radar.md (seção E) — path corrigido: `sentry-instrumentation-guide`
+     skills-radar.md (seção E) — path corrigido: `sentry-instrumentation-guide`
      (nome antigo citado na varredura original) foi movida pra skills-legacy/ em getsentry/sentry-for-ai;
      esta é a skill viva. -->
 

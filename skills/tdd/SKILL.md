@@ -4,7 +4,7 @@ description: Test-driven development. Use when the user wants to build features 
 ---
 
 <!-- Fonte: github.com/mattpocock/skills, skills/engineering/tdd/SKILL.md (Matt Pocock). Copiado
-     verbatim 2026-09-01 após leitura completa. Ver Wibi/backlogs/skills-radar.md (seção C). -->
+     verbatim 2026-09-01 após leitura completa. Ver skills-radar.md (seção C). -->
 
 # Test-Driven Development
 
