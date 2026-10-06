@@ -8,8 +8,7 @@ license: Apache-2.0
      (Apache-2.0, org oficial Sentry). Copiado verbatim 2026-09-01 após leitura completa. Ver
      Wibi/backlogs/skills-radar.md (seção E) — path corrigido: `sentry-instrumentation-guide`
      (nome antigo citado na varredura original) foi movida pra skills-legacy/ em getsentry/sentry-for-ai;
-     esta é a skill viva. Alvo real: dream-book-api-agent (LangChain + OpenAI/Google GenAI confirmados
-     no package.json) — Sentry de erro genérico já está integrado lá, o gap é custo/latência/token de LLM. -->
+     esta é a skill viva. -->
 
 # Setup Sentry AI Agent Monitoring
 

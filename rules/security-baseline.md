@@ -6,7 +6,7 @@ Non-negotiable in any project on this stack:
 - **Authorization on the server.** Permission guard/decorator on every route that isn't explicitly public. The frontend hides buttons; the server denies actions.
 - **Tenant isolation at the data layer.** Every query filters by workspace. PR review checks this on every new repository method.
 - **Secrets out of the repository.** `.env` in `.gitignore`, `.env.example` with placeholders. A committed secret = rotate immediately, not just delete from history. Same bar for `AGENTS.md`, `OPEN_DECISIONS.md` and agent memory: never write credentials, tokens, connection strings, or client contract terms there — session memory is not a secrets store.
-- **Secret scanning for LLM-integrated projects.** Any project that talks to an LLM provider (`dream-book-api-agent` today) runs automated secret scanning (`gitleaks` or equivalent) in a pre-commit hook or CI — not optional. This repo already has a real incident of a versioned API key, not a hypothetical one. See the `secrets-gitleaks` skill for the concrete setup.
+- **Secret scanning for LLM-integrated projects.** Any project that talks to an LLM provider runs automated secret scanning (`gitleaks` or equivalent) in a pre-commit hook or CI — not optional. A committed API key is a realistic failure here, not a hypothetical one. See the `secrets-gitleaks` skill for the concrete setup.
 - **Input validation at every edge** (`class-validator` + global `ValidationPipe` with `whitelist: true`).
 - **Dates in UTC in the database and the API**; timezone only at presentation.
 - **Personal data with privacy law in mind** (LGPD/GDPR): collect the minimum, record the purpose, and treat personal-data deletion as a requirement (the only accepted exception to soft delete).

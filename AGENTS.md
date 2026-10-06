@@ -28,6 +28,6 @@ When working on any project that references this harness:
    - `tdd` — test-first feature/bugfix work, red-green-refactor discipline
    - `secrets-gitleaks` — secret scanning, pre-commit and CI (operationalizes `security-baseline.md`)
    - `ci-cd-and-automation` — standing up CI/CD quality gates from scratch
-   - `rag-architect` — designing/evaluating a RAG pipeline (dream-book-api-agent today)
-   - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens (dream-book-api-agent today)
+   - `rag-architect` — designing/evaluating a RAG pipeline
+   - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens
 3. **Documentary source of truth**: data model and scope come from the project's documents. Divergence is a blocker to resolve with the tech lead, not a detail to ignore.

@@ -39,8 +39,8 @@ oficina/
 │   ├── tdd/                        # Red-green-refactor: seams, anti-patterns, the rules of the loop
 │   ├── secrets-gitleaks/           # Gitleaks: pre-commit + CI secret scanning (security-baseline.md)
 │   ├── ci-cd-and-automation/       # Quality-gate CI/CD from scratch: gates, rollback, feature flags
-│   ├── rag-architect/              # RAG pipeline design + retrieval evaluation (dream-book-api-agent)
-│   └── sentry-setup-ai-monitoring/ # LLM call cost/latency/token instrumentation (dream-book-api-agent)
+│   ├── rag-architect/              # RAG pipeline design + retrieval evaluation
+│   └── sentry-setup-ai-monitoring/ # LLM call cost/latency/token instrumentation
 ├── rules/           # Always-on rules (embedded into project context files)
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
@@ -110,7 +110,7 @@ If you use a different stack, this repository is probably not for you — and th
 
 - Method and structural inspiration: [affaan-m/ECC](https://github.com/affaan-m/ECC)
 - Engineering philosophy: Fabio Akita and Augusto Galego
-- Patterns extracted from real projects built at [Wibi](https://wibi.com.br)
+- Patterns extracted from real projects built at [Wibi](https://wibi.dev)
 
 ## License
 
