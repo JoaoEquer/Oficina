@@ -28,6 +28,10 @@ When working on any project that references this harness:
    - `tdd` — test-first feature/bugfix work, red-green-refactor discipline
    - `secrets-gitleaks` — secret scanning, pre-commit and CI (operationalizes `security-baseline.md`)
    - `ci-cd-and-automation` — standing up CI/CD quality gates from scratch
+   - `redesign-existing-projects` — auditing and upgrading the UI of an existing project without changing its stack
+   - `screenshot-to-code` — rebuilding a UI from a screenshot, then comparing the render against it
+   - `web-design-guidelines` — reviewing front-end code against Vercel Web Interface Guidelines (rules vendored, no network call)
+   - `playwright-cli` — driving a real browser from the terminal to test a page at phone width (needs `npm i -g @playwright/cli`)
    - `rag-architect` — designing/evaluating a RAG pipeline
    - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens
 3. **Documentary source of truth**: data model and scope come from the project's documents. Divergence is a blocker to resolve with the tech lead, not a detail to ignore.
