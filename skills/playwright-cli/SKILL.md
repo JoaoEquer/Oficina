@@ -6,6 +6,9 @@ allowed-tools: Bash(playwright-cli:*) Bash(npx playwright:*) Bash(npx --no-insta
 
 # Browser Automation with playwright-cli
 
+> Provenance: github.com/microsoft/playwright-cli (skills/playwright-cli, Apache-2.0), audited 2026-10-13 (instruction-only, no scripts). Why: drive a real browser from the terminal to check pages at phone width. Unmodified. Needs `npm i -g @playwright/cli`.
+
+
 ## Quick start
 
 ```bash

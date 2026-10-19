@@ -18,6 +18,9 @@ When working on any project that references this harness:
    - `clickup-task-breakdown` — breaking scope into tasks
    - `client-facing-docs` — any material the client will read
    - `token-efficiency` — session setup, token/context limits, RTK
+   - `design-audit` — read-only audit for the generated-UI look and design-system drift (static scan + rendered check, ranked report)
+   - `security-audit` — read-only code security audit, source-to-sink tracing, HIGH-confidence findings only (Express/Prisma, web, Electron, Expo, LLM)
+   - `ai-news` — daily AI news briefing in PT-BR (AlphaSignal + Hermes AI, new items only) and Shorts scripts from the best stories; output in `~/.oficina/news/`, never in a repo
 
    Curated skills (audited external adoption closing a confirmed gap — Path 2 in `docs/HOW-TO-GROW.md`):
    - `domain-modeling` — building/sharpening CONTEXT.md glossary and ADRs

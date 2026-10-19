@@ -5,3 +5,6 @@ node_modules/
 # Local dogfood session memory (this repo is public — never leak
 # analysis of client/production code such as a client or production API into it).
 .oficina/
+
+# playwright-cli session artifacts (snapshots/logs from local test runs)
+.playwright-cli/
