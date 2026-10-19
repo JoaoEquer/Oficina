@@ -5,12 +5,17 @@ description: Upgrades existing websites and apps to premium quality. Audits curr
 
 # Redesign Skill
 
+> Provenance: github.com/Leonxlnx/taste-skill (skills/redesign-skill, MIT), audited 2026-10-13 (instruction-only, no scripts). Why: UI upgrades of existing projects without a stack rewrite. Upstream has since retired this skill in favor of design-taste-frontend; this copy is kept and edited locally (see note below).
+
+
+> Oficina edit (2026-10-19): diagnosis now comes from the `design-audit` skill. Removed advice that is itself a generated-UI tell (Geist/Outfit/Satoshi as "fonts with character", grain/noise overlays, mesh gradients, glassmorphism, spotlight borders, picsum backgrounds). When this file and `design-audit/references/slop-catalog.md` disagree, the catalog wins.
+
 ## How This Works
 
 When applied to an existing project, follow this sequence:
 
 1. **Scan** — Read the codebase. Identify the framework, styling method (Tailwind, vanilla CSS, styled-components, etc.), and current design patterns.
-2. **Diagnose** — Run through the audit below. List every generic pattern, weak point, and missing state you find.
+2. **Diagnose** — Run the `design-audit` skill (or reuse its latest report). Use the audit below only for what that report does not cover.
 3. **Fix** — Apply targeted upgrades working with the existing stack. Do not rewrite from scratch. Improve what's there.
 
 ## Design Audit
@@ -19,7 +24,7 @@ When applied to an existing project, follow this sequence:
 
 Check for these problems and fix them:
 
-- **Browser default fonts or Inter everywhere.** Replace with a font that has character. Good options: `Geist`, `Outfit`, `Cabinet Grotesk`, `Satoshi`. For editorial/creative projects, pair a serif header with a sans-serif body.
+- **Browser default fonts or Inter everywhere.** Replace with a face chosen for the product's character and audience, and write the reason down. Do not swap one default for another (Geist, Satoshi, Space Grotesk and italic display serifs are defaults now too). A documented brand font stays.
 - **Headlines lack presence.** Increase size for display text, tighten letter-spacing, reduce line-height. Headlines should feel heavy and intentional.
 - **Body text too wide.** Limit paragraph width to roughly 65 characters. Increase line-height for readability.
 - **Only Regular (400) and Bold (700) weights used.** Introduce Medium (500) and SemiBold (600) for more subtle hierarchy.
@@ -36,11 +41,10 @@ Check for these problems and fix them:
 - **Mixing warm and cool grays.** Stick to one gray family. Tint all grays with a consistent hue (warm or cool, not both).
 - **Purple/blue "AI gradient" aesthetic.** This is the most common AI design fingerprint. Replace with neutral bases and a single, considered accent.
 - **Generic `box-shadow`.** Tint shadows to match the background hue. Use colored shadows (e.g., dark blue shadow on a blue background) instead of pure black at low opacity.
-- **Flat design with zero texture.** Add subtle noise, grain, or micro-patterns to backgrounds. Pure flat vectors feel sterile.
-- **Perfectly even gradients.** Break the uniformity with radial gradients, noise overlays, or mesh gradients instead of standard linear 45-degree fades.
+- **Decorative gradients and textures.** Gradients, grain, grid or stripe backgrounds with no meaning are generated-UI tells. Prefer flat surfaces from the neutral ramp; add texture only when the brand calls for it.
 - **Inconsistent lighting direction.** Audit all shadows to ensure they suggest a single, consistent light source.
 - **Random dark sections in a light mode page (or vice versa).** A single dark-background section breaking an otherwise light page looks like a copy-paste accident. Either commit to a full dark mode or keep a consistent background tone throughout. If contrast is needed, use a slightly darker shade of the same palette — not a sudden jump to `#111` in the middle of a cream page.
-- **Empty, flat sections with no visual depth.** Sections that are just text on a plain background feel unfinished. Add high-quality background imagery (blurred, overlaid, or masked), subtle patterns, or ambient gradients. Use reliable placeholder sources like `https://picsum.photos/seed/{name}/1920/1080` when real assets are not available. Experiment with background images behind hero sections, feature blocks, or CTAs — even a subtle full-width photo at low opacity adds presence.
+- **Empty sections.** A section that is only text usually needs real content (product photo, screenshot, real number, example), not decoration. Never ship random placeholder photos or a low-opacity image buried under a wash.
 
 ### Layout
 
@@ -105,7 +109,7 @@ Check for these problems and fix them:
 
 ### Iconography
 
-- **Lucide or Feather icons exclusively.** These are the "default" AI icon choice. Use Phosphor, Heroicons, or a custom set for differentiation.
+- **Icons used as decoration.** The tell is the icon tile above every heading, not the icon library. Keep the project's existing set; cut icons that carry no meaning.
 - **Rocketship for "Launch", shield for "Security".** Replace cliche metaphors with less obvious icons (bolt, fingerprint, spark, vault).
 - **Inconsistent stroke widths across icons.** Audit all icons and standardize to one stroke weight.
 - **Missing favicon.** Always include a branded favicon.
@@ -134,30 +138,13 @@ Check for these problems and fix them:
 
 ## Upgrade Techniques
 
-When upgrading a project, pull from these high-impact techniques to replace generic patterns:
+Effects are not upgrades. Scroll-jacking, glassmorphism, spotlight borders, grain overlays, parallax stacks and staggered reveals are now the generated-UI look itself, and reveal animations often leave content invisible when they fail. Upgrade by subtraction and by content:
 
-### Typography Upgrades
-- **Variable font animation.** Interpolate weight or width on scroll or hover for text that feels alive.
-- **Outlined-to-fill transitions.** Text starts as a stroke outline and fills with color on scroll entry or interaction.
-- **Text mask reveals.** Large typography acting as a window to video or animated imagery behind it.
-
-### Layout Upgrades
-- **Broken grid / asymmetry.** Elements that deliberately ignore column structure — overlapping, bleeding off-screen, or offset with calculated randomness.
-- **Whitespace maximization.** Aggressive use of negative space to force focus on a single element.
-- **Parallax card stacks.** Sections that stick and physically stack over each other during scroll.
-- **Split-screen scroll.** Two halves of the screen sliding in opposite directions.
-
-### Motion Upgrades
-- **Smooth scroll with inertia.** Decouple scrolling from browser defaults for a heavier, cinematic feel.
-- **Staggered entry.** Elements cascade in with slight delays, combining Y-axis translation with opacity fade. Never mount everything at once.
-- **Spring physics.** Replace linear easing with spring-based motion for a natural, weighty feel on all interactive elements.
-- **Scroll-driven reveals.** Content entering through expanding masks, wipes, or draw-on SVG paths tied to scroll progress.
-
-### Surface Upgrades
-- **True glassmorphism.** Go beyond `backdrop-filter: blur`. Add a 1px inner border and a subtle inner shadow to simulate edge refraction.
-- **Spotlight borders.** Card borders that illuminate dynamically under the cursor.
-- **Grain and noise overlays.** A fixed, pointer-events-none overlay with subtle noise to break digital flatness.
-- **Colored, tinted shadows.** Shadows that carry the hue of the background rather than using generic black.
+- **Real content first.** Replace placeholder copy, fake data and decorative illustrations with the product's own photos, screenshots, numbers and examples.
+- **One clear type scale.** At least one strong size jump between heading and body; tabular numbers where data is compared.
+- **Whitespace with rhythm.** Tight inside a group, generous between sections.
+- **Motion with a job.** Transitions only for state changes (open, close, loading, feedback), `transform`/`opacity`, ease-out, honoring `prefers-reduced-motion`. Content visible by default.
+- **Tinted, consistent shadows** only where elevation communicates hierarchy.
 
 ## Fix Priority
 
