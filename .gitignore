@@ -8,3 +8,7 @@ node_modules/
 
 # playwright-cli session artifacts (snapshots/logs from local test runs)
 .playwright-cli/
+
+# Python bytecode
+__pycache__/
+*.pyc
