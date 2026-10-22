@@ -19,6 +19,7 @@ When working on any project that references this harness:
    - `client-facing-docs` — any material the client will read
    - `token-efficiency` — session setup, token/context limits, RTK
    - `design-audit` — read-only audit for the generated-UI look and design-system drift (static scan + rendered check, ranked report)
+   - `frontend-design` — pick a deliberate visual direction (plan, review against brief, build) before writing UI; pair with `design-audit` to check the result
    - `security-audit` — read-only code security audit, source-to-sink tracing, HIGH-confidence findings only (Express/Prisma, web, Electron, Expo, LLM)
    - `ai-news` — daily AI news briefing in PT-BR (AlphaSignal + Hermes AI, new items only) and Shorts scripts from the best stories; output in `~/.oficina/news/`, never in a repo
 
