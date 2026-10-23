@@ -1,0 +1,10 @@
+description = "Installs AssetForge (asset viewer + export CLI) into the current game project using the game-assets skill (experimental) - Oficina harness"
+prompt = """
+Install AssetForge in the current game project. Optional argument: {{args}} - the target (electron, unity or roblox), if already known.
+
+Confirm this is a game project and a git repo; if not, stop. Follow skills/game-assets/SKILL.md in the Oficina repo. If tools/asset-forge/ already exists, stop and ask; never overwrite forge.config.json, .env or .asset-forge-cache.json. Ask in one round only what the project does not answer: target, destination path for that target (Electron assets folder, Unity project root, or the Rojo folder for Assets.lua), game name, and for Unity the Pixels Per Unit (default 16), each with a recommended answer.
+
+Copy skills/game-assets/templates/asset-forge to tools/asset-forge (without node_modules). Fill forge.config.json with one game entry (assetsDir ../../assets, destination relative to tools/asset-forge) and remove the placeholder entries. Create assets/<game>/ and ASSETS.md from skills/game-assets/templates/ASSETS.md; leave placeholders for anything the owner has not decided, do not invent a palette. Ensure the root .gitignore contains tools/asset-forge/.env and tools/asset-forge/node_modules/. For roblox, tell the user to copy .env.example to .env and fill it by hand (never paste the key in chat) and to set up secret scanning with gitleaks before the first upload.
+
+Run npm install, npm test and npm run typecheck inside tools/asset-forge and report failures verbatim. Do not commit. Print what was created, the next commands (npm run dev, npm run export -- <game> <path>), and remind the user to record the project in the skill's Validacao table.
+"""
