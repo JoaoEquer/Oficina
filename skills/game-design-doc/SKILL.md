@@ -55,4 +55,4 @@ Record each real project where this skill was used, and what it changed. Promote
 
 | Project | Date | Mode | Result / what was missing |
 |---|---|---|---|
-| | | | |
+| Galaslime (`idle-game`) | 2026-10-23 | Review | GDD sem entrevista, 21 itens do checklist: MVP numérico, fora de escopo e gancho de retorno ausentes; escolhas mortas e duração da luta não verificadas sem rodar sonda. Review não fechou sozinho: falta o dono responder os PENDENTE. |

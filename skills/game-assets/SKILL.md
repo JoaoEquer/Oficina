@@ -53,4 +53,4 @@ Record each real project where this was used and what broke. Promote to stable a
 
 | Project | Date | Targets used | Result / what was missing |
 |---|---|---|---|
-| | | | |
+| Galaslime (`idle-game`) | 2026-10-23 | none (ASSETS.md only) | Jogo sem PNG (arte em código): só o guia de estilo foi preenchido, AssetForge não instalado. Template serviu, mas falta campo para arte gerada em código e conflito guia x código. Exporters não exercitados. |
