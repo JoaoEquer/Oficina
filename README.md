@@ -40,7 +40,9 @@ oficina/
 │   ├── secrets-gitleaks/           # Gitleaks: pre-commit + CI secret scanning (security-baseline.md)
 │   ├── ci-cd-and-automation/       # Quality-gate CI/CD from scratch: gates, rollback, feature flags
 │   ├── rag-architect/              # RAG pipeline design + retrieval evaluation
-│   └── sentry-setup-ai-monitoring/ # LLM call cost/latency/token instrumentation
+│   ├── sentry-setup-ai-monitoring/ # LLM call cost/latency/token instrumentation
+│   ├── game-design-doc/            # EXPERIMENTAL, games only: GDD build/review, idle economy reference
+│   └── game-assets/                # EXPERIMENTAL, games only: asset naming + AssetForge viewer/export (Unity, Electron, Roblox)
 ├── rules/           # Always-on rules (embedded into project context files)
 │   ├── engineering-philosophy.md
 │   ├── git-workflow.md
@@ -50,7 +52,10 @@ oficina/
 │   ├── init.md      # /oficina:init — configures any project automatically
 │   ├── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
 │   ├── review.md    # /oficina:review [PR] — reviews a diff against the house checklist, read-only
-│   └── fechar-sessao.md  # /oficina:fechar-sessao — closes the session, rewrites Estado Atual
+│   ├── fechar-sessao.md  # /oficina:fechar-sessao — closes the session, rewrites Estado Atual
+│   ├── gdd.md            # /oficina:gdd — builds/reviews GDD.md in a game project (experimental)
+│   ├── asset-forge.md    # /oficina:asset-forge — installs the AssetForge scaffold in a game project (experimental)
+│   └── asset.md          # /oficina:asset — creates/adjusts one asset per ASSETS.md and exports it (experimental)
 ├── .claude-plugin/  # Claude Code plugin/marketplace manifests
 ├── install.sh / install.ps1  # Installers for non-Claude harnesses
 ├── examples/        # Example CLAUDE.md and committed .claude/settings.json for a project on this harness
@@ -82,7 +87,7 @@ cd Oficina
 .\install.ps1 -Gemini
 ```
 
-This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
+This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:gdd`, `/oficina:asset-forge`, `/oficina:asset` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
 
 There is deliberately no `SessionStart` hook nudging you to run `/oficina:fechar-sessao`. An earlier version had one; it assumed every session ends cleanly enough to close it out, which doesn't hold if you work until the session/quota just cuts off — so it fired on sessions you had no intention of closing and, worse, primed the agent to spend a turn catching up a stale `AGENTS.md` before starting the actual next task. `/oficina:fechar-sessao` is opt-in bookkeeping: run it when you land on a natural stopping point and want to, never a prerequisite for anything.
 
