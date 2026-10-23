@@ -32,7 +32,7 @@ Common refutations: `outline-removed` on a programmatic focus target (`tabindex=
 Aggregate thresholds that signal "no system": more than ~24 distinct hex colors, ~6 radii, or ~10 font sizes in UI code.
 
 ### 3. Manual pass for what grep cannot see
-Read the main screens' JSX/templates against `references/slop-catalog.md`, sections "Layout" and "Copy". These are structural (icon-tile feature grids, three-equal-cards rows, nested cards, hero template, numbered section labels) and only show up by reading the component tree.
+Read the main screens' JSX/templates against `references/slop-catalog.md`, sections "Layout" and "Copy". Then read the screen against `references/ux-laws.md` (seven usability laws) as questions, not citations. These are structural (icon-tile feature grids, three-equal-cards rows, nested cards, hero template, numbered section labels) and only show up by reading the component tree.
 
 ### 4. Rendered check (web/Electron renderer)
 If the app can run locally, use the `playwright-cli` skill: screenshot the key routes at **375, 768 and 1440px**, then look at each screenshot. Check what code cannot show: contrast, real line length, cramped padding, touch targets under 44px, content hidden at rest (reveal animations that never fire), text overflow, the first viewport (is there a clear title and one primary action?). Expo: use the web build or an emulator screenshot. If the app cannot run, say the rendered check was skipped; do not guess.
