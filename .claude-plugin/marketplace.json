@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "oficina",
-      "description": "House patterns: NestJS CRUD with DIP, multi-tenant Prisma schema conventions, RBAC design, ClickUp task breakdown and client-facing documentation. Includes /oficina:init to configure any project automatically and /oficina:review for house-checklist diff review.",
+      "description": "House patterns: Express + Prisma CRUD with manual Clean Architecture, multi-tenant schema conventions, RBAC design, security and design audits, task breakdown and client-facing documentation. Includes /oficina:init to configure any project and /oficina:review for checklist-based diff review.",
       "source": "./",
       "category": "development"
     }

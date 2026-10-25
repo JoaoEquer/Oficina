@@ -1,4 +1,4 @@
-# AGENTS.md — Oficina
+﻿# AGENTS.md — Oficina
 
 Entry point for harnesses that read `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI and similar).
 
@@ -20,6 +20,7 @@ When working on any project that references this harness:
    - `token-efficiency` — session setup, token/context limits, RTK
    - `design-audit` — read-only audit for the generated-UI look and design-system drift (static scan + rendered check, ranked report)
    - `frontend-design` — pick a deliberate visual direction (plan, review against brief, build) before writing UI; pair with `design-audit` to check the result
+   - `break-ui` — feeds a component worst-case data (long names, empty states, huge counts, non-Latin text) behind a demo toggle and reports what breaks, with a fix for each
    - `security-audit` — read-only code security audit, source-to-sink tracing, HIGH-confidence findings only (Express/Prisma, web, Electron, Expo, LLM)
    - `ai-news` — daily AI news briefing in PT-BR (AlphaSignal + Hermes AI, new items only) and Shorts scripts from the best stories; output in `~/.oficina/news/`, never in a repo
 

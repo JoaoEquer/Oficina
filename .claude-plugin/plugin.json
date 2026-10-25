@@ -1,7 +1,7 @@
 {
   "name": "oficina",
   "version": "1.5.0",
-  "description": "A lean agent harness for AI-assisted development — NestJS + TypeScript + Prisma + PostgreSQL. Skills for CRUD, Prisma modeling, RBAC, task breakdown and client-facing docs.",
+  "description": "Agent harness for AI-assisted development: rules, skills and slash commands for Node + TypeScript + Prisma backends (Express with manual Clean Architecture), security audit, design audit and client-facing docs.",
   "author": {
     "name": "João Victor Equer",
     "url": "https://github.com/JoaoEquer"
@@ -9,11 +9,14 @@
   "repository": "https://github.com/JoaoEquer/Oficina",
   "license": "MIT",
   "keywords": [
-    "nestjs",
+    "agent-harness",
+    "agent-skills",
+    "claude-code",
+    "express",
     "prisma",
-    "postgresql",
+    "typescript",
     "rbac",
-    "pt-br",
-    "harness"
+    "security-audit",
+    "pt-br"
   ]
 }

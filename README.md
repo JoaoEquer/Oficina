@@ -1,4 +1,4 @@
-# Oficina
+﻿# Oficina
 
 Pacote versionado de regras, skills e comandos que assistentes de código com IA leem para se comportar do mesmo jeito em todo projeto: 27 skills, 4 regras sempre ativas, 8 comandos, cerca de 5,7 mil linhas de Markdown.
 
@@ -125,9 +125,8 @@ Convenções (de `rules/git-workflow.md`; o log do repo as segue): um branch por
 
 Em uso ativo; manifesto do plugin na versão 1.5.0. Problemas conhecidos:
 
-- `.claude-plugin/plugin.json` ainda descreve o projeto como "NestJS + TypeScript + Prisma", o que está desatualizado: a stack da casa hoje é Express. NestJS fica só para projetos que escolham explicitamente.
 - As skills de jogo são experimentais.
-- O `AGENTS.md` lista as skills à mão e pode ficar atrás da pasta `skills/`.
+- O `AGENTS.md` lista as skills à mão e pode ficar atrás da pasta `skills/`; confira ao adicionar uma nova.
 
 Não há roadmap registrado no repositório.
 
