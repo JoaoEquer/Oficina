@@ -5,7 +5,7 @@ description: Organizes, previews and exports 2D game assets (sprites, UI, tiles)
 
 # Game assets
 
-> Provenance: own skill (2026-10-22), **experimental**. Not yet used in two real projects (see Validation). Roblox exporter is tested only against a mocked API.
+> Provenance: own skill (2026-10-22), **experimental**. Used in two real projects (Galaslime, Milkway Runners) but stays experimental: the Roblox exporter is tested only against a mocked API, and the template has no mode for 3D or code-generated art (Milkway needed a hand-adapted ASSETS.md).
 
 Oficina does not run the app. It holds this skill, the template and the commands; `/oficina:asset-forge` copies the scaffold into the game project (`tools/asset-forge/`), where it runs.
 
@@ -55,3 +55,4 @@ Record each real project where this was used and what broke. Promote to stable a
 |---|---|---|---|
 | Galaslime (`idle-game`) | 2026-10-23 | none (ASSETS.md only) | Jogo sem PNG (arte em código): só o guia de estilo foi preenchido, AssetForge não instalado. Template serviu, mas falta campo para arte gerada em código e conflito guia x código. Exporters não exercitados. |
 | Galaslime (`idle-game`) | 2026-10-25 | electron | AssetForge instalado via scaffold: 25 testes e typecheck verdes, export de 1 PNG gerou `assets.ts` e manifesto, viewer compila. Falta: abrir o viewer com arte real; Unity e Roblox não exercitados. Comando `/oficina:asset-forge` pede `npm install` (projeto usa yarn): funciona, mas o npm avisa de install-scripts bloqueados (esbuild). |
+| Milkway Runners (`teste-milk/milkway-runners`) | 2026-10-25 | unity (em pasta temporária, repo não tocado) | Projeto é 3D low poly gerado por código, sem PNG: o template de ASSETS.md (pixel art, 32x32, paleta de 3 cores) não serviu e foi adaptado à mão (o guia aponta o `05-arte.md` do projeto como fonte). Exporter Unity ok: 25 testes verdes, 1 PNG de 16x16 foi copiado para `Assets/Sprites/items/`, `PixelArtImporter.cs` e `.json` (ppu 16) gerados. Falta na skill: modo "3D/arte em código" no template, e aviso de que o PixelArtImporter força Point/sem compressão (pixel art) e pode não servir a ícones de HUD low poly. Roblox não exercitado. |
