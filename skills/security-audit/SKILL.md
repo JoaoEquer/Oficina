@@ -45,6 +45,7 @@ List entry points before reading sinks. For each: who can reach it (anonymous / 
 | `express`, `prisma`, `fastify`, `@nestjs` | `references/node-api.md` |
 | `react`, `vite`, `next`, plain HTML/JS | `references/web-frontend.md` |
 | `electron` | `references/electron.md` |
+| public site or app about to launch (forms, tracking, payments, Brazil) | `references/launch-compliance.md` |
 | `expo`, `react-native` | `references/expo-react-native.md` |
 | `@anthropic-ai/sdk`, `openai`, `ai`, `langchain`, any model API call | `references/llm-integration.md` |
 
