@@ -51,8 +51,8 @@ Be honest about what is unverified: a balance claim without a run/test is an opi
 - A game with no "out of scope" list has no scope. Insist on it.
 - When the meeting plan and the code disagree, mark the plan PLANEJADO and the code CONFIRMADO; never write the plan as if it existed. Flag code features that no document decided (e.g. PvP) as a risk, not as scope.
 
-## Validation (experimental)
-Record each real project where this skill was used, and what it changed. Promote to stable after two.
+## Validation
+Record each real project where this skill was used, and what it changed. Promoted to stable after two projects (2026-10-25).
 
 | Project | Date | Mode | Result / what was missing |
 |---|---|---|---|
