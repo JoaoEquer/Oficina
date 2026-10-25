@@ -1,0 +1,8 @@
+{
+  "assetsDir": "../../assets",
+  "games": [
+    { "name": "meu-jogo-electron", "target": "electron", "destination": "../../src/assets" },
+    { "name": "meu-jogo-unity", "target": "unity", "destination": "../../../MeuJogoUnity", "ppu": 16 },
+    { "name": "meu-jogo-roblox", "target": "roblox", "destination": "../../../MeuJogoRoblox/src/shared" }
+  ]
+}

@@ -71,6 +71,7 @@ https://github.com/JoaoEquer/Oficina/tree/main/skills (or in the local installat
 - ci-cd-and-automation — standing up CI/CD quality gates from scratch
 - rag-architect — designing/evaluating a RAG pipeline (if the project has one)
 - sentry-setup-ai-monitoring — instrumenting LLM call cost/latency/tokens (if the project talks to an LLM)
+- game-design-doc, game-assets — experimental, list ONLY if the project is a game (engine files, `electron/` with a game loop, `ProjectSettings/`, `default.project.json`); omit for everything else
 
 ## Locked decisions for this project
 <list what you detected in code/docs; mark unconfirmed ones as PENDING>

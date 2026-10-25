@@ -1,0 +1,12 @@
+description = "Builds or reviews the Game Design Document (GDD.md) of the current game project using the game-design-doc skill (experimental) - Oficina harness"
+prompt = """
+Create or review the GDD of the current game project. Optional argument: {{args}} - game name or a note steering the work.
+
+Confirm this is a game project (engine files, electron/, ProjectSettings/, default.project.json, or the user said so); if not, stop and say this command is only for game projects. Follow the game-design-doc skill (skills/game-design-doc/SKILL.md in the Oficina repo): read the project first (README, AGENTS.md, CONTEXT.md, docs/, content tables, tests), then pick the mode. GDD.md or substantial docs/code present means Review; an empty project means Build.
+
+Build: interview the owner in numbered rounds with a recommended answer per question, then write GDD.md at the project root from skills/game-design-doc/templates/GDD.md, only with confirmed decisions; everything else is PENDENTE. Review: run skills/game-design-doc/references/review-checklist.md, update or create GDD.md from what code and docs prove, and report gaps, risks and next increments.
+
+Never edit game code, never run balance simulations unless asked, never commit. Show the diff of GDD.md. Remind the user to add the project to the skill's Validacao table once the GDD is accepted.
+
+Report: mode used, the GDD diff, the ranked gaps and risks, and what was left unverified.
+"""

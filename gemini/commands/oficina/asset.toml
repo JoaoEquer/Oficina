@@ -1,0 +1,10 @@
+description = "Creates or adjusts one game asset following the project's ASSETS.md, then exports it with AssetForge (experimental) - Oficina harness"
+prompt = """
+Create or adjust the asset described by {{args}}, following the project's style guide, then export it.
+
+Require ASSETS.md and tools/asset-forge/forge.config.json; if either is missing, stop and say the asset-forge command needs to run first. Follow skills/game-assets/SKILL.md in the Oficina repo. Read ASSETS.md (style, palette, base sizes, naming, asset list) and GDD.md if present. Pick the game from the arguments, or ask if forge.config.json has several.
+
+Name the asset categoria_objeto_estado_NN.png (snake_case, 3+ words, two-digit index, unique) and use the size from the base-size table; if it exists, adjust in place and keep the name. Produce the image as code (a small script writing the PNG with only palette colors, integer coordinates, no anti-aliasing, transparent background) or edit the existing file; do not call an external image service or invent a palette. Save under assets/<project>/<categoria>/ and update the asset list in ASSETS.md.
+
+Export with npm run export -- <game> <path-relative-to-assets> inside tools/asset-forge. For a Roblox game this uploads to the owner's account: confirm before the first upload of the session and never print .env values. Verify the command printed Exported 1 asset(s), the generated index lists the name, and the dimensions match the base-size table; report any mismatch. Do not commit; show the changed files.
+"""
