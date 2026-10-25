@@ -1,122 +1,138 @@
 # Oficina
 
-**A portable context pack for AI coding assistants — pragmatic, focused, battle-tested.**
+Pacote versionado de regras, skills e comandos que assistentes de código com IA leem para se comportar do mesmo jeito em todo projeto: 27 skills, 4 regras sempre ativas, 8 comandos, cerca de 5,7 mil linhas de Markdown.
 
-Not an agent itself: a shared, versioned set of rules, skills and commands that any AI coding assistant reads, so it behaves the same way — house style, security baseline, memory across sessions — on every project you point it at.
+Não é um agente nem uma biblioteca. É contexto: o que eu explicaria para o agente toda vez que abro um projeto novo (estilo da casa, baseline de segurança, memória entre sessões), escrito uma vez e instalado por plugin ou por script. Funciona com Claude Code e com qualquer ferramenta que leia `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI).
 
-Real patterns extracted from real projects (multi-tenant SaaS, admin panels with RBAC, operational task management), built with Node.js + TypeScript + Prisma — Express in a manual Clean Architecture shape today (NestJS kept for projects that explicitly pick it). Nothing here is theoretical: every house-pattern skill, rule and command was born from a problem that showed up in production or in a client delivery; the curated skills (see `docs/HOW-TO-GROW.md`) close a confirmed, current gap the same way.
+*Oficina in English: a portable context pack of rules, skills and slash commands for AI coding assistants. The rest of this README is in Portuguese; the skills themselves are written in English.*
 
-Works with **Claude Code** and any harness that reads `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI).
+## O que tem dentro (saída real)
 
-*"Oficina" is Portuguese for "workshop" — the place where working patterns are forged.*
-
-## Philosophy
-
-Inspired by the method behind [ECC](https://github.com/affaan-m/ECC) — use, extract the pattern, turn it into a skill, reuse — but deliberately **small**. There are no 270 skills for 12 languages here. There is what I actually use, for the stack I actually use. The single growth rule:
-
-> **Nothing enters this repository until it has repeated at least twice in a real project.**
-
-The editorial line follows the pragmatic school (Fabio Akita, Augusto Galego): proven technology over trends, complexity only when the problem demands it, reversible decisions, no buzzwords.
-
-## Structure
+Contagem feita no clone, sem nada instalado:
 
 ```
-oficina/
-├── skills/          # Reusable working patterns (the primary surface)
-│   │                # -- House patterns (Path 1: extracted by repetition, see docs/HOW-TO-GROW.md) --
-│   ├── express-prisma-pattern/     # Express + Prisma CRUD: manual Clean Architecture (the house stack)
-│   ├── prisma-schema-conventions/  # Multi-tenant data modeling conventions for Prisma
-│   ├── rbac-design/                # RBAC design: roles + granular permissions
-│   ├── clickup-task-breakdown/     # From scope documents to structured tasks
-│   ├── client-facing-docs/         # Technical docs for clients, jargon-free
-│   ├── token-efficiency/           # RTK setup + habits to cut session token waste
-│   │                # -- Curated (Path 2: audited external adoption, see docs/HOW-TO-GROW.md) --
-│   ├── domain-modeling/            # Sharpen CONTEXT.md glossary + ADRs as you design
-│   ├── codebase-design/            # Deep-module vocabulary: module, interface, depth, seam, adapter
-│   ├── improve-codebase-architecture/ # Scan for deepening opportunities, visual HTML report
-│   ├── grilling/                   # Structured requirements interview (design-tree, round by round)
-│   ├── diagnosing-bugs/            # 6-phase discipline for hard bugs and perf regressions
-│   ├── tdd/                        # Red-green-refactor: seams, anti-patterns, the rules of the loop
-│   ├── secrets-gitleaks/           # Gitleaks: pre-commit + CI secret scanning (security-baseline.md)
-│   ├── ci-cd-and-automation/       # Quality-gate CI/CD from scratch: gates, rollback, feature flags
-│   ├── rag-architect/              # RAG pipeline design + retrieval evaluation
-│   ├── sentry-setup-ai-monitoring/ # LLM call cost/latency/token instrumentation
-│   ├── game-design-doc/            # EXPERIMENTAL, games only: GDD build/review, idle economy reference
-│   └── game-assets/                # EXPERIMENTAL, games only: asset naming + AssetForge viewer/export (Unity, Electron, Roblox)
-├── rules/           # Always-on rules (embedded into project context files)
-│   ├── engineering-philosophy.md
-│   ├── git-workflow.md
-│   ├── security-baseline.md
-│   └── agent-workflow.md          # how to direct the agent itself: plan before code, scoped sessions, early correction
-├── commands/        # Slash commands
-│   ├── init.md      # /oficina:init — configures any project automatically
-│   ├── crud.md      # /oficina:crud <domain> — generates a CRUD domain, house style
-│   ├── review.md    # /oficina:review [PR] — reviews a diff against the house checklist, read-only
-│   ├── fechar-sessao.md  # /oficina:fechar-sessao — closes the session, rewrites Estado Atual
-│   ├── gdd.md            # /oficina:gdd — builds/reviews GDD.md in a game project (experimental)
-│   ├── asset-forge.md    # /oficina:asset-forge — installs the AssetForge scaffold in a game project (experimental)
-│   └── asset.md          # /oficina:asset — creates/adjusts one asset per ASSETS.md and exports it (experimental)
-├── .claude-plugin/  # Claude Code plugin/marketplace manifests
-├── install.sh / install.ps1  # Installers for non-Claude harnesses
-├── examples/        # Example CLAUDE.md and committed .claude/settings.json for a project on this harness
-├── docs/
-│   └── HOW-TO-GROW.md   # The growth process of this repository
-└── AGENTS.md        # Entry point for non-Claude harnesses
+$ (Get-ChildItem skills -Directory).Count
+27
+$ (Get-ChildItem commands -File).Count
+8
+$ (Get-ChildItem rules -File).Count
+4
+$ git ls-files | measure
+139 arquivos versionados
 ```
 
-## Installation
+Comandos: `/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:audit`, `/oficina:gdd`, `/oficina:asset-forge`, `/oficina:asset`.
 
-### Claude Code (recommended — plugin, zero manual copying)
+## Quick start
 
-Inside Claude Code, two commands:
+No Claude Code, dois comandos:
 
 ```
 /plugin marketplace add JoaoEquer/Oficina
 /plugin install oficina@oficina
 ```
 
-Skills and commands load automatically (namespaced: `/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`). To update when the repository evolves: `/plugin marketplace update oficina`.
-
-### Gemini CLI, Cursor, Codex and others
-
-```bash
-git clone https://github.com/JoaoEquer/Oficina.git
-cd Oficina
-./install.sh --gemini     # macOS/Linux/WSL
-# or, on Windows:
-.\install.ps1 -Gemini
-```
-
-This installs the same slash commands for Gemini CLI (`/oficina:init`, `/oficina:crud`, `/oficina:review`, `/oficina:fechar-sessao`, `/oficina:gdd`, `/oficina:asset-forge`, `/oficina:asset` — TOML commands in `~/.gemini/commands/`). Run `/commands reload` inside Gemini afterwards. These harnesses also read the project's `AGENTS.md` — which the step below generates for you.
-
-There is deliberately no `SessionStart` hook nudging you to run `/oficina:fechar-sessao`. An earlier version had one; it assumed every session ends cleanly enough to close it out, which doesn't hold if you work until the session/quota just cuts off — so it fired on sessions you had no intention of closing and, worse, primed the agent to spend a turn catching up a stale `AGENTS.md` before starting the actual next task. `/oficina:fechar-sessao` is opt-in bookkeeping: run it when you land on a natural stopping point and want to, never a prerequisite for anything.
-
-## Using it in a project (autonomous)
-
-Enter the project folder and run:
+Depois, dentro de qualquer projeto:
 
 ```
 /oficina:init
 ```
 
-The AI investigates the repository (stack, structure, data model document), generates an `AGENTS.md` with the full rules embedded plus `CLAUDE.md` and `GEMINI.md` pointing to it, detects technical decisions already present in the code, and lists anything that needs human confirmation as PENDING. One command, three harnesses configured.
+Resultado esperado: o agente investiga o repositório (stack, estrutura, documento do modelo de dados), gera um `AGENTS.md` com as regras embutidas, mais `CLAUDE.md` e `GEMINI.md` apontando para ele, e lista como PENDENTE o que precisa de confirmação humana. Não verifiquei o plugin em uma instalação limpa para este README; o comportamento acima é o que `commands/init.md` descreve.
 
-On a harness without slash commands, just ask: *"configure this project following `commands/init.md` from Oficina"*.
+Para Gemini CLI, Cursor e Codex:
 
-Prefer doing it by hand? `examples/project-CLAUDE.md` remains available as a template.
+```
+git clone https://github.com/JoaoEquer/Oficina.git
+cd Oficina
+.\install.ps1 -Gemini      # Windows;  ./install.sh --gemini no macOS/Linux/WSL
+```
 
-## Covered stack
+Isso copia skills e comandos para `~/.claude` e instala os comandos em TOML em `~/.gemini/commands/oficina/`. Rode `/commands reload` no Gemini depois. O instalador também tenta instalar o `rtk` (usado pela skill `token-efficiency`); se falhar, só avisa e segue.
 
-TypeScript · Express · NestJS (legacy) · Prisma · MySQL/PostgreSQL · Docker · GitHub Actions · ClickUp
+## Como funciona
 
-If you use a different stack, this repository is probably not for you — and that's fine. Build your own; `docs/HOW-TO-GROW.md` explains the method (including the curated-adoption path for stack-agnostic engineering practice: testing, debugging, CI/CD, secret scanning).
+```
+                  +-------------------+
+                  |  repositorio      |   fonte unica
+                  |  skills/ rules/   |
+                  |  commands/ gemini/|
+                  +---------+---------+
+          plugin            |           install.ps1 / install.sh / sync
+   (.claude-plugin/)        |           (copia para ~/.claude, ~/.gemini)
+        +-------------------+-------------------+
+        v                                       v
+  Claude Code                       Gemini CLI / Cursor / Codex
+  skills + /oficina:*               AGENTS.md + comandos TOML
+        |                                       |
+        +------------------+--------------------+
+                           v
+                /oficina:init no projeto alvo
+        gera AGENTS.md (regras embutidas) + CLAUDE.md + GEMINI.md
+```
 
-## Credits
+Três tipos de peça, cada um com um critério de entrada:
 
-- Method and structural inspiration: [affaan-m/ECC](https://github.com/affaan-m/ECC)
-- Engineering philosophy: Fabio Akita and Augusto Galego
-- Patterns extracted from real production projects
+- **Skill** (`skills/<nome>/SKILL.md`): fluxo com passos, decisões e armadilhas. Ex.: `rbac-design`.
+- **Regra** (`rules/*.md`): curta, inegociável, vale para toda interação. Ex.: o `workspaceId` nunca vem do body. As quatro: filosofia de engenharia, git workflow, baseline de segurança, como dirigir o agente.
+- **Comando** (`commands/*.md`): skill que disparo com frequência e com parâmetro. Ex.: `/oficina:crud tarefas`.
 
-## License
+Decisões de design e o porquê:
 
-MIT — use, copy, adapt.
+- **Só entra o que se repetiu duas vezes num projeto real.** Uma vez é caso, duas é padrão. Evita virar catálogo genérico (inspirado no ECC, mas de propósito pequeno). O processo está em `docs/HOW-TO-GROW.md`.
+- **Dois caminhos de entrada.** Caminho 1: padrões da casa, extraídos por repetição (a stack Express + Prisma com Clean Architecture manual, convenções de schema, RBAC, quebra de tarefas, docs para cliente, eficiência de tokens). Caminho 2: skills curadas de fora, adotadas depois de auditoria e só se fecham uma lacuna confirmada (`tdd`, `diagnosing-bugs`, `secrets-gitleaks`, `ci-cd-and-automation`, `security-audit` etc.). A origem de cada skill curada fica registrada no próprio `SKILL.md`.
+- **Generalizar antes de gravar.** Entra o padrão, nunca o caso: sem nome de cliente, sem horas de contrato, sem "no projeto X fizemos Y".
+- **Sem hook de SessionStart cobrando `/oficina:fechar-sessao`.** Uma versão antiga tinha; assumia que toda sessão termina limpa, e disparava em sessões que eu não ia fechar. Hoje o fechamento é opcional. Decisão confirmada vai direto para `OPEN_DECISIONS.md`.
+- **Skills de jogo (`game-design-doc`, `game-assets`) estão marcadas como experimentais**: ainda não passaram pelo critério das duas repetições.
+
+Trade-offs e limites:
+
+- O conteúdo é opinativo e cobre uma stack (TypeScript, Express, Prisma, MySQL/PostgreSQL, Docker, GitHub Actions, ClickUp). Em outra stack, provavelmente não serve; o método de `HOW-TO-GROW.md` serve para montar o seu.
+- A instalação por script copia arquivos; não há versionamento por projeto. Para atualizar: `/plugin marketplace update oficina` ou rodar o sync de novo.
+- Não há testes automatizados do conteúdo. A validação é uso real e revisão.
+
+## Para quem é
+
+- Quem usa agentes de código todo dia e está cansado de repetir as mesmas instruções projeto a projeto.
+- Quem trabalha em Node + TypeScript + Prisma e quer um ponto de partida opinativo para adaptar.
+
+Para quem não é: quem quer um catálogo amplo de skills para muitas linguagens, ou um agente pronto para rodar. Aqui não tem nenhum dos dois.
+
+## Desenvolvimento
+
+Não há build, teste ou lint. O trabalho é editar Markdown e conferir se o resultado carrega no agente.
+
+```
+skills/            # superfície principal; uma pasta por skill, com SKILL.md
+rules/             # regras sempre ativas (embutidas pelo /oficina:init)
+commands/          # slash commands do Claude Code
+gemini/            # os mesmos comandos em TOML para o Gemini CLI
+.claude-plugin/    # manifestos de plugin e marketplace
+scripts/           # sync.ps1 / sync.sh e git-hooks (pre-commit, post-commit)
+examples/          # CLAUDE.md e settings.json de exemplo para um projeto
+docs/              # HOW-TO-GROW.md: como o repositório cresce
+AGENTS.md          # ponto de entrada para ferramentas que não são Claude
+```
+
+Hooks de git (instalados pelo `install.ps1`/`install.sh`):
+
+- `pre-commit` bloqueia o commit se algo em `.oficina/` estiver staged. O repositório é público e essa pasta é memória local de sessão.
+- `post-commit` roda `scripts/sync.ps1` (ou `sync.sh`), então skill ou comando editado já vale em `~/.claude` e `~/.gemini` sem reinstalar.
+
+Convenções (de `rules/git-workflow.md`; o log do repo as segue): um branch por entrega (`feat/`, `fix/`, `chore/`), Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`), PRs pequenos. O histórico tem merges de branches `feat/*` em um branch de integração.
+
+## Status
+
+Em uso ativo; manifesto do plugin na versão 1.5.0. Problemas conhecidos:
+
+- `.claude-plugin/plugin.json` ainda descreve o projeto como "NestJS + TypeScript + Prisma", o que está desatualizado: a stack da casa hoje é Express. NestJS fica só para projetos que escolham explicitamente.
+- As skills de jogo são experimentais.
+- O `AGENTS.md` lista as skills à mão e pode ficar atrás da pasta `skills/`.
+
+Não há roadmap registrado no repositório.
+
+## Créditos e licença
+
+Método inspirado em [affaan-m/ECC](https://github.com/affaan-m/ECC). Linha editorial pragmática (Fabio Akita, Augusto Galego).
+
+MIT. Veja `LICENSE`.
