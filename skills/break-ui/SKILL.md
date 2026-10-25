@@ -8,7 +8,7 @@ description: Try to break a piece of UI by feeding it worst-case data — long n
 > Provenance: adopted 2026-10-23 from `emilkowalski/skills` (MIT), skills/break-ui, copied unchanged except this block and the removal of its scripted first reply (Oficina style: no greeting). Read in full before adoption: markdown only, no scripts, no network calls.
 >
 > **Oficina rules that override the workflow below:**
-> - In a production repo (`dream-book-*` and any other team repo) run **report mode only**: Phases 1, 2 and 4 by reading code, no toggle, no fixture, no edit. The toggle and fixture are for personal repos and prototype routes.
+> - In a production or team repo run **report mode only**: Phases 1, 2 and 4 by reading code, no toggle, no fixture, no edit. The toggle and fixture are for personal repos and prototype routes.
 > - Findings you did not verify in a rendered screen are labeled "inferred".
 > - Worst-case values come from the real schema (Prisma model, Zod, DTO), not from invention.
 
