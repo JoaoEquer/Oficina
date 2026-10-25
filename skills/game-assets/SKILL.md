@@ -54,3 +54,4 @@ Record each real project where this was used and what broke. Promote to stable a
 | Project | Date | Targets used | Result / what was missing |
 |---|---|---|---|
 | Galaslime (`idle-game`) | 2026-10-23 | none (ASSETS.md only) | Jogo sem PNG (arte em código): só o guia de estilo foi preenchido, AssetForge não instalado. Template serviu, mas falta campo para arte gerada em código e conflito guia x código. Exporters não exercitados. |
+| Galaslime (`idle-game`) | 2026-10-25 | electron | AssetForge instalado via scaffold: 25 testes e typecheck verdes, export de 1 PNG gerou `assets.ts` e manifesto, viewer compila. Falta: abrir o viewer com arte real; Unity e Roblox não exercitados. Comando `/oficina:asset-forge` pede `npm install` (projeto usa yarn): funciona, mas o npm avisa de install-scripts bloqueados (esbuild). |

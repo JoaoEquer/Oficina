@@ -56,3 +56,4 @@ Record each real project where this skill was used, and what it changed. Promote
 | Project | Date | Mode | Result / what was missing |
 |---|---|---|---|
 | Galaslime (`idle-game`) | 2026-10-23 | Review | GDD sem entrevista, 21 itens do checklist: MVP numérico, fora de escopo e gancho de retorno ausentes; escolhas mortas e duração da luta não verificadas sem rodar sonda. Review não fechou sozinho: falta o dono responder os PENDENTE. |
+| Galaslime (`idle-game`) | 2026-10-25 | Interview (parcial) | Entrevista fechou 6 PENDENTE em uma rodada (monetização, sessão e ritmo, arte, cena, acessibilidade) e expôs um conflito: free-to-play com compras contradiz o "fora de escopo" proposto antes sem entrevista. A skill deveria cruzar cada resposta com as seções já escritas antes de gravar. |
