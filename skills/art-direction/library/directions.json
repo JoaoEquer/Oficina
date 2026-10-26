@@ -1,0 +1,226 @@
+{
+  "_note": "Own library, written for this skill. A direction is a way of composing a page (an idea engine), not a look. Palettes and type are dealt separately.",
+  "directions": [
+    {
+      "id": "specimen",
+      "name": "Type specimen",
+      "engine": "The subject's name or one word of its vocabulary is set so large it becomes the picture.",
+      "sectors": ["portfolio", "culture", "retail-craft", "food-producer", "services", "software"],
+      "tones": ["bold", "editorial", "playful"],
+      "needs": [],
+      "hero": "One word or name filling 70 to 100% of the viewport width, cropped or tightly set; one sentence and one action beside or under it. No picture is required.",
+      "sections": "Alternate full-width specimen lines with ruled-off content blocks of plain text; vary the specimen size section to section.",
+      "risks": "Needs a name or word with character; a long generic name defeats it. Headline-lines check will fire on purpose here: use a one-line specimen and keep the real h1 short.",
+      "disagrees": "A one-word hero is under the usual headline size floor in the other direction: it is far above it, so hero-size never fires, but check that the supporting sentence stays visible."
+    },
+    {
+      "id": "artefact",
+      "name": "The printed thing",
+      "engine": "The page is built as the printed object of the subject's world: a ticket, menu, label, timetable, receipt, invitation, manual.",
+      "sectors": ["hospitality", "culture", "food-producer", "services", "retail-craft", "education"],
+      "tones": ["warm", "quiet", "editorial", "playful"],
+      "needs": [],
+      "hero": "The artefact itself at reading size, on a plain field, carrying the real headline and the primary action as parts of it (a ticket stub is the button).",
+      "sections": "Each section is a different region or fold of the same object; keep its real conventions (columns of a timetable, dotted leaders on a menu).",
+      "risks": "A skeuomorphic texture becomes ornament; take the structure and typography of the object, not its paper texture.",
+      "disagrees": "Dotted leaders, tabular rules and small caps are normal here; they are structure, not decoration."
+    },
+    {
+      "id": "cutaway",
+      "name": "Object cutaway",
+      "engine": "One physical object or its silhouette, enlarged and cropped, is the frame; copy attaches to its parts.",
+      "sectors": ["hardware", "retail-craft", "food-producer", "health", "real-estate"],
+      "tones": ["technical", "quiet", "bold"],
+      "needs": ["product-photo"],
+      "hero": "The object occupies 55 to 70% of the first screen, cropped by the edge; headline overlaps its quiet area, never its detail.",
+      "sections": "Move the camera: each section crops a different part of the same object, text attached to the part it explains.",
+      "risks": "Needs a strong real or well-drawn object; a stock product shot kills it.",
+      "disagrees": "Callout lines to parts of the object are structure; keep them only where they point at something."
+    },
+    {
+      "id": "ledger",
+      "name": "Ledger",
+      "engine": "The subject's real numbers are the layout: a table, a column of figures, a price list that is the design.",
+      "sectors": ["finance", "software", "services", "nonprofit", "real-estate"],
+      "tones": ["technical", "quiet", "bold"],
+      "needs": [],
+      "hero": "One decisive figure at display size with its unit and what it means, next to a plain table of the other figures.",
+      "sections": "Rows and columns throughout; one section per question the numbers answer, each opening with the figure.",
+      "risks": "Invented numbers are forbidden: only real figures from the brief; otherwise pick another direction.",
+      "disagrees": "Hairline row rules and tabular figures are normal; thin rules elsewhere are not."
+    },
+    {
+      "id": "route",
+      "name": "Route",
+      "engine": "A real map, route or timeline is the spine of the page; sections are stops along it.",
+      "sectors": ["hospitality", "culture", "real-estate", "services", "nonprofit", "food-producer"],
+      "tones": ["warm", "editorial", "quiet"],
+      "needs": [],
+      "hero": "The map or line, large, with the subject's place marked; headline sits in a clear quadrant.",
+      "sections": "The route continues through the page as a vertical line or progress mark; each stop has a place, a time or a distance in its heading.",
+      "risks": "A decorative line with no real stops is an ornament; every stop must be a real place, step or date.",
+      "disagrees": "A continuous line is a thin rule by the meter; here it is the structure, so keep it single and meaningful."
+    },
+    {
+      "id": "archive",
+      "name": "Archive wall",
+      "engine": "Found pictures of the subject's world, hung and captioned like museum labels, carry the page.",
+      "sectors": ["culture", "hospitality", "portfolio", "retail-craft", "real-estate", "education"],
+      "tones": ["quiet", "editorial", "warm"],
+      "needs": [],
+      "hero": "One archival picture at 45 to 60% of the first screen with a caption that states what it is, plus the headline.",
+      "sections": "Picture-led blocks of varied sizes; each caption names the subject, date and source; copy is short and sits beside the picture.",
+      "risks": "Found pictures show the world around the client, never the client's own product or people; credits go in the footer.",
+      "disagrees": "Dense image grids are normal here; the fullness check passes easily, so judge rhythm by eye."
+    },
+    {
+      "id": "ritual",
+      "name": "Ritual",
+      "engine": "The page performs the subject's real sequence as the visitor scrolls: a process, a day, a recipe, a season.",
+      "sectors": ["food-producer", "hospitality", "services", "health", "software", "education"],
+      "tones": ["warm", "playful", "quiet", "technical"],
+      "needs": [],
+      "hero": "Step one of the sequence, shown and named; a visible sign that there is more (the next hour, the next stage).",
+      "sections": "One screen per step, each changing one dominant thing; numbers are allowed because the content is a real sequence.",
+      "risks": "Scroll-jacking: the page must read fully with motion off and without script.",
+      "disagrees": "Numbered markers are legitimate here; confirm the content is truly ordered."
+    },
+    {
+      "id": "split",
+      "name": "Split world",
+      "engine": "Two halves of the subject's world sit side by side (before and after, day and night, two audiences) and the page lets one answer the other.",
+      "sectors": ["software", "health", "services", "nonprofit", "education", "finance"],
+      "tones": ["bold", "technical", "playful"],
+      "needs": [],
+      "hero": "The first screen is cut in two with a different ground, type size and content on each side; the headline crosses the seam.",
+      "sections": "Each section re-uses the seam: the two halves stay opposed (problem and answer, then and now) until the final section joins them.",
+      "risks": "On a phone the halves stack; the seam must still read as a contrast, not as two unrelated blocks.",
+      "disagrees": "Two competing focal points are intended in the hero; one must still win by size."
+    },
+    {
+      "id": "field",
+      "name": "Fields of colour",
+      "engine": "Whole full-bleed fields of one colour per section, with type and one object, carry the page; no cards, no borders.",
+      "sectors": ["retail-craft", "food-producer", "portfolio", "culture", "hardware", "software"],
+      "tones": ["bold", "playful", "editorial"],
+      "needs": [],
+      "hero": "A full-bleed colour field with the headline at display size and one object or cut-out placed off-centre.",
+      "sections": "Each section its own field from the palette, edge to edge; type changes size, not decoration, between fields.",
+      "risks": "Needs a palette with real contrast between fields; pastel sets blur into each other.",
+      "disagrees": "Large flat fills are intended; the gradient and shadow checks should stay quiet."
+    },
+    {
+      "id": "manual",
+      "name": "Manual",
+      "engine": "The page reads like an instruction booklet or exploded diagram of the subject.",
+      "sectors": ["hardware", "software", "health", "education", "services"],
+      "tones": ["technical", "quiet", "playful"],
+      "needs": [],
+      "hero": "A large diagram or exploded view of the subject, drawn in the palette's colours, with the headline plainly set beside it.",
+      "sections": "Diagram plus a short numbered procedure per section; callouts only on parts that matter.",
+      "risks": "A diagram that is not accurate to the subject is decoration; draw it from real parts or do not use this direction.",
+      "disagrees": "Numbered callouts are structure here, but only where the content is a procedure."
+    },
+    {
+      "id": "instrument",
+      "name": "Live instrument",
+      "engine": "The hero is a working instrument of the subject: a configurator, calculator, availability or status display.",
+      "sectors": ["finance", "software", "real-estate", "hospitality", "retail-craft", "health"],
+      "tones": ["technical", "quiet", "bold"],
+      "needs": [],
+      "hero": "The instrument itself on the first screen with sane real defaults and its result stated in large type; headline names what it answers.",
+      "sections": "Each section explains or extends one control of the instrument; the instrument state follows into the final action.",
+      "risks": "Must work with a thumb and have a plain fallback; fake data that cannot be real is worse than no instrument.",
+      "disagrees": "Dense control panels are normal inside the instrument; the rest of the page stays spacious."
+    },
+    {
+      "id": "correspondence",
+      "name": "Correspondence",
+      "engine": "The page is a set of notes, letters or postcards from the subject to the visitor, written in a human voice.",
+      "sectors": ["hospitality", "nonprofit", "retail-craft", "food-producer", "health", "education"],
+      "tones": ["warm", "quiet", "editorial"],
+      "needs": [],
+      "hero": "A short letter set like a letter (paragraph, signature, date) at reading size, with the action as its closing line.",
+      "sections": "Each section is another note with its own date or place; handwriting-like type only for annotations, never for body text.",
+      "risks": "Twee voice; keep it factual and specific, and avoid fake personal stories.",
+      "disagrees": "Long paragraphs in the hero are intended; keep the h1 short and above them."
+    },
+    {
+      "id": "posters",
+      "name": "Poster stack",
+      "engine": "Every section is a poster: one dominant thing and the content it carries, full screen, no two alike.",
+      "sectors": ["culture", "portfolio", "hospitality", "software", "retail-craft", "hardware"],
+      "tones": ["bold", "editorial", "playful"],
+      "needs": [],
+      "hero": "A poster composition: one dominant element at 50% or more of the screen, headline integrated with it.",
+      "sections": "Each section is its own poster with its own dominant element, size and alignment.",
+      "risks": "Needs real content for every poster; empty posters are the near-empty screens the meter fails.",
+      "disagrees": "Strong asymmetry is intended; the frame check can warn: defend it or close the void."
+    }
+  ],
+  "palettes": [
+    { "id": "ink-and-signal", "moods": ["bold", "technical"], "roles": { "ground": "#0E1116", "ink": "#EDEFF2", "accent": "#FF5A36", "field": "#1B2230", "muted": "#9AA3B2" }, "proportions": "70 ground, 20 field, 8 ink, 2 accent. The accent appears once per screen." },
+    { "id": "chalk-and-ultramarine", "moods": ["quiet", "technical", "editorial"], "roles": { "ground": "#F7F7F5", "ink": "#101828", "accent": "#2438D6", "field": "#E7E9F5", "muted": "#586174" }, "proportions": "75 ground, 15 field, 8 ink, 2 accent. Blue only on actions and one figure." },
+    { "id": "clay-and-moss", "moods": ["warm", "quiet"], "roles": { "ground": "#EFE6DA", "ink": "#2A2118", "accent": "#486A3E", "field": "#D9C7AE", "muted": "#6D5E4C" }, "proportions": "60 ground, 25 field, 10 ink, 5 accent. Never pair with a serif display plus terracotta: that is the common default." },
+    { "id": "citrus-bold", "moods": ["bold", "playful"], "roles": { "ground": "#FFF6CF", "ink": "#16130A", "accent": "#E8321E", "field": "#FFD23F", "muted": "#6B5F2A" }, "proportions": "40 ground, 40 field, 15 ink, 5 accent. Full yellow fields are the point; keep ink at full strength." },
+    { "id": "deep-sea", "moods": ["quiet", "luxury", "technical"], "roles": { "ground": "#0B2A33", "ink": "#E6F1EE", "accent": "#E9B44C", "field": "#12404B", "muted": "#8FB0B2" }, "proportions": "65 ground, 25 field, 8 ink, 2 accent. Gold is a hairline use, never a fill." },
+    { "id": "paper-and-red", "moods": ["editorial", "bold"], "roles": { "ground": "#FAF8F3", "ink": "#111111", "accent": "#C8102E", "field": "#EFEAE0", "muted": "#615B52" }, "proportions": "80 ground, 10 field, 8 ink, 2 accent. Warm paper only if the subject is print or paper." },
+    { "id": "pool", "moods": ["playful", "bold"], "roles": { "ground": "#E8F6F6", "ink": "#06323A", "accent": "#FF7A59", "field": "#9ADCDC", "muted": "#3F6F76" }, "proportions": "50 ground, 35 field, 12 ink, 3 accent. Check the accent against the field: contrast above 3:1." },
+    { "id": "graphite-and-lime", "moods": ["technical", "bold"], "roles": { "ground": "#17181A", "ink": "#F2F3EE", "accent": "#C6F432", "field": "#242629", "muted": "#8B8F94" }, "proportions": "75 ground, 15 field, 8 ink, 2 accent. Acid accent is a known default; use it only if the subject owns that color." },
+    { "id": "stone-and-plum", "moods": ["luxury", "quiet", "editorial"], "roles": { "ground": "#EDE9E4", "ink": "#1F1A21", "accent": "#5B2A52", "field": "#DDD5CF", "muted": "#6E6670" }, "proportions": "70 ground, 15 field, 12 ink, 3 accent." },
+    { "id": "orchard", "moods": ["warm", "playful"], "roles": { "ground": "#FBF3E4", "ink": "#2B1D14", "accent": "#C23B22", "field": "#F2C94C", "muted": "#7A5C3E" }, "proportions": "50 ground, 30 field, 15 ink, 5 accent. Name the subject's own fruit, wood or soil colors instead if it has them." }
+  ],
+  "type": [
+    { "id": "grotesk-plus-serif", "tones": ["editorial", "bold"], "display": "Bricolage Grotesque", "body": "Newsreader", "source": "Google Fonts", "note": "Display at weight 700 and tight tracking; body serif at 18 to 20px, line height 1.55." },
+    { "id": "one-family-wide", "tones": ["bold", "technical"], "display": "Familjen Grotesk", "body": "Familjen Grotesk", "source": "Google Fonts", "note": "One family: weight and size carry hierarchy; display at 600 and a size jump of at least 3x over body." },
+    { "id": "serif-statement", "tones": ["luxury", "quiet", "editorial"], "display": "Instrument Serif", "body": "Hanken Grotesk", "source": "Google Fonts", "note": "Serif only for the statement; avoid italic on a single word of the headline." },
+    { "id": "mono-and-sans", "tones": ["technical"], "display": "Schibsted Grotesk", "body": "IBM Plex Sans", "source": "Google Fonts", "note": "A monospace (IBM Plex Mono) is allowed for real data, code or figures; not for decorative labels." },
+    { "id": "condensed-poster", "tones": ["bold", "playful"], "display": "Anton", "body": "Public Sans", "source": "Google Fonts", "note": "Condensed display at huge sizes, never in running text; body at 17px minimum." },
+    { "id": "humanist", "tones": ["warm", "quiet"], "display": "Fraunces", "body": "Source Sans 3", "source": "Google Fonts", "note": "Fraunces with the soft optical axis; do not combine with a cream and terracotta page." },
+    { "id": "geometric-friendly", "tones": ["playful", "warm"], "display": "Outfit", "body": "Nunito Sans", "source": "Google Fonts", "note": "Rounded feel suits services and education; keep weights to 400 and 700." },
+    { "id": "old-style-book", "tones": ["editorial", "luxury"], "display": "Libre Caslon Display", "body": "Libre Caslon Text", "source": "Google Fonts", "note": "A book setting: generous leading (1.6), measure under 70 characters, small caps only for real abbreviations." },
+    { "id": "swiss", "tones": ["technical", "quiet", "bold"], "display": "Archivo", "body": "Archivo", "source": "Google Fonts", "note": "Use the width axis for display (Archivo Expanded at 700), normal width for body." }
+  ],
+  "sections": {
+    "features": [
+      { "id": "annotated-subject", "text": "One large picture of the subject with 3 to 5 labels attached to real parts; no icon grid." },
+      { "id": "alternating-rows", "text": "Alternating picture and text rows with a full paragraph each; the picture varies in crop and size." },
+      { "id": "plain-list-with-evidence", "text": "A single column list where every item pairs the claim with its proof (a figure, a photo, a quote)." }
+    ],
+    "how-it-works": [
+      { "id": "sequence-screens", "text": "One screen per step, the dominant element changes each time; numbers allowed because it is a real sequence." },
+      { "id": "worked-example", "text": "One real example walked through end to end, with the actual inputs and outputs shown." },
+      { "id": "timeline-spine", "text": "A vertical spine with dated or timed stops and the artefact each step produces." }
+    ],
+    "proof": [
+      { "id": "named-outcome", "text": "One real outcome stated with its figure and source; no logo strip." },
+      { "id": "unedited-material", "text": "Raw material shown unedited (a real message, a real invoice, a real screen) with a one-line caption." },
+      { "id": "press-and-credits", "text": "Only real mentions, linked; if there are none, leave the section out." }
+    ],
+    "pricing": [
+      { "id": "single-price-statement", "text": "One price stated big, with exactly what it includes and what it does not." },
+      { "id": "table-by-need", "text": "A plain table by need (not by tier names), each row with its price and who it suits." },
+      { "id": "quote-form", "text": "No fixed prices: a short form that states the real range and the response time." }
+    ],
+    "faq": [
+      { "id": "real-questions-flat", "text": "Real questions as headings with full answers, all visible; no accordion that hides content from search." },
+      { "id": "two-columns-by-audience", "text": "Questions split by audience (before buying, after buying), each answer two to four sentences." },
+      { "id": "chat-transcript", "text": "The five questions that come up most, answered as a short transcript in the subject's own voice." }
+    ],
+    "gallery": [
+      { "id": "contact-sheet", "text": "A grid of frames at one size, captions below with title, year and technique." },
+      { "id": "one-at-a-time", "text": "One piece per screen, full width, caption set small underneath." },
+      { "id": "mixed-wall", "text": "A wall of varied sizes with captions as museum labels." }
+    ],
+    "cta": [
+      { "id": "the-one-action", "text": "One sentence, one button named for what it does, one line about what happens next." },
+      { "id": "continuation-of-hero", "text": "The hero's device returns, resolved: the ticket gets torn, the instrument shows the final result." },
+      { "id": "contact-card", "text": "The real contact details (address, hours, phone) set big, with the map." }
+    ],
+    "footer": [
+      { "id": "colophon", "text": "Credits, licences, the fonts and pictures used, the real address; written plainly." },
+      { "id": "sitemap-and-contact", "text": "Complete navigation plus one contact method; legal links present and real." },
+      { "id": "closing-statement", "text": "A last line in display size that echoes the idea, with the small print beneath." }
+    ]
+  }
+}
