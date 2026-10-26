@@ -40,6 +40,22 @@ When working on any project that references this harness:
    - `rag-architect` — designing/evaluating a RAG pipeline
    - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens
 
+   Canal de YouTube (**opcional** — só em projeto de conteúdo/canal, nunca em backend ou web app):
+   - `yt-script` — roteiro a partir de uma ideia: hooks pontuados e roteiro falado com as marcas de retenção
+   - `yt-package` — título e thumbnail como par, com lint de truncamento e duplicação
+   - `yt-seo` — descrição, tags e texto de busca
+   - `yt-chapters` — capítulos validados pelas regras do YouTube
+   - `yt-edit` — lista de cortes (silêncio, muletas, retakes) a partir da transcrição
+   - `yt-shorts` — acha e escreve os Shorts dentro de um vídeo longo
+   - `yt-retention` — lê o export de retenção do Studio e aponta onde o público sai
+   - `yt-audit` — auditoria do canal (embalagem, consistência, primeiros 15 s)
+   - `yt-plan` — calendário de uploads dimensionado à capacidade real
+   - `yt-comment` — respostas a comentários na voz do criador, com triagem
+   - `yt-viral` — o que está funcionando no nicho, ranqueado contra o próprio canal
+
+   Direção de arte (própria, **experimental** até o primeiro uso real):
+   - `art-direction` — a ideia de uma página pública vem do assunto (inventário, argumento, teste do concorrente, uma coisa viva), construída cheia e checada no navegador; usa `frontend-design` para tipografia/paleta e `design-audit` como portão
+
    Game projects only (**experimental** — not yet used in two real projects; load only when the project is a game, never in backends or web apps):
    - `game-design-doc` — building/reviewing a GDD (pillars, core loop, economy, scope); `/oficina:gdd`
    - `game-assets` — asset layout, naming and the AssetForge viewer/export scaffold for Unity, Electron and Roblox; `/oficina:asset-forge`, `/oficina:asset`
