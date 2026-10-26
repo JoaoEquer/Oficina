@@ -167,6 +167,7 @@ function measure() {
     if (img.complete && img.naturalWidth === 0) add('FAIL', 'img-broken', `image failed to load: ${(img.src || '').slice(-60)}`);
   }
   for (const v of document.querySelectorAll('video')) if (visible(v)) { vids++; pics++; }
+  for (const c of document.querySelectorAll('canvas')) { const r = c.getBoundingClientRect(); if (visible(c) && r.width >= 200 && r.height >= 150) pics++; }
   for (const el of document.querySelectorAll('*')) {
     const bg = getComputedStyle(el).backgroundImage;
     if (bg && bg.includes('url(') && !/svg/i.test(bg) && !bg.includes('gradient')) {
@@ -175,7 +176,22 @@ function measure() {
     }
   }
   out.facts.pictures = pics; out.facts.videos = vids;
-  if (pics < 2) add('FAIL', 'pictures', `${pics} real pictures on the page (floor is 4)`);
+  // software shows its own interface as HTML (imagery.md): big framed blocks full of text, not counted as pictures
+  let uiFrames = 0;
+  for (const el of document.querySelectorAll('div,figure,section')) {
+    if (!visible(el)) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 320 || r.height < 180 || r.width > innerWidth * 0.98) continue;
+    const cs = getComputedStyle(el);
+    const framed = parseFloat(cs.borderTopWidth) > 0 || cs.boxShadow !== 'none';
+    if (!framed) continue;
+    if (el.querySelectorAll('p,li,span,code,pre,td,h3,h4').length < 4) continue;
+    if ([...el.querySelectorAll('div,figure')].some((c) => c !== el && c.getBoundingClientRect().width >= r.width * 0.9 && c.getBoundingClientRect().height >= r.height * 0.9 && getComputedStyle(c).boxShadow !== 'none')) continue;
+    uiFrames++;
+  }
+  out.facts.uiFrames = uiFrames;
+  if (pics + uiFrames >= 4 && pics < 4) add('WARN', 'pictures', `${pics} real pictures, ${uiFrames} framed interface blocks in HTML: confirm they carry the picture role (floor is 4)`);
+  else if (pics < 2) add('FAIL', 'pictures', `${pics} real pictures on the page (floor is 4)`);
   else if (pics < 4) add('WARN', 'pictures', `${pics} real pictures on the page (floor is 4)`);
 
   // text elements (leaf-ish) for contrast, size, edges

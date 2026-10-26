@@ -1,6 +1,6 @@
 # Imagery
 
-Pages made by a model skip pictures because finding them is work. The floor is four real pictures on the page, usually six to twelve. SVG drawings do not count toward it.
+Pages made by a model skip pictures because finding them is work. The floor is four real pictures on the page, usually six to twelve. SVG drawings do not count toward it. For software, `inspect.mjs` also counts large canvases and reports framed interface blocks drawn in HTML separately: with enough of them the floor drops from FAIL to a WARN that asks you to confirm they carry the picture role (real data, cropped and scaled like a photograph).
 
 ## Order of preference
 1. The project's own photographs, footage or product screens.
