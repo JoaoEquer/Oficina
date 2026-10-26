@@ -240,6 +240,12 @@ function measure() {
     if (['LI', 'P', 'A', 'FIGURE', 'TABLE', 'BLOCKQUOTE'].includes(el.tagName) && !text(el) && !el.querySelector('img,svg,video')) continue;
     boxes.push(r);
   }
+  // text that lives in plain div/span/pre/code/td (terminals, tables, custom blocks) is content too
+  for (const el of document.querySelectorAll('div,span,pre,code,td,th,dt,dd,label,summary')) {
+    if (!visible(el) || ![...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1)) continue;
+    const r = abs(el.getBoundingClientRect());
+    if (r.w * r.h >= 400 && r.h < docH * 0.9) boxes.push(r);
+  }
   for (const el of document.querySelectorAll('*')) {
     const bg = getComputedStyle(el).backgroundImage;
     if (bg && bg.includes('url(') && !/svg/i.test(bg) && visible(el)) { const r = abs(el.getBoundingClientRect()); if (r.h < docH * 0.9) boxes.push(r); }
