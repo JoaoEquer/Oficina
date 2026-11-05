@@ -40,6 +40,9 @@ When working on any project that references this harness:
    - `rag-architect` — designing/evaluating a RAG pipeline
    - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens
 
+   Motion (**experimental** até o primeiro vídeo real que usar):
+   - `motion-dictionary` — vocabulário de 25 efeitos (entradas, ritmo, texto, formas, transições e princípios de animação) com duração, easing e parâmetros padrão, gramática de spec ("peça assim"), 5 modelos de prompt em blocos e `fx.js` determinístico (função do tempo, sem dependências) para HTML-to-video, GSAP, Remotion, CSS ou Framer Motion
+
    Game projects only (**experimental** — not yet used in two real projects; load only when the project is a game, never in backends or web apps):
    - `game-design-doc` — building/reviewing a GDD (pillars, core loop, economy, scope); `/oficina:gdd`
    - `game-assets` — asset layout, naming and the AssetForge viewer/export scaffold for Unity, Electron and Roblox; `/oficina:asset-forge`, `/oficina:asset`
