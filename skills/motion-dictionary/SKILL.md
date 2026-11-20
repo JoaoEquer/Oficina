@@ -9,7 +9,12 @@ description: >-
   product spot, personal intro, App Store style promo); plus web.md, scroll
   choreography for landing pages (line mask reveals, picture unveils, one
   pinned scrub section, smooth scroll, reduced-motion levels) with the
-  patterns owners rejected as amateur. Use whenever writing or reviewing a
+  patterns owners rejected as amateur; timing.md (duration by element,
+  distance scaling, easing direction, emotion-to-motion, choreography and
+  stagger budgets); styles.md (15 named styles with checkable signatures,
+  from flat vector to HUD and pixel art, plus a juror review loop); and
+  review.md (what reads as AI slop in a promo film, craft laws, render
+  gates). Use whenever writing or reviewing a
   motion spec, a beat table, a prompt asking an AI for an animated video,
   animation code (HTML-to-video, GSAP, Remotion, CSS, Framer Motion), or the
   motion of a web page, and when the user says an animation looks generic,
@@ -108,6 +113,12 @@ product spot, personal intro), rewritten with dictionary names, durations and a 
 one when the user wants a whole video, then adjust the beats; never send a template with the
 placeholders still in it.
 
+## Sizing, styles and review
+
+- [timing.md](timing.md): how long, which curve, in what order. Read when choosing numbers for several elements.
+- [styles.md](styles.md): 15 styles with the techniques that make each recognisable. Read when the brief names a look.
+- [review.md](review.md): "never ship" list, craft laws and render gates. Read before planning a promo or ad, and on the first render.
+
 ## Motion on a web page
 
 For a landing page or any scroll-driven page, read [web.md](web.md) before writing code. It covers
@@ -160,3 +171,6 @@ rewritten templates and fx.js are this skill's own. The block structure
 (inputs/direction/structure/build/gotchas/start) and the banned list in prompts.md follow the
 patterns collected on prompt-motion.com (gallery of Claude motion prompts curated by @p4nthera_), read
 2026-11-05. Easing formulas are the standard Penner curves.
+timing.md condenses LottieFiles/motion-design-skill (MIT); styles.md condenses Vincentwei1021/mg-styles-15 (MIT);
+review.md rewrites the rules of Tejashmakwana/motionmaxxing (Apache-2.0) in our words. All read 2026-11-20,
+adopted because the owner's video pipelines (news Shorts, stream cuts, product spots) render motion every day (Path 2).
