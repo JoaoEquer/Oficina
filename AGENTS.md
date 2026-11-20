@@ -41,7 +41,9 @@ When working on any project that references this harness:
    - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens
 
    Motion (**experimental** até o primeiro vídeo real que usar):
-   - `motion-dictionary` — vocabulário de 25 efeitos (entradas, ritmo, texto, formas, transições e princípios de animação) com duração, easing e parâmetros padrão, gramática de spec ("peça assim"), 5 modelos de prompt em blocos e `fx.js` determinístico (função do tempo, sem dependências) para HTML-to-video, GSAP, Remotion, CSS ou Framer Motion
+   - `motion-dictionary` — vocabulário de 25 efeitos (entradas, ritmo, texto, formas, transições e princípios de animação) com duração, easing e parâmetros padrão, gramática de spec ("peça assim"), 5 modelos de prompt em blocos e `fx.js` determinístico (função do tempo, sem dependências) para HTML-to-video, GSAP, Remotion, CSS ou Framer Motion; `timing.md` (duração, curvas, coreografia), `styles.md` (15 estilos com assinatura verificável) e `review.md` (lista anti-slop e gates do render)
+   - `video-pipeline` — do brief ao arquivo pronto para postar: roteiro, voz com tempo por palavra, legenda palavra a palavra (faster-whisper/WhisperX), imagem em HTML determinístico (`__seek`) ou segmentos ffmpeg, música com licença e crédito, ducking, master −14 LUFS, revisão e preflight; cortes de live por picos de chat/volume
+   - `reanimate` — clona o movimento de um vídeo, gif ou página ao vivo para código e prova quadro a quadro (precisa de Bun; baixa Playwright + ffmpeg na primeira vez)
 
    Game projects only (**experimental** — not yet used in two real projects; load only when the project is a game, never in backends or web apps):
    - `game-design-doc` — building/reviewing a GDD (pillars, core loop, economy, scope); `/oficina:gdd`

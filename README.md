@@ -1,6 +1,6 @@
 ﻿# Oficina
 
-Pacote versionado de regras, skills e comandos que assistentes de código com IA leem para se comportar do mesmo jeito em todo projeto: 28 skills, 4 regras sempre ativas, 8 comandos, cerca de 5,7 mil linhas de Markdown.
+Pacote versionado de regras, skills e comandos que assistentes de código com IA leem para se comportar do mesmo jeito em todo projeto: 30 skills, 4 regras sempre ativas, 8 comandos, cerca de 5,7 mil linhas de Markdown.
 
 Não é um agente nem uma biblioteca. É contexto: o que eu explicaria para o agente toda vez que abro um projeto novo (estilo da casa, baseline de segurança, memória entre sessões), escrito uma vez e instalado por plugin ou por script. Funciona com Claude Code e com qualquer ferramenta que leia `AGENTS.md` (Codex, Cursor, OpenCode, Gemini CLI).
 
