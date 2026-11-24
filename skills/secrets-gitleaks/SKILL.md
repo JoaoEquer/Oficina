@@ -35,6 +35,12 @@ references:
 
 # Secrets Detection with Gitleaks
 
+House rules (Oficina adaptation, these win over anything below):
+
+- A secret found in history is rotated first. Rotation is the fix; a history rewrite only limits further exposure.
+- Never run `git commit --no-verify`, a history rewrite (`git filter-repo`, BFG) or `git push --force` on your own. Stop, show what would change, and wait for the user's explicit go: a rewrite breaks every clone and open branch, and a force push cannot be taken back.
+- Never print a found secret in full; use `--redact`.
+
 ## Overview
 
 Gitleaks is a secret detection tool that scans git repositories, files, and directories for hardcoded credentials including passwords, API keys, tokens, and other sensitive information. It uses regex-based pattern matching combined with Shannon entropy analysis to identify secrets that could lead to unauthorized access if exposed.
@@ -352,17 +358,18 @@ tags = ["api-key", "acme-internal"]
 1. Add inline comment to bypass hook: `# gitleaks:allow`
 2. Update `.gitleaks.toml` allowlist for the specific pattern
 3. Use `--redact` to safely review findings: `gitleaks protect --staged --redact`
-4. Temporary bypass (use with caution): `git commit --no-verify`
-5. Review with security team if pattern is genuinely needed
+4. Review with security team if pattern is genuinely needed
+
+Do not bypass the hook with `--no-verify`: fix the finding or allowlist it, so the decision is recorded.
 
 ### Issue: Secrets Found in Git History
 
 **Solution**:
-1. Rotate compromised credentials immediately (highest priority)
-2. For public repositories, consider full history rewrite using:
+1. Rotate compromised credentials immediately (highest priority). Report which secret, where, and since which commit.
+2. Propose, do not run, a history rewrite. For a public repository it is usually worth it; show the user the plan:
    - `git filter-repo` (recommended): `git filter-repo --path-glob '*.env' --invert-paths`
    - BFG Repo-Cleaner: `bfg --delete-files credentials.json`
-3. Force-push cleaned history: `git push --force`
+3. Only after the user's explicit go: run the rewrite on a fresh clone, then the user pushes the cleaned history (`git push --force` rewrites the remote for everyone).
 4. Notify all contributors to rebase/re-clone
 5. Document incident in security audit log
 
