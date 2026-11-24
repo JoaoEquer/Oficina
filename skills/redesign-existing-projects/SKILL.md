@@ -1,6 +1,6 @@
 ---
 name: redesign-existing-projects
-description: Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS.
+description: Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS. Use when the user wants an existing project's UI improved in place, keeping its stack, usually after design-audit has listed what to fix. Not for a read-only audit (use design-audit) or a new page from scratch (use art-direction or taste-skill); when it disagrees with design-audit, design-audit wins.
 ---
 
 # Redesign Skill
