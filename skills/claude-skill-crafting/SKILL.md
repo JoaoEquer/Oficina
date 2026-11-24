@@ -54,3 +54,5 @@ Copy this and tick it per skill; report before changing anything.
 ```
 
 Report as one table row per skill (failures, worst problem), then per-skill findings with file:line and the exact fix, then a numbered fix list ranked by impact. Apply only the numbers the user approves, re-check the changed skills, and if a check still fails, go back and fix it before listing what changed. On a big folder, start with the five most-used skills or the ones that send money, delete things or talk to clients.
+
+Test tasks for this skill: [tests.md](tests.md). Run them with the skill on and off after any big change.

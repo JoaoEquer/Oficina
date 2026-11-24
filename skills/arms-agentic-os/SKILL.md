@@ -58,3 +58,5 @@ Apps     [ ] every app has an entry, lightest first
          [ ] one mod or extension saves clicks daily
          [ ] one weekly job lives in a micro-app
 ```
+
+Test tasks for this skill: [tests.md](tests.md). Run them with the skill on and off after any big change.

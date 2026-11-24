@@ -174,3 +174,5 @@ Apply changes in this order for maximum visual impact with minimum risk:
 - If the project uses Tailwind, check the version (v3 vs v4) before modifying config.
 - If the project has no framework, use vanilla CSS.
 - Keep changes reviewable and focused. Small, targeted improvements over big rewrites.
+
+Test tasks for this skill: [tests.md](tests.md). Run them with the skill on and off after any big change.

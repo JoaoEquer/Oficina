@@ -451,3 +451,5 @@ See [references/pr-attachments.md](references/pr-attachments.md) for alt text, i
 * **Attaching screenshots and videos to pull requests** [references/pr-attachments.md](references/pr-attachments.md)
 * **Inspecting element attributes** [references/element-attributes.md](references/element-attributes.md)
 * **Worked examples (forms, tabs, DevTools, interactive)** [references/examples.md](references/examples.md)
+
+Test tasks for this skill: [tests.md](tests.md). Run them with the skill on and off after any big change.
