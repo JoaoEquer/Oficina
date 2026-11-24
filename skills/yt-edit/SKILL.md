@@ -25,7 +25,22 @@ track YouTube generates on an unlisted upload all work. Do not guess at timings.
   Cutting flush against speech is what makes a tightened take sound gasping.
 - **FILLER** - cues that are nothing but "um", "so yeah", "basically".
 - **REPEAT** - a sentence restarted. Compared against the last cue that was actually speech, not
-  the literal previous cue, because most retakes have an "um" between the two attempts.
+  the literal previous cue, because most retakes have an "um" between the two attempts. The earlier
+  take is the cut; the last attempt is the one kept, because the last one is usually the clean one.
+
+## Applying the cuts (only when asked)
+
+The report is the default. When the user asks you to cut the file too:
+
+1. Show the full text that will survive, in order, and wait for an OK. Approving words is faster than
+   approving timecodes.
+2. Only remove. Never reorder, rewrite or merge lines; that is a different edit and needs its own ask.
+3. Cut with ffmpeg and re-encode (`-c:v libx264 -crf 18 -c:a aac` or the source codecs). Do not use
+   `-c copy` for this: stream copy can only start a segment on a keyframe, so a cut lands up to a few
+   seconds off and the join shows.
+4. Save `cut.mp4` plus the transcript of the cut, then check every join for a clipped word or an
+   audio click and list the timecodes you are unsure of.
+5. Transcription API keys (AssemblyAI, ElevenLabs) go in `.env`, never in the chat.
 
 ## What it will not do
 

@@ -40,6 +40,9 @@ When working on any project that references this harness:
    - `rag-architect` — designing/evaluating a RAG pipeline
    - `sentry-setup-ai-monitoring` — instrumenting LLM call cost/latency/tokens
 
+   - `claude-skill-crafting` — writing or auditing a skill: the 10 authoring rules plus the pre-ship checks
+   - `arms-agentic-os` — setting up or auditing an agent workspace by its four parts (Skills, Memory, Routines, Apps), level by level
+
    Canal de YouTube (**opcional** — só em projeto de conteúdo/canal, nunca em backend ou web app):
    - `yt-script` — roteiro a partir de uma ideia: hooks pontuados e roteiro falado com as marcas de retenção
    - `yt-package` — título e thumbnail como par, com lint de truncamento e duplicação
