@@ -1,5 +1,17 @@
 # Worst-Case Catalog
 
+## Contents
+
+- People and names
+- Emails, URLs, identifiers
+- Labels, titles, and copy from data
+- Numbers and money
+- Collections
+- Time
+- Images and media
+- States
+- Environment
+
 Realistic values that break UI, grouped by what kind of value the component renders. Use the rows that apply to the fields in your Phase 1 table. Each value is something a real user could produce; the note says what it tends to break.
 
 Use `example.com`, `example.org`, or `.test` domains for emails and URLs, so the fixture never points at a real inbox or site.

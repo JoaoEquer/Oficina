@@ -5,6 +5,15 @@ description: Try to break a piece of UI by feeding it worst-case data — long n
 
 # Breaking UI
 
+## Contents
+
+- Operating Posture
+- Hard Rules
+- Workflow
+- Required Output Format
+- Invocation Variants
+- Tone
+
 > Provenance: adopted 2026-10-23 from `emilkowalski/skills` (MIT), skills/break-ui, copied unchanged except this block and the removal of its scripted first reply (Oficina style: no greeting). Read in full before adoption: markdown only, no scripts, no network calls.
 >
 > **Oficina rules that override the workflow below:**

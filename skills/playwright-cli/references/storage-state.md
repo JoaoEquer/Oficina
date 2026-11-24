@@ -1,5 +1,15 @@
 # Storage Management
 
+## Contents
+
+- Storage State
+- Cookies
+- Local Storage
+- Session Storage
+- IndexedDB
+- Common Patterns
+- Security Notes
+
 Manage cookies, localStorage, sessionStorage, and browser storage state.
 
 ## Storage State

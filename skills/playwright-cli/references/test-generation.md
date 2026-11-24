@@ -1,5 +1,13 @@
 # Test generation (plan → generate → heal)
 
+## Contents
+
+- 0. How generation works
+- 1. Planning
+- 2. Generate
+- 3. Heal
+- Cross-references
+
 End-to-end workflow for authoring and maintaining Playwright tests with `playwright-cli`. Every `playwright-cli` action emits the equivalent Playwright TypeScript, and that generated code is the raw material for every test. The sections below can be used independently:
 
 - **How generation works** — the core mechanic everything else relies on: actions become TypeScript, plus how to add assertions.

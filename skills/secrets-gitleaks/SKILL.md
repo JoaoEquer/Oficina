@@ -41,6 +41,18 @@ House rules (Oficina adaptation, these win over anything below):
 - Never run `git commit --no-verify`, a history rewrite (`git filter-repo`, BFG) or `git push --force` on your own. Stop, show what would change, and wait for the user's explicit go: a rewrite breaks every clone and open branch, and a force push cannot be taken back.
 - Never print a found secret in full; use `--redact`.
 
+## Contents
+
+- Overview
+- Quick Start
+- Core Workflows
+- Security Considerations
+- Common Patterns
+- Integration Points
+- Troubleshooting
+- Advanced Configuration
+- References
+
 ## Overview
 
 Gitleaks is a secret detection tool that scans git repositories, files, and directories for hardcoded credentials including passwords, API keys, tokens, and other sensitive information. It uses regex-based pattern matching combined with Shannon entropy analysis to identify secrets that could lead to unauthorized access if exposed.

@@ -10,6 +10,21 @@ description: Automates CI/CD pipeline setup. Use when setting up or modifying bu
 
 # CI/CD and Automation
 
+## Contents
+
+- Overview
+- When to Use
+- The Quality Gate Pipeline
+- GitHub Actions Configuration
+- Feeding CI Failures Back to Agents
+- Deployment Strategies
+- Environment Management
+- Automation Beyond CI
+- CI Optimization
+- Common Rationalizations
+- Red Flags
+- Verification
+
 ## Overview
 
 Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill — it catches what humans and agents miss, and it does so consistently on every single change.

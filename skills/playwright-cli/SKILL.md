@@ -6,6 +6,24 @@ allowed-tools: Bash(playwright-cli:*) Bash(npx playwright:*) Bash(npx --no-insta
 
 # Browser Automation with playwright-cli
 
+## Contents
+
+- Quick start
+- Commands
+- Raw output
+- Open parameters
+- URLs with `&` on Windows
+- Snapshots
+- Targeting elements
+- Browser Sessions
+- Installation
+- Example: Form submission
+- Example: Multi-tab workflow
+- Example: Debugging with DevTools
+- Example: Interactive session
+- Attaching screenshots and videos to pull requests
+- Specific tasks
+
 > Provenance: github.com/microsoft/playwright-cli (skills/playwright-cli, Apache-2.0), audited 2026-10-13 (instruction-only, no scripts). Why: drive a real browser from the terminal to check pages at phone width. Unmodified. Needs `npm i -g @playwright/cli`.
 
 

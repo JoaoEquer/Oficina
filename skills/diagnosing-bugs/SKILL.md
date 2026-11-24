@@ -10,6 +10,16 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 
 # Diagnosing Bugs
 
+## Contents
+
+- Redact
+- Phase 1: Build a feedback loop
+- Phase 2: Reproduce + minimise
+- Phase 3: Hypothesise
+- Phase 4: Instrument
+- Phase 5: Fix + regression test
+- Phase 6: Cleanup
+
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
 When exploring the codebase, read `CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.

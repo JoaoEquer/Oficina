@@ -1,5 +1,17 @@
 # Embedding Model Benchmark (historical snapshot, 2024)
 
+## Contents
+
+- Executive Summary
+- Models Evaluated
+- Evaluation Methodology
+- Results Overview
+- Detailed Analysis
+- Recommendations by Use Case
+- Implementation Guidelines
+- Future Considerations
+- Conclusion
+
 > **Staleness warning:** This benchmark is a dated snapshot. Model names, scores, and especially prices rot quickly — `text-embedding-ada-002` is legacy, and newer families (OpenAI `text-embedding-3-*`, Voyage `voyage-3` / `voyage-code-3`, Cohere `embed-v4`) have superseded several entries. Treat the *methodology* (dimensions vs. quality vs. cost trade-offs, NDCG@10 comparison protocol) as the durable content; verify current model IDs and per-token pricing against the providers' live pricing pages before recommending anything.
 
 ## Executive Summary

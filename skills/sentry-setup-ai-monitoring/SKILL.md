@@ -12,6 +12,19 @@ license: Apache-2.0
 
 # Setup Sentry AI Agent Monitoring
 
+## Contents
+
+- Invoke This Skill When
+- Prerequisites
+- Data Capture Warning
+- Detection First
+- Supported SDKs
+- JavaScript Configuration
+- Python Configuration
+- Manual Instrumentation
+- Verification
+- Troubleshooting
+
 Configure Sentry to track LLM calls, agent executions, tool usage, and token consumption.
 
 ## Invoke This Skill When

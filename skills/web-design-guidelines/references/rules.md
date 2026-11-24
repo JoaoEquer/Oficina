@@ -5,6 +5,11 @@ argument-hint: <file-or-pattern>
 
 # Web Interface Guidelines
 
+## Contents
+
+- Rules: Accessibility, Focus States, Forms, Animation, Typography, Content Handling, Images, Performance, Navigation & State, Touch & Interaction, Safe Areas & Layout, Dark Mode & Theming, Locale & i18n, Hydration Safety, Hover & Interactive States, Content & Copy, Anti-patterns (flag these)
+- Output Format
+
 Review these files for compliance: $ARGUMENTS
 
 Read files, check against rules below. Output concise but comprehensive—sacrifice grammar for brevity. High signal-to-noise.

@@ -1,5 +1,16 @@
 # Chunking Strategies Comparison
 
+## Contents
+
+- Executive Summary
+- Strategies Analyzed
+- Comparative Analysis
+- Domain-Specific Recommendations
+- Implementation Guidelines
+- Evaluation Framework
+- Cost-Benefit Analysis
+- Conclusion
+
 ## Executive Summary
 
 Document chunking is the foundation of effective RAG systems. This analysis compares five primary chunking strategies across key metrics including semantic coherence, boundary quality, processing speed, and implementation complexity.

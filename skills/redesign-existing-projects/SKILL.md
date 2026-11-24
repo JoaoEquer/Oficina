@@ -5,6 +5,14 @@ description: Upgrades existing websites and apps to premium quality. Audits curr
 
 # Redesign Skill
 
+## Contents
+
+- How This Works
+- Design Audit
+- Upgrade Techniques
+- Fix Priority
+- Rules
+
 > Provenance: github.com/Leonxlnx/taste-skill (skills/redesign-skill, MIT), audited 2026-10-13 (instruction-only, no scripts). Why: UI upgrades of existing projects without a stack rewrite. Upstream has since retired this skill in favor of design-taste-frontend; this copy is kept and edited locally (see note below).
 
 
