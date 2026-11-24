@@ -13,17 +13,30 @@ Boundaries come from the gaps - the pauses you actually took between sections - 
 the pause was and how much the vocabulary changes across it. It is a first draft you retitle, not a
 summariser.
 """
-import json, os, re, sys
+import json, os, re, sys, unicodedata
+# PT-BR output: Windows pipes default to cp1252 and mangle accents
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "yt-edit"))
 from deadair import load, parse_ts  # noqa: E402  (same parser, one implementation)
 
 STOP = set("the a an of for to in on and or is are was were be been with this that it as at by from "
            "you your i my we our they them he she but so if then than there here what which who how "
            "when where why not no yes do does did just really very like about into over out up down "
-           "can could will would should have has had get got make made go going went one two".split())
+           "can could will would should have has had get got make made go going went one two "
+           # portugues
+           "o a os as um uma uns umas de do da dos das em no na nos nas por para com sem sobre entre "
+           "e ou mas porque que como quando onde qual quais quem ele ela eles elas voce voces nos eu meu "
+           "minha seu sua isso isto esse essa este esta aquilo aqui ali agora entao tambem muito mais "
+           "menos ser estar esta estao foi era tem tinha vai vou vamos fazer faz pode podem ver coisa "
+           "gente tipo ainda so ja nao sim bem la ai".split())
+
+def _fold(w):
+    return "".join(c for c in unicodedata.normalize("NFD", w) if unicodedata.category(c) != "Mn")
 
 def keywords(text):
-    return {w for w in re.findall(r"[a-z']{4,}", text.lower()) if w not in STOP}
+    # letters of any script (accents stay inside the word), apostrophe allowed mid-word
+    words = re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)*", text.lower())
+    return {w for w in words if len(w) >= 4 and _fold(w) not in STOP and w not in STOP}
 
 def mmss(t):
     t = int(t); h, m, s = t // 3600, (t % 3600) // 60, t % 60

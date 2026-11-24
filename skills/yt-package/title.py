@@ -12,15 +12,23 @@ Length: YouTube truncates around 60 characters on desktop search and around 40 o
 feed. Both limits are reported because they are different failures - a desktop truncation loses the
 tail, a mobile one can lose the subject.
 """
-import json, re, sys, os
+import json, re, sys, os, unicodedata
+# PT-BR output: Windows pipes default to cp1252 and mangle accents
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 
 DESKTOP, MOBILE, HARD = 60, 40, 100
 VAGUE = {"amazing","incredible","insane","crazy","huge","massive","ultimate","best","powerful",
          "secret","revolutionary","mindblowing","epic","perfect","complete","everything"}
 STOP = {"the","a","an","of","for","to","in","on","and","or","is","are","with","your","you","my","i",
-        "this","that","it","how","what","why"}
+        "this","that","it","how","what","why",
+        "o","os","as","um","uma","de","do","da","dos","das","em","no","na","nos","nas","por","para",
+        "com","sem","e","ou","que","como","seu","sua","voce","isso","esse","essa","este","esta","vai"}
 
-def words(t): return re.findall(r"[a-z0-9']+", t.lower())
+# letters and digits of any script; accents stay inside the word. Accent-folded so "voce" == "você"
+def words(t):
+    t = unicodedata.normalize("NFD", t.casefold())
+    t = "".join(c for c in t if unicodedata.category(c) != "Mn")
+    return re.findall(r"[^\W_]+(?:'[^\W_]+)*", t)
 
 def check(title, thumb=None):
     t = title.strip()

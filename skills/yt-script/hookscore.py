@@ -14,21 +14,31 @@ auto-captions, top-8 and bottom-8 by views across five channels): it separates d
 hooks from real ones well, and it separates a creator's own hits from their own misses barely at
 all. Treat a low score as a reason to look again, never a high score as a promise.
 """
-import json, os, re, sys
+import json, os, re, sys, unicodedata
+# PT-BR output: Windows pipes default to cp1252 and mangle accents
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FORMULAS = json.load(open(os.path.join(HERE, "hooks.json")))["hooks"]
+FORMULAS = json.load(open(os.path.join(HERE, "hooks.json"), encoding="utf-8"))["hooks"]
 
+# Every lexicon below carries English and Portuguese (accent-folded, see fold()).
 FILLER = {"basically","actually","literally","just","really","very","so","kind","sort","like",
-          "guys","hey","welcome","today","video","subscribe","channel"}
+          "guys","hey","welcome","today","video","subscribe","channel",
+          "basicamente","literalmente","tipo","gente","galera","fala","ola","hoje","canal","inscreva"}
 VAGUE = {"amazing","incredible","insane","crazy","huge","massive","game","changer","secret",
-         "powerful","ultimate","best","revolutionary","mind","blowing","unbelievable"}
-CONCRETE = re.compile(r"\b(\d[\d,.]*\s?(%|k|m|x|s|m|h)?|\$\d|\d+\s?(second|minute|hour|day|week|month|year)s?)\b", re.I)
-YOU = re.compile(r"\b(you|your|you're|youre|yourself)\b", re.I)
-STAKE = re.compile(r"\b(lose|lost|wasting|waste|quit|fail|broke|cost|risk|before|stop|never|die|dying|dead)\b", re.I)
-CURIOSITY = re.compile(r"\b(why|how|what|which|until|before|but|nobody|almost|except|reason|actually)\b", re.I)
+         "powerful","ultimate","best","revolutionary","mind","blowing","unbelievable",
+         "incrivel","absurdo","absurda","insano","insana","revolucionario","revolucionaria","melhor",
+         "poderoso","inacreditavel","segredo","definitivo","surreal"}
+CONCRETE = re.compile(r"\b(\d[\d,.]*\s?(%|k|m|x|s|m|h)?|\$\d|r\$\s?\d|\d+\s?(second|minute|hour|day|week|month|year|segundo|minuto|hora|dia|semana|mes|ano)s?)\b", re.I)
+YOU = re.compile(r"\b(you|your|you're|youre|yourself|voce|voces|seu|sua|seus|suas|teu|tua)\b", re.I)
+STAKE = re.compile(r"\b(lose|lost|wasting|waste|quit|fail|broke|cost|risk|before|stop|never|die|dying|dead|perde|perder|perdendo|desperdicio|risco|custa|custar|antes|pare|nunca|quebra|errado)\b", re.I)
+CURIOSITY = re.compile(r"\b(why|how|what|which|until|before|but|nobody|almost|except|reason|actually|por ?que|como|qual|quais|ate|mas|ninguem|quase|exceto|motivo|razao)\b", re.I)
 
-def words(t): return re.findall(r"[a-z0-9'%$.]+", t.lower())
+# accents folded so "você"/"voce" and "por quê"/"por que" hit the same pattern
+def fold(t):
+    return "".join(c for c in unicodedata.normalize("NFD", t) if unicodedata.category(c) != "Mn")
+
+def words(t): return re.findall(r"[a-z0-9'%$.]+", fold(t).lower())
 
 def specificity(t):
     w = words(t)
@@ -54,7 +64,7 @@ def curiosity(t):
     n = len(CURIOSITY.findall(t))
     q = 18 if t.strip().endswith("?") else 0
     # a hook that resolves itself has no gap left
-    closed = -18 if re.search(r"\b(because|so that|which means)\b", t, re.I) else 0
+    closed = -18 if re.search(r"\b(because|so that|which means|porque|ou seja|o que significa)\b", t, re.I) else 0
     return max(0, min(100, 24 + n * 17 + q + closed))
 
 def brevity(t):
@@ -76,6 +86,7 @@ def classify(t):
     return (best["name"] if best else "Unclassified"), hits
 
 def score(t):
+    t = fold(t)
     parts = {n: fn(t) for n, fn in PROPS}
     vals = list(parts.values())
     verdict = round(0.6 * (sum(vals) / len(vals)) + 0.4 * min(vals))
@@ -109,7 +120,7 @@ def main():
     if "--hook" in a:
         lines = [a[a.index("--hook") + 1]]
     elif a and os.path.exists(a[0]):
-        lines = [l for l in open(a[0]).read().splitlines() if l.strip()]
+        lines = [l for l in open(a[0], encoding="utf-8-sig").read().splitlines() if l.strip()]
     else:
         print(__doc__); sys.exit(1 if not a else 0)
     out = []

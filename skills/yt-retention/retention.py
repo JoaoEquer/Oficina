@@ -18,6 +18,8 @@ With --transcript it prints what you were saying at each cliff, which is the onl
 report you can act on without scrubbing the video yourself.
 """
 import csv, json, os, re, sys
+# PT-BR output: Windows pipes default to cp1252 and mangle accents
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 
 def load_csv(path):
     rows = []

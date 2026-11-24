@@ -7,15 +7,21 @@
 Finds three things and prints the cuts as a list you can act on, newest problem first:
   DEAD    gaps between spoken cues longer than the floor
   FILLER  cues that are only filler ("um", "so yeah", "basically")
-  REPEAT  a sentence restarted - the second take of the same opening
+  REPEAT  a sentence restarted - the earlier take is cut, the last one kept
 
 WHAT IT DOES NOT DO. It does not cut the file. It prints an EDL, the total it would remove, and the
 runtime you would land on, and you apply it in whatever editor you use. Nothing here touches media.
 """
 import json, os, re, sys
+# PT-BR output: Windows pipes default to cp1252 and mangle accents
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 
-FILLER_ONLY = re.compile(r"^[\s,.-]*((um+|uh+|er+|ah+|so|okay|ok|right|yeah|like|anyway|basically|"
-                         r"actually|you know|i mean|let me see|hold on)[\s,.-]*)+$", re.I)
+FILLER_ONLY = re.compile(r"^[\s,.\-?!…]*((um+|uh+|er+|ah+|so|okay|ok|right|yeah|like|anyway|basically|"
+                         r"actually|you know|i mean|let me see|hold on|"
+                         # portugues
+                         r"a+h+|e+h+|h[mn]+|t[aá]|ent[aã]o|n[eé]|tipo|assim|bom|beleza|certo|"
+                         r"deixa eu ver|pera[ií]?|espera|hum+|sabe|quer dizer|ou seja|enfim|"
+                         r"de qualquer forma|na verdade)[\s,.\-?!…]*)+$", re.I)
 
 def parse_ts(s):
     s = s.strip().replace(",", ".")
@@ -38,7 +44,8 @@ def load(path):
             cur[2].append(line.strip())
     return [(a, b, " ".join(t)) for a, b, t in cues if t]
 
-def norm(t): return re.sub(r"[^a-z ]", "", t.lower()).split()
+# letters in any script; [^a-z ] turned "então" into "ento" and broke the retake comparison
+def norm(t): return re.sub(r"[\d_]|[^\w ]", "", t.lower()).split()
 
 def main():
     a = sys.argv[1:]
