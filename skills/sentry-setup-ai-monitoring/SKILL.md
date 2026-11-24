@@ -196,12 +196,15 @@ Use when no supported SDK is detected.
 ### Example (JavaScript)
 
 ```javascript
+const recordPrompts = false; // flip only after the Data Capture Warning checks pass
+
 await Sentry.startSpan({
   op: "gen_ai.request",
   name: "LLM request gpt-4o",
   attributes: { "gen_ai.request.model": "gpt-4o" },
 }, async (span) => {
-  span.setAttribute("gen_ai.request.messages", JSON.stringify(messages));
+  // Prompt content is PII: same opt-in as recordInputs
+  if (recordPrompts) span.setAttribute("gen_ai.request.messages", JSON.stringify(messages));
   const result = await llmClient.complete(prompt);
   span.setAttribute("gen_ai.usage.input_tokens", result.inputTokens);
   span.setAttribute("gen_ai.usage.output_tokens", result.outputTokens);

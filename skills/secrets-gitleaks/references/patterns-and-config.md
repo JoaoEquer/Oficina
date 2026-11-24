@@ -69,15 +69,16 @@ Protect developers from accidental secret commits:
 brew install gitleaks  # macOS
 # or use package manager for your OS
 
-# 2. Install pre-commit hook (see "Pre-Commit Hook Protection" above)
+# 2. Install pre-commit hook (see "Pre-Commit Hook Protection" in SKILL.md)
 
-# 3. Test hook with dummy commit
-echo "api_key = 'EXAMPLE_KEY_12345'" > test.txt
+# 3. Test hook with a throwaway GitHub-token-shaped value, generated so no secret lives in the repo
+echo "token = ghp_$(head -c 18 /dev/urandom | xxd -p)" > test.txt
 git add test.txt
 git commit -m "test"  # Should be blocked by gitleaks
 
-# 4. Clean up test
-git reset HEAD~1
+# 4. Clean up test (the commit was blocked, so there is nothing to reset;
+#    never `git reset HEAD~1` here, it would undo your previous commit)
+git restore --staged test.txt
 rm test.txt
 ```
 
