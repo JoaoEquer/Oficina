@@ -17,15 +17,8 @@ allowed-tools: Bash(playwright-cli:*) Bash(npx playwright:*) Bash(npx --no-insta
 - Targeting elements
 - Browser Sessions
 - Installation
-- Example: Form submission
-- Example: Multi-tab workflow
-- Example: Debugging with DevTools
-- Example: Interactive session
 - Attaching screenshots and videos to pull requests
 - Specific tasks
-
-> Provenance: github.com/microsoft/playwright-cli (skills/playwright-cli, Apache-2.0), audited 2026-10-13 (instruction-only, no scripts). Why: drive a real browser from the terminal to check pages at phone width. Unmodified. Needs `npm i -g @playwright/cli`.
-
 
 ## Quick start
 
@@ -432,58 +425,7 @@ When local version is available, use `npx playwright cli` in all commands. Other
 npm install -g @playwright/cli@latest
 ```
 
-## Example: Form submission
-
-```bash
-playwright-cli open https://example.com/form
-playwright-cli snapshot
-
-playwright-cli fill e1 "user@example.com"
-playwright-cli fill e2 "password123"
-playwright-cli click e3
-playwright-cli snapshot
-playwright-cli close
-```
-
-## Example: Multi-tab workflow
-
-```bash
-playwright-cli open https://example.com
-playwright-cli tab-new https://example.com/other
-playwright-cli tab-list
-playwright-cli tab-select 0
-playwright-cli snapshot
-playwright-cli close
-```
-
-## Example: Debugging with DevTools
-
-```bash
-playwright-cli open https://example.com
-playwright-cli click e4
-playwright-cli fill e7 "test"
-playwright-cli console
-playwright-cli requests
-playwright-cli close
-```
-
-```bash
-playwright-cli open https://example.com
-playwright-cli tracing-start
-playwright-cli click e4
-playwright-cli fill e7 "test"
-playwright-cli tracing-stop
-playwright-cli close
-```
-
-## Example: Interactive session
-
-Ask the user for UI review or design feedback. The user draws boxes on the live page and types comments; you receive the annotated screenshot, the snapshot of the marked region, and the user's notes. Use this whenever the user asks for "UI review", "design feedback", or to "ask the user what they think / want / mean":
-
-```bash
-playwright-cli open https://example.com
-playwright-cli show --annotate
-```
+Worked examples (form submission, multi-tab, DevTools debugging, interactive session): [references/examples.md](references/examples.md).
 
 ## Attaching screenshots and videos to pull requests
 
@@ -508,3 +450,4 @@ See [references/pr-attachments.md](references/pr-attachments.md) for alt text, i
 * **Video recording** [references/video-recording.md](references/video-recording.md)
 * **Attaching screenshots and videos to pull requests** [references/pr-attachments.md](references/pr-attachments.md)
 * **Inspecting element attributes** [references/element-attributes.md](references/element-attributes.md)
+* **Worked examples (forms, tabs, DevTools, interactive)** [references/examples.md](references/examples.md)

@@ -17,21 +17,15 @@ description: Automates CI/CD pipeline setup. Use when setting up or modifying bu
 - The Quality Gate Pipeline
 - GitHub Actions Configuration
 - Feeding CI Failures Back to Agents
-- Deployment Strategies
-- Environment Management
-- Automation Beyond CI
-- CI Optimization
 - Common Rationalizations
 - Red Flags
 - Verification
 
 ## Overview
 
-Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill — it catches what humans and agents miss, and it does so consistently on every single change.
+Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. Cheapest check first (lint, types) and expensive ones later (integration, E2E).
 
-**Shift Left:** Catch problems as early in the pipeline as possible. A bug caught in linting costs minutes; the same bug caught in production costs hours. Move checks upstream — static analysis before tests, tests before staging, staging before production.
-
-**Faster is Safer:** Smaller batches and more frequent releases reduce risk, not increase it. A deployment with 3 changes is easier to debug than one with 30. Frequent releases build confidence in the release process itself.
+House adaptation (Oficina, wins over the examples below): the examples use npm; on a project with `yarn.lock` use `yarn install --frozen-lockfile` / `yarn <script>` and `cache: 'yarn'`, never npm. Read the project's `package.json` scripts before writing a step. On Wibi repos the pipeline gates PRs into `develop`, and `master` only receives release merges.
 
 ## When to Use
 
@@ -206,182 +200,17 @@ Agent fixes → pushes → CI runs again
 ```
 Lint failure → Agent runs `npm run lint --fix` and commits
 Type error  → Agent reads the error location and fixes the type
-Test failure → Agent follows debugging-and-error-recovery skill
+Test failure → Agent follows the diagnosing-bugs skill
 Build error → Agent checks config and dependencies
 ```
 
-## Deployment Strategies
-
-### Preview Deployments
-
-Every PR gets a preview deployment for manual testing:
-
-```yaml
-# Deploy preview on PR (Vercel/Netlify/etc.)
-deploy-preview:
-  runs-on: ubuntu-latest
-  if: github.event_name == 'pull_request'
-  steps:
-    - uses: actions/checkout@v4
-    - name: Deploy preview
-      run: npx vercel --token=${{ secrets.VERCEL_TOKEN }}
-```
-
-### Feature Flags
-
-Feature flags decouple deployment from release. Deploy incomplete or risky features behind flags so you can:
-
-- **Ship code without enabling it.** Merge to main early, enable when ready.
-- **Roll back without redeploying.** Disable the flag instead of reverting code.
-- **Canary new features.** Enable for 1% of users, then 10%, then 100%.
-- **Run A/B tests.** Compare behavior with and without the feature.
-
-```typescript
-// Simple feature flag pattern
-if (featureFlags.isEnabled('new-checkout-flow', { userId })) {
-  return renderNewCheckout();
-}
-return renderLegacyCheckout();
-```
-
-**Flag lifecycle:** Create → Enable for testing → Canary → Full rollout → Remove the flag and dead code. Flags that live forever become technical debt — set a cleanup date when you create them.
-
-### Staged Rollouts
-
-```
-PR merged to main
-    │
-    ▼
-  Staging deployment (auto)
-    │ Manual verification
-    ▼
-  Production deployment (manual trigger or auto after staging)
-    │
-    ▼
-  Monitor for errors (15-minute window)
-    │
-    ├── Errors detected → Rollback
-    └── Clean → Done
-```
-
-### Rollback Plan
-
-Every deployment should be reversible:
-
-```yaml
-# Manual rollback workflow
-name: Rollback
-on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to rollback to'
-        required: true
-
-jobs:
-  rollback:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Rollback deployment
-        run: |
-          # Deploy the specified previous version
-          npx vercel rollback ${{ inputs.version }}
-```
-
-## Environment Management
-
-```
-.env.example       → Committed (template for developers)
-.env                → NOT committed (local development)
-.env.test           → Committed (test environment, no real secrets)
-CI secrets          → Stored in GitHub Secrets / vault
-Production secrets  → Stored in deployment platform / vault
-```
-
-CI should never have production secrets. Use separate secrets for CI testing.
-
-## Automation Beyond CI
-
-### Dependabot / Renovate
-
-```yaml
-# .github/dependabot.yml
-version: 2
-updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
-```
-
-### Build Cop Role
-
-Designate someone responsible for keeping CI green. When the build breaks, the Build Cop's job is to fix or revert — not the person whose change caused the break. This prevents broken builds from accumulating while everyone assumes someone else will fix it.
-
-### PR Checks
-
-- **Required reviews:** At least 1 approval before merge
-- **Required status checks:** CI must pass before merge
-- **Branch protection:** No force-pushes to main
-- **Auto-merge:** If all checks pass and approved, merge automatically
-
-## CI Optimization
-
-When the pipeline exceeds 10 minutes, apply these strategies in order of impact:
-
-```
-Slow CI pipeline?
-├── Cache dependencies
-│   └── Use actions/cache or setup-node cache option for node_modules
-├── Run jobs in parallel
-│   └── Split lint, typecheck, test, build into separate parallel jobs
-├── Only run what changed
-│   └── Use path filters to skip unrelated jobs (e.g., skip e2e for docs-only PRs)
-├── Use matrix builds
-│   └── Shard test suites across multiple runners
-├── Optimize the test suite
-│   └── Remove slow tests from the critical path, run them on a schedule instead
-└── Use larger runners
-    └── GitHub-hosted larger runners or self-hosted for CPU-heavy builds
-```
-
-**Example: caching and parallelism**
-```yaml
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '22', cache: 'npm' }
-      - run: npm ci
-      - run: npm run lint
-
-  typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '22', cache: 'npm' }
-      - run: npm ci
-      - run: npx tsc --noEmit
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '22', cache: 'npm' }
-      - run: npm ci
-      - run: npm test -- --coverage
-```
+Deployment strategies (preview deploys, feature flags, staged rollouts, rollback), environment and secret layout, Dependabot/Renovate, PR checks, and CI optimization when the pipeline passes 10 minutes: [references/deploy-and-ops.md](references/deploy-and-ops.md).
 
 ## Common Rationalizations
 
 | Rationalization | Reality |
 |---|---|
-| "CI is too slow" | Optimize the pipeline (see CI Optimization below), don't skip it. A 5-minute pipeline prevents hours of debugging. |
+| "CI is too slow" | Optimize the pipeline (see CI Optimization in references/deploy-and-ops.md), don't skip it. A 5-minute pipeline prevents hours of debugging. |
 | "This change is trivial, skip CI" | Trivial changes break builds. CI is fast for trivial changes anyway. |
 | "The test is flaky, just re-run" | Flaky tests mask real bugs and waste everyone's time. Fix the flakiness. |
 | "We'll add CI later" | Projects without CI accumulate broken states. Set it up on day one. |
@@ -402,7 +231,7 @@ jobs:
 After setting up or modifying CI:
 
 - [ ] All quality gates are present (lint, types, tests, build, audit)
-- [ ] Pipeline runs on every PR and push to main
+- [ ] Pipeline runs on every PR and push to the integration branch (`develop` on Wibi repos, `main` elsewhere)
 - [ ] Failures block merge (branch protection configured)
 - [ ] CI results feed back into the development loop
 - [ ] Secrets are stored in the secrets manager, not in code
